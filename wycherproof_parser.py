@@ -1,6 +1,7 @@
 import json
 from binascii import unhexlify, hexlify
 from pathlib import Path
+import hashlib
 
 def der_decode_sig(der_bytes, size_bytes):
     """Decode DER ECDSA signature into fixed-size raw r, s."""
@@ -28,9 +29,20 @@ def curve_size_bytes(curve_name):
     sizes = {
         "secp256r1": 32,
         "secp384r1": 48,
-        "secp521r1": 66  # P-521 bits rounded up to bytes
+        "secp521r1": 66
     }
     return sizes.get(curve_name, None)
+
+def compute_hash(msg_bytes, sha_name):
+    """Compute hash digest for given SHA algorithm."""
+    if sha_name.upper() == "SHA-256":
+        return hashlib.sha256(msg_bytes).digest()
+    elif sha_name.upper() == "SHA-384":
+        return hashlib.sha384(msg_bytes).digest()
+    elif sha_name.upper() == "SHA-512":
+        return hashlib.sha512(msg_bytes).digest()
+    else:
+        return b''
 
 # === 路徑設定 ===
 folder_path = Path("./wycherproof_vectors/")
@@ -45,7 +57,7 @@ first_group = data["testGroups"][0]
 curve = first_group["key"]["curve"]
 sha = first_group["sha"]
 
-# 設定輸出檔名：ecdsa_<curve>_<sha>_human.txt
+# 設定輸出檔名
 output_file = folder_path / f"ecdsa_{curve}_{sha}_human.txt"
 
 # 寫出可讀格式
@@ -69,7 +81,7 @@ with open(output_file, "w") as out:
         for test in group.get("tests", []):
             tc_id = test["tcId"]
             comment = test.get("comment", "")
-            msg = test["msg"]
+            msg_hex = test["msg"]
             sig = test["sig"]
             result = test["result"]
             flags = ", ".join(test.get("flags", []))
@@ -81,8 +93,15 @@ with open(output_file, "w") as out:
                     r_hex = hexlify(r).decode()
                     s_hex = hexlify(s).decode()
 
+            # 計算 hash
+            msg_bytes = bytes.fromhex(msg_hex)
+            digest = compute_hash(msg_bytes, group_sha)
+            digest_hex = hexlify(digest).decode()
+
+            # 輸出每一筆測試向量
             out.write(f"TC {tc_id} | {comment} | Result={result}, Flags={flags}\n")
-            out.write(f"  Msg: {msg}\n")
+            out.write(f"  Msg: {msg_hex}\n")
+            out.write(f"  Hash: {digest_hex}\n")
             out.write(f"  PubKey.X: {x}\n")
             out.write(f"  PubKey.Y: {y}\n")
             out.write(f"  Sig(R): {r_hex}\n")
