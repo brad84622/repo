@@ -1,144 +1,122 @@
 import json
-from binascii import unhexlify, hexlify
 from pathlib import Path
+from binascii import unhexlify, hexlify
 import hashlib
 
 def der_decode_sig(der_bytes, size_bytes):
+    if len(der_bytes) < 6 or der_bytes[0] != 0x30:
+        return None, None
     try:
-        if len(der_bytes) < 6 or der_bytes[0] != 0x30:
-            return None, None
         idx = 2
-        if idx >= len(der_bytes) or der_bytes[idx] != 0x02:
+        if der_bytes[idx] != 0x02:
             return None, None
         rlen = der_bytes[idx + 1]
-        if idx + 2 + rlen >= len(der_bytes):
-            return None, None
-        r = der_bytes[idx + 2:idx + 2 + rlen]
+        r = der_bytes[idx + 2 : idx + 2 + rlen]
         idx += 2 + rlen
-        if idx >= len(der_bytes) or der_bytes[idx] != 0x02:
+        if der_bytes[idx] != 0x02:
             return None, None
         slen = der_bytes[idx + 1]
-        if idx + 2 + slen > len(der_bytes):
-            return None, None
-        s = der_bytes[idx + 2:idx + 2 + slen]
-        r = r.lstrip(b'\x00').rjust(size_bytes, b'\x00')
-        s = s.lstrip(b'\x00').rjust(size_bytes, b'\x00')
+        s = der_bytes[idx + 2 : idx + 2 + slen]
+        # Fix size to exactly size_bytes
+        r = r.lstrip(b'\x00')[-size_bytes:].rjust(size_bytes, b'\x00')
+        s = s.lstrip(b'\x00')[-size_bytes:].rjust(size_bytes, b'\x00')
         return r, s
-    except Exception:
+    except:
         return None, None
 
-def curve_size_bytes(curve_name):
-    sizes = {
-        "secp256r1": 32,
-        "secp384r1": 48,
-        "secp521r1": 66
-    }
-    return sizes.get(curve_name, None)
-
 def compute_hash(msg_bytes, sha_name):
-    if sha_name.upper() == "SHA-256":
+    sha_name = sha_name.lower()
+    if sha_name == "sha-256":
         return hashlib.sha256(msg_bytes).digest()
-    elif sha_name.upper() == "SHA-384":
+    elif sha_name == "sha-384":
         return hashlib.sha384(msg_bytes).digest()
-    elif sha_name.upper() == "SHA-512":
+    elif sha_name == "sha-512":
         return hashlib.sha512(msg_bytes).digest()
     else:
-        return b''
+        return b""
 
-def sanitize_name(name):
-    return name.replace('-', '_').replace('.', '_')
+curve_size_map = {
+    "secp256r1": 32,
+    "secp384r1": 48,
+    "secp521r1": 66,
+}
 
-# === 主程式 ===
-folder_path = Path("./wycherproof_vectors/")
-json_files = list(folder_path.glob("*.json"))
+def to_sv_hex(byte_data, bit_width):
+    # format like: 384'h001122...
+    hex_str = hexlify(byte_data).decode()
+    actual_bits = len(hex_str) * 4
+    expected_bits = bit_width
+    if actual_bits > expected_bits:
+        # Cut MSB
+        excess_bits = actual_bits - expected_bits
+        excess_nibbles = excess_bits // 4
+        hex_str = hex_str[excess_nibbles:]
+    return f"{expected_bits}'h{hex_str}"
 
-for input_file in json_files:
-    with open(input_file, "r") as f:
+# === 自動處理資料夾中所有 JSON ===
+folder = Path("./wycherproof_vectors")
+json_files = sorted(folder.glob("*.json"))
+
+for file in json_files:
+    with open(file, "r") as f:
         data = json.load(f)
 
-    first_group = data["testGroups"][0]
-    curve = first_group["key"]["curve"]
-    sha = first_group["sha"]
-
-    size_bytes = curve_size_bytes(curve)
-    if size_bytes is None:
-        print(f"[!] Skip unsupported curve: {curve}")
+    tg = data["testGroups"][0]
+    curve = tg["key"]["curve"]
+    sha = tg["sha"]
+    size_bytes = curve_size_map.get(curve, None)
+    if not size_bytes:
+        print(f"跳過不支援的曲線: {curve}")
         continue
 
-    struct_base = f"{sanitize_name(curve)}_{sanitize_name(sha)}"
-    txt_output = folder_path / f"{struct_base}_human.txt"
-    sv_output = folder_path / f"{struct_base}_vectors.sv"
-    struct_name = f"ecdsa_vector_{sanitize_name(curve)}_{sanitize_name(sha)}"
+    bit_width = size_bytes * 8
+    base_name = file.stem.replace("ecdsa_", "").replace("_test", "")
+    struct_name = f"ecdsa_vector_{curve}_{sha.replace('-', '')}"
+    array_name = f"test_vectors_{curve}_{sha.replace('-', '')}"
+    output_sv = folder / f"{curve}_{sha.replace('-', '_')}_vectors.sv"
 
-    # === Human-readable output ===
-    with open(txt_output, "w") as out:
-        out.write(f"=== Wycheproof ECDSA Test Vectors ===\n")
-        out.write(f"Source file: {input_file.name}\n")
-        out.write(f"Curve: {curve}, SHA: {sha}\n\n")
+    vectors = []
 
-        for group in data.get("testGroups", []):
-            x = group["key"]["wx"]
-            y = group["key"]["wy"]
-            for test in group.get("tests", []):
-                msg_hex = test["msg"]
-                sig = test["sig"]
-                tc_id = test["tcId"]
-                comment = test.get("comment", "")
-                result = test["result"]
-                flags = ", ".join(test.get("flags", []))
+    for group in data.get("testGroups", []):
+        x = group["key"]["wx"]
+        y = group["key"]["wy"]
 
-                if not sig or not sig.startswith("30"):
-                    continue
+        for test in group.get("tests", []):
+            tc_id = test["tcId"]
+            msg_bytes = bytes.fromhex(test["msg"])
+            digest = compute_hash(msg_bytes, sha)
+            sig_bytes = unhexlify(test["sig"])
 
-                r, s = der_decode_sig(unhexlify(sig), size_bytes)
-                if r is None or s is None:
-                    print(f"[!] DER decode failed for TC {tc_id} in {input_file.name}")
-                    continue
+            r, s = der_decode_sig(sig_bytes, size_bytes)
+            if r is None or s is None:
+                continue
 
-                digest = compute_hash(unhexlify(msg_hex), sha)
-                out.write(f"TC {tc_id} | {comment} | Result={result}, Flags={flags}\n")
-                out.write(f"  Msg: {msg_hex}\n")
-                out.write(f"  Hash: {hexlify(digest).decode()}\n")
-                out.write(f"  PubKey.X: {x}\n")
-                out.write(f"  PubKey.Y: {y}\n")
-                out.write(f"  Sig(R): {hexlify(r).decode()}\n")
-                out.write(f"  Sig(S): {hexlify(s).decode()}\n\n")
+            vectors.append({
+                "tc_id": tc_id,
+                "msg": to_sv_hex(msg_bytes, bit_width),
+                "hash": to_sv_hex(digest, bit_width),
+                "x": to_sv_hex(unhexlify(x), bit_width),
+                "y": to_sv_hex(unhexlify(y), bit_width),
+                "r": to_sv_hex(r, bit_width),
+                "s": to_sv_hex(s, bit_width),
+            })
 
-    # === SystemVerilog struct output ===
-    with open(sv_output, "w") as sv:
-        sv.write(f"typedef struct packed {{\n")
-        sv.write(f"  logic [15:0] tc_id;\n")
-        sv.write(f"  logic [{size_bytes*8-1}:0] msg_hash;\n")
-        sv.write(f"  logic [{size_bytes*8-1}:0] pub_x;\n")
-        sv.write(f"  logic [{size_bytes*8-1}:0] pub_y;\n")
-        sv.write(f"  logic [{size_bytes*8-1}:0] sig_r;\n")
-        sv.write(f"  logic [{size_bytes*8-1}:0] sig_s;\n")
-        sv.write(f"}} {struct_name};\n\n")
+    # === 寫出 SV 檔 ===
+    with open(output_sv, "w") as out:
+        out.write(f"typedef struct packed {{\n")
+        out.write(f"  int tc_id;\n")
+        out.write(f"  logic [{bit_width-1}:0] msg;\n")
+        out.write(f"  logic [{bit_width-1}:0] hash;\n")
+        out.write(f"  logic [{bit_width-1}:0] x;\n")
+        out.write(f"  logic [{bit_width-1}:0] y;\n")
+        out.write(f"  logic [{bit_width-1}:0] r;\n")
+        out.write(f"  logic [{bit_width-1}:0] s;\n")
+        out.write(f"}} {struct_name};\n\n")
 
-        sv.write(f"{struct_name} test_vectors[] = '{{\n")
-        for group in data.get("testGroups", []):
-            x = group["key"]["wx"]
-            y = group["key"]["wy"]
-            for test in group.get("tests", []):
-                msg_hex = test["msg"]
-                sig = test["sig"]
-                tc_id = test["tcId"]
-                if not sig or not sig.startswith("30"):
-                    continue
+        out.write(f"{struct_name} {array_name} [] = '{{\n")
+        for i, v in enumerate(vectors):
+            comma = "," if i < len(vectors)-1 else ""
+            out.write(f"  '{{{v['tc_id']}, {v['msg']}, {v['hash']}, {v['x']}, {v['y']}, {v['r']}, {v['s']}}}{comma}\n")
+        out.write("};\n")
 
-                r, s = der_decode_sig(unhexlify(sig), size_bytes)
-                if r is None or s is None:
-                    continue
-
-                digest = compute_hash(unhexlify(msg_hex), sha)
-                sv.write(f"  '{{\n")
-                sv.write(f"    16'd{tc_id},\n")
-                sv.write(f"    {size_bytes*8}'h{hexlify(digest).decode()},\n")
-                sv.write(f"    {size_bytes*8}'h{x},\n")
-                sv.write(f"    {size_bytes*8}'h{y},\n")
-                sv.write(f"    {size_bytes*8}'h{hexlify(r).decode()},\n")
-                sv.write(f"    {size_bytes*8}'h{hexlify(s).decode()}\n")
-                sv.write(f"  }},\n")
-        sv.write(f"}};\n")
-
-    print(f"[✔] Done: {input_file.name} → {txt_output.name}, {sv_output.name}")
+    print(f"✅ Generated {output_sv} ({len(vectors)} vectors)")
