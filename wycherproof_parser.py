@@ -13,11 +13,10 @@ def der_decode_sig(der_bytes, size_bytes):
         rlen = der_bytes[idx + 1]
         r = der_bytes[idx + 2 : idx + 2 + rlen]
         idx += 2 + rlen
-        if der_bytes[idx] != 0x02:
+        if idx >= len(der_bytes) or der_bytes[idx] != 0x02:
             return None, None
         slen = der_bytes[idx + 1]
         s = der_bytes[idx + 2 : idx + 2 + slen]
-        # Fix size to exactly size_bytes
         r = r.lstrip(b'\x00')[-size_bytes:].rjust(size_bytes, b'\x00')
         s = s.lstrip(b'\x00')[-size_bytes:].rjust(size_bytes, b'\x00')
         return r, s
@@ -42,18 +41,12 @@ curve_size_map = {
 }
 
 def to_sv_hex(byte_data, bit_width):
-    # format like: 384'h001122...
     hex_str = hexlify(byte_data).decode()
-    actual_bits = len(hex_str) * 4
-    expected_bits = bit_width
-    if actual_bits > expected_bits:
-        # Cut MSB
-        excess_bits = actual_bits - expected_bits
-        excess_nibbles = excess_bits // 4
-        hex_str = hex_str[excess_nibbles:]
-    return f"{expected_bits}'h{hex_str}"
+    total_nibbles = bit_width // 4
+    hex_str = hex_str[-total_nibbles:].rjust(total_nibbles, '0')
+    return f"{bit_width}'h{hex_str}"
 
-# === 自動處理資料夾中所有 JSON ===
+# === 處理資料夾中所有 JSON ===
 folder = Path("./wycherproof_vectors")
 json_files = sorted(folder.glob("*.json"))
 
@@ -66,7 +59,7 @@ for file in json_files:
     sha = tg["sha"]
     size_bytes = curve_size_map.get(curve, None)
     if not size_bytes:
-        print(f"跳過不支援的曲線: {curve}")
+        print(f"❌ 跳過不支援的曲線: {curve}")
         continue
 
     bit_width = size_bytes * 8
