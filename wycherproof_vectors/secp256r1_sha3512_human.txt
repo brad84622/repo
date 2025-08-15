@@ -12,6 +12,7 @@ TC 1 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 2 | result=acceptable | valid_bit=1 | Flags=MissingZero
   Comment: Legacy:ASN encoding of r misses leading 0
   Msg: 313233343030 (len=6 bytes)
@@ -23,6 +24,7 @@ TC 2 | result=acceptable | valid_bit=1 | Flags=MissingZero
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 3 | result=acceptable | valid_bit=1 | Flags=MissingZero
   Comment: Legacy:ASN encoding of s misses leading 0
@@ -36,6 +38,7 @@ TC 3 | result=acceptable | valid_bit=1 | Flags=MissingZero
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 4 | result=valid | valid_bit=1 | Flags=
   Comment: valid
   Msg: 313233343030 (len=6 bytes)
@@ -47,6 +50,7 @@ TC 4 | result=valid | valid_bit=1 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 94 | result=invalid | valid_bit=0 | Flags=
   Comment: appending 0's to integer
@@ -60,6 +64,7 @@ TC 94 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 95 | result=invalid | valid_bit=0 | Flags=
   Comment: appending 0's to integer
   Msg: 313233343030 (len=6 bytes)
@@ -71,6 +76,7 @@ TC 95 | result=invalid | valid_bit=0 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b850000 (len=34 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 99 | result=invalid | valid_bit=0 | Flags=
   Comment: appending null value to integer
@@ -84,6 +90,7 @@ TC 99 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 100 | result=invalid | valid_bit=0 | Flags=
   Comment: appending null value to integer
   Msg: 313233343030 (len=6 bytes)
@@ -95,6 +102,7 @@ TC 100 | result=invalid | valid_bit=0 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b850500 (len=34 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 115 | result=invalid | valid_bit=0 | Flags=
   Comment: dropping value of integer
@@ -108,6 +116,7 @@ TC 115 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: ZERO
 
+
 TC 116 | result=invalid | valid_bit=0 | Flags=
   Comment: dropping value of integer
   Msg: 313233343030 (len=6 bytes)
@@ -119,6 +128,7 @@ TC 116 | result=invalid | valid_bit=0 | Flags=
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 119 | result=invalid | valid_bit=0 | Flags=
   Comment: modify first byte of integer
@@ -132,6 +142,7 @@ TC 119 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 120 | result=invalid | valid_bit=0 | Flags=
   Comment: modify first byte of integer
   Msg: 313233343030 (len=6 bytes)
@@ -143,6 +154,7 @@ TC 120 | result=invalid | valid_bit=0 | Flags=
   S: 02edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=33 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 121 | result=invalid | valid_bit=0 | Flags=
   Comment: modify last byte of integer
@@ -156,6 +168,7 @@ TC 121 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 122 | result=invalid | valid_bit=0 | Flags=
   Comment: modify last byte of integer
   Msg: 313233343030 (len=6 bytes)
@@ -167,6 +180,7 @@ TC 122 | result=invalid | valid_bit=0 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b05 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 123 | result=invalid | valid_bit=0 | Flags=
   Comment: truncated integer
@@ -180,6 +194,7 @@ TC 123 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 124 | result=invalid | valid_bit=0 | Flags=
   Comment: truncated integer
   Msg: 313233343030 (len=6 bytes)
@@ -191,6 +206,7 @@ TC 124 | result=invalid | valid_bit=0 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b (len=31 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 125 | result=invalid | valid_bit=0 | Flags=
   Comment: leading ff in integer
@@ -204,6 +220,7 @@ TC 125 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 126 | result=invalid | valid_bit=0 | Flags=
   Comment: leading ff in integer
   Msg: 313233343030 (len=6 bytes)
@@ -215,6 +232,7 @@ TC 126 | result=invalid | valid_bit=0 | Flags=
   S: ff00edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=34 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 129 | result=invalid | valid_bit=0 | Flags=
   Comment: replacing integer with zero
@@ -228,6 +246,7 @@ TC 129 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: ZERO
 
+
 TC 130 | result=invalid | valid_bit=0 | Flags=
   Comment: replacing integer with zero
   Msg: 313233343030 (len=6 bytes)
@@ -239,6 +258,7 @@ TC 130 | result=invalid | valid_bit=0 | Flags=
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 131 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
@@ -252,6 +272,7 @@ TC 131 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 132 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
   Msg: 313233343030 (len=6 bytes)
@@ -263,6 +284,7 @@ TC 132 | result=invalid | valid_bit=0 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 133 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
@@ -276,6 +298,7 @@ TC 133 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 134 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
   Msg: 313233343030 (len=6 bytes)
@@ -287,6 +310,7 @@ TC 134 | result=invalid | valid_bit=0 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 135 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
@@ -300,6 +324,7 @@ TC 135 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 136 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
   Msg: 313233343030 (len=6 bytes)
@@ -311,6 +336,7 @@ TC 136 | result=invalid | valid_bit=0 | Flags=
   S: edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 137 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
@@ -324,6 +350,7 @@ TC 137 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 138 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
   Msg: 313233343030 (len=6 bytes)
@@ -335,6 +362,7 @@ TC 138 | result=invalid | valid_bit=0 | Flags=
   S: 01edfdf96294a0052321d023d6f25e4522e1324bd0b3e61f56adb3b10db3b750d6 (len=33 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 139 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
@@ -348,6 +376,7 @@ TC 139 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 140 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
   Msg: 313233343030 (len=6 bytes)
@@ -359,6 +388,7 @@ TC 140 | result=invalid | valid_bit=0 | Flags=
   S: ff1202069c6b5ffaddde2fdc290da1badcdbb4aedcf3317f2e460619b548abd47b (len=33 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 141 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
@@ -372,6 +402,7 @@ TC 141 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
 
+
 TC 142 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
   Msg: 313233343030 (len=6 bytes)
@@ -383,6 +414,7 @@ TC 142 | result=invalid | valid_bit=0 | Flags=
   S: 01edfdf96394a0052221d023d6f25e4523244b51230cce80d1b9f9e64ab7542b85 (len=33 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 143 | result=invalid | valid_bit=0 | Flags=
   Comment: Modified r or s, e.g. by adding or subtracting the order of the group
@@ -396,6 +428,7 @@ TC 143 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 144 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -407,6 +440,7 @@ TC 144 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 145 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -420,6 +454,7 @@ TC 145 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: ZERO
 
+
 TC 146 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -431,6 +466,7 @@ TC 146 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 147 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -444,6 +480,7 @@ TC 147 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: ZERO
 
+
 TC 148 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -455,6 +492,7 @@ TC 148 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 149 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -468,6 +506,7 @@ TC 149 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: ZERO
 
+
 TC 150 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -479,6 +518,7 @@ TC 150 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 151 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -492,6 +532,7 @@ TC 151 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: ZERO
 
+
 TC 154 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -503,6 +544,7 @@ TC 154 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 155 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -516,6 +558,7 @@ TC 155 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 156 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -527,6 +570,7 @@ TC 156 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 157 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -540,6 +584,7 @@ TC 157 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 158 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -551,6 +596,7 @@ TC 158 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 159 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -564,6 +610,7 @@ TC 159 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 160 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -575,6 +622,7 @@ TC 160 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 161 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -588,6 +636,7 @@ TC 161 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 164 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -599,6 +648,7 @@ TC 164 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 165 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -612,6 +662,7 @@ TC 165 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 166 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -623,6 +674,7 @@ TC 166 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 167 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -636,6 +688,7 @@ TC 167 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 168 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -647,6 +700,7 @@ TC 168 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 169 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -660,6 +714,7 @@ TC 169 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 170 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -671,6 +726,7 @@ TC 170 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 171 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -684,6 +740,7 @@ TC 171 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 174 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -695,6 +752,7 @@ TC 174 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 175 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -708,6 +766,7 @@ TC 175 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 176 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -719,6 +778,7 @@ TC 176 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 177 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -732,6 +792,7 @@ TC 177 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 178 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -743,6 +804,7 @@ TC 178 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 179 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -756,6 +818,7 @@ TC 179 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 180 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -767,6 +830,7 @@ TC 180 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 181 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -780,6 +844,7 @@ TC 181 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 184 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -791,6 +856,7 @@ TC 184 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 185 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -804,6 +870,7 @@ TC 185 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 186 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -815,6 +882,7 @@ TC 186 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 187 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -828,6 +896,7 @@ TC 187 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 188 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -839,6 +908,7 @@ TC 188 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 189 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -852,6 +922,7 @@ TC 189 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 190 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -863,6 +934,7 @@ TC 190 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 191 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -876,6 +948,7 @@ TC 191 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 194 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -887,6 +960,7 @@ TC 194 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 195 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -900,6 +974,7 @@ TC 195 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 196 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -911,6 +986,7 @@ TC 196 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 197 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -924,6 +1000,7 @@ TC 197 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 198 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -935,6 +1012,7 @@ TC 198 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 199 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -948,6 +1026,7 @@ TC 199 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 200 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -959,6 +1038,7 @@ TC 200 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 201 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -972,6 +1052,7 @@ TC 201 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 204 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -983,6 +1064,7 @@ TC 204 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 205 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -996,6 +1078,7 @@ TC 205 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 206 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -1007,6 +1090,7 @@ TC 206 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 207 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -1020,6 +1104,7 @@ TC 207 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 208 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -1031,6 +1116,7 @@ TC 208 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 209 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -1044,6 +1130,7 @@ TC 209 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 210 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -1055,6 +1142,7 @@ TC 210 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 211 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -1068,6 +1156,7 @@ TC 211 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 214 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -1079,6 +1168,7 @@ TC 214 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: 00 (len=0 bytes)
   Encoding: STRICT_OK
   Range: ZERO
+
 
 TC 215 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -1092,6 +1182,7 @@ TC 215 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 216 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -1103,6 +1194,7 @@ TC 216 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 217 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -1116,6 +1208,7 @@ TC 217 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 218 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -1127,6 +1220,7 @@ TC 218 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632550 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 219 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -1140,6 +1234,7 @@ TC 219 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 220 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
@@ -1151,6 +1246,7 @@ TC 220 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ffffffff00000001000000000000000000000000ffffffffffffffffffffffff (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 221 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
@@ -1164,6 +1260,7 @@ TC 221 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 230 | result=valid | valid_bit=1 | Flags=
   Comment: Edge case for Shamir multiplication
   Msg: 3335343130 (len=5 bytes)
@@ -1175,6 +1272,7 @@ TC 230 | result=valid | valid_bit=1 | Flags=
   S: 3d4e6c69176bb9e30eec304a30d982cb3f6073a2273f36b67b1b284899b08163 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 231 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1188,6 +1286,7 @@ TC 231 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 232 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 343331343737363137 (len=9 bytes)
@@ -1199,6 +1298,7 @@ TC 232 | result=valid | valid_bit=1 | Flags=
   S: f6f357077677e2669c1e289f65c6094c68b8e1efbe4c87468327c81d55979bd9 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 233 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1212,6 +1312,7 @@ TC 233 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 234 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32383239363231343535 (len=10 bytes)
@@ -1223,6 +1324,7 @@ TC 234 | result=valid | valid_bit=1 | Flags=
   S: 6e6b65f9798cd8c32d7068270800da5d98f06d36836ccb7c30551717fae3052f (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 235 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1236,6 +1338,7 @@ TC 235 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 236 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3131373730373734313735 (len=11 bytes)
@@ -1247,6 +1350,7 @@ TC 236 | result=valid | valid_bit=1 | Flags=
   S: cfb91fa16a32c8724cef5714e72f2c91b1d50050b4eb272a82327604486cbbb2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 237 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1260,6 +1364,7 @@ TC 237 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 238 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32383831313031363138 (len=10 bytes)
@@ -1271,6 +1376,7 @@ TC 238 | result=valid | valid_bit=1 | Flags=
   S: 24bd9a9f39ed02773e8ba54e3f0f99f4e806a69839b7890099be2978cd55076f (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 239 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1284,6 +1390,7 @@ TC 239 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 240 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 39353030323437373837 (len=10 bytes)
@@ -1295,6 +1402,7 @@ TC 240 | result=valid | valid_bit=1 | Flags=
   S: 4d0d3ed085477a4dc7fd86d242905637a71700ffd4c22cf962a67e9ae32b8877 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 241 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1308,6 +1416,7 @@ TC 241 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 242 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 38313933373839323237 (len=10 bytes)
@@ -1319,6 +1428,7 @@ TC 242 | result=valid | valid_bit=1 | Flags=
   S: 3e41fe090c8f14b8af7fd39c2628869258cf05b0e289b6692602c10cdcc8dd83 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 243 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1332,6 +1442,7 @@ TC 243 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 244 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3136333833393533353233 (len=11 bytes)
@@ -1343,6 +1454,7 @@ TC 244 | result=valid | valid_bit=1 | Flags=
   S: 485ee205c6fa3ffe5411948dff2351ab9bbbc20ca419d6182da77f5579058749 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 245 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1356,6 +1468,7 @@ TC 245 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 246 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 39333634373032383235 (len=10 bytes)
@@ -1367,6 +1480,7 @@ TC 246 | result=valid | valid_bit=1 | Flags=
   S: 7afa3d39b8a7e52ce768e466db6da41a354c12ea2f677bf05a24fc689e347323 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 247 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1380,6 +1494,7 @@ TC 247 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 248 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 35313738313334383231 (len=10 bytes)
@@ -1391,6 +1506,7 @@ TC 248 | result=valid | valid_bit=1 | Flags=
   S: f7d99b7738aca745b91b65c697a83ac76ce1e61568d9271631d06af1b77ad5d6 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 249 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1404,6 +1520,7 @@ TC 249 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 250 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3134333533393131363839 (len=11 bytes)
@@ -1415,6 +1532,7 @@ TC 250 | result=valid | valid_bit=1 | Flags=
   S: b3bde8f45d5f885948b45402b9e7a722c292e88bfadb5bb2fdadfe8e1b3f5181 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 251 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1428,6 +1546,7 @@ TC 251 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 252 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32373632313932373839 (len=10 bytes)
@@ -1439,6 +1558,7 @@ TC 252 | result=valid | valid_bit=1 | Flags=
   S: 88328ac07938b5b9cfe62a3841382cfbe9d623480cec2a3fdb73ee36dd4aef8f (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 253 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1452,6 +1572,7 @@ TC 253 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 254 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32343336383939303330 (len=10 bytes)
@@ -1463,6 +1584,7 @@ TC 254 | result=valid | valid_bit=1 | Flags=
   S: 22ccc9a0493116556d9ffc7582253c581452d717a7e00618dce21f46f5b64fd0 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 255 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1476,6 +1598,7 @@ TC 255 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 256 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33333337313139393735 (len=10 bytes)
@@ -1487,6 +1610,7 @@ TC 256 | result=valid | valid_bit=1 | Flags=
   S: 2818f7847c48a9a38739c71653919104db8920a816000ed21e5179980efb6b6d (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 257 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1500,6 +1624,7 @@ TC 257 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 258 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32303933303137373437 (len=10 bytes)
@@ -1511,6 +1636,7 @@ TC 258 | result=valid | valid_bit=1 | Flags=
   S: a73b3a703857aa8d12263290366a19d64e0b3efccd0623f53a7370099e9dcece (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 259 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1524,6 +1650,7 @@ TC 259 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 260 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31373634333530363837 (len=10 bytes)
@@ -1535,6 +1662,7 @@ TC 260 | result=valid | valid_bit=1 | Flags=
   S: c0f1427005a46aac00a0af43b8f54a951e673e0480c6bf7a6b5775d4a3de5e60 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 261 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1548,6 +1676,7 @@ TC 261 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 262 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32323638323436343933 (len=10 bytes)
@@ -1559,6 +1688,7 @@ TC 262 | result=valid | valid_bit=1 | Flags=
   S: f70f7f0563c46a07d248e80a65f38532d5759f49fc104184fa6718ca55274372 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 263 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1572,6 +1702,7 @@ TC 263 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 264 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 393733333935313139 (len=9 bytes)
@@ -1583,6 +1714,7 @@ TC 264 | result=valid | valid_bit=1 | Flags=
   S: ddb7c78b45c4221db6f26e845f8c30be61c29bcf38e38abaf7cbd03e5af914f7 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 265 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1596,6 +1728,7 @@ TC 265 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 266 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33373433353638373832 (len=10 bytes)
@@ -1607,6 +1740,7 @@ TC 266 | result=valid | valid_bit=1 | Flags=
   S: bd528be771fa1e52cab6d7485c5887befb378ceaf565aca0f32d2831a466959e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 267 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1620,6 +1754,7 @@ TC 267 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 268 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 373235343434333234 (len=9 bytes)
@@ -1631,6 +1766,7 @@ TC 268 | result=valid | valid_bit=1 | Flags=
   S: 0376b7ff7601978a47bbf7d11c6844520a442ceb167aec3a0ddf36e150a385c9 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 269 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1644,6 +1780,7 @@ TC 269 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 270 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3132333031383133373933 (len=11 bytes)
@@ -1655,6 +1792,7 @@ TC 270 | result=valid | valid_bit=1 | Flags=
   S: e3a002023296fe6d9395fc92ba31dd35c5ada42e06db01466a24f087ae70cdb4 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 271 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1668,6 +1806,7 @@ TC 271 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 272 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32383934333937393632 (len=10 bytes)
@@ -1679,6 +1818,7 @@ TC 272 | result=valid | valid_bit=1 | Flags=
   S: edc803cdb54bd4c54b87bc69a42df3dd11ab56bb13d8b5b78642ffa9ef88d31d (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 273 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1692,6 +1832,7 @@ TC 273 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 274 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 323131323639323536 (len=9 bytes)
@@ -1703,6 +1844,7 @@ TC 274 | result=valid | valid_bit=1 | Flags=
   S: d219cdbfefa9ced843f947191ff11bfe4880702a4504f34b28481b424f433a38 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 275 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1716,6 +1858,7 @@ TC 275 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 276 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 38333536373632373235 (len=10 bytes)
@@ -1727,6 +1870,7 @@ TC 276 | result=valid | valid_bit=1 | Flags=
   S: 3b8920181a8ab6f9ea0a1814171db3eb4ff3d5fd9cbd2d9c1ec4018a7625562e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 277 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1740,6 +1884,7 @@ TC 277 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 278 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31393237303834313635 (len=10 bytes)
@@ -1751,6 +1896,7 @@ TC 278 | result=valid | valid_bit=1 | Flags=
   S: 117910985597a6f7482bec7632e94676c432684f16f7f3d09a90ff4ed6ad36db (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 279 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1764,6 +1910,7 @@ TC 279 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 280 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3133343733373337333833 (len=11 bytes)
@@ -1775,6 +1922,7 @@ TC 280 | result=valid | valid_bit=1 | Flags=
   S: b679eff436faa53c0a3c437717f574b59135d5dc49fb8524a365296db2d119e6 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 281 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1788,6 +1936,7 @@ TC 281 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 282 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33353335303430303239 (len=10 bytes)
@@ -1799,6 +1948,7 @@ TC 282 | result=valid | valid_bit=1 | Flags=
   S: 5dba085bd57b5471f8547cff0aca9e51234d85c0847d01a3aa0b3cf3cace82d9 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 283 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1812,6 +1962,7 @@ TC 283 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 284 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 393035313735303638 (len=9 bytes)
@@ -1823,6 +1974,7 @@ TC 284 | result=valid | valid_bit=1 | Flags=
   S: 9ff59fabe5e8dcf9539ea1bf9f4b880f112a26c915c14827dad9de6b251dd65e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 285 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1836,6 +1988,7 @@ TC 285 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 286 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 383733363733343931 (len=9 bytes)
@@ -1847,6 +2000,7 @@ TC 286 | result=valid | valid_bit=1 | Flags=
   S: c9423b8575e4afe16cfebefb03e55d628270264fad0eb67c9acf0268e514584c (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 287 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1860,6 +2014,7 @@ TC 287 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 288 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 34353339353735383736 (len=10 bytes)
@@ -1871,6 +2026,7 @@ TC 288 | result=valid | valid_bit=1 | Flags=
   S: 7d1ea6859a0c932f2298f9d21c89ebea7354bbe508d2b73469dc3efe8613bc87 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 289 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1884,6 +2040,7 @@ TC 289 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 290 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33383036303638303338 (len=10 bytes)
@@ -1895,6 +2052,7 @@ TC 290 | result=valid | valid_bit=1 | Flags=
   S: a6d25ae5cab39cc83116d073cd1eb59d80ce2ed208c1c970b134be2ad29d6068 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 291 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1908,6 +2066,7 @@ TC 291 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 292 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 34303734333232353538 (len=10 bytes)
@@ -1919,6 +2078,7 @@ TC 292 | result=valid | valid_bit=1 | Flags=
   S: 56c21579e85fc9075c7601bd36ef8a3fa57d5bc7550c9a17bb8383e7fdbb366f (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 293 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1932,6 +2092,7 @@ TC 293 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 294 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3137343138373339323133 (len=11 bytes)
@@ -1943,6 +2104,7 @@ TC 294 | result=valid | valid_bit=1 | Flags=
   S: a210a74c1c682de5708b9d19e6fd2f74ea047b1352edac7e4784cc008e8b0b5a (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 295 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1956,6 +2118,7 @@ TC 295 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 296 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 35303338363930383739 (len=10 bytes)
@@ -1967,6 +2130,7 @@ TC 296 | result=valid | valid_bit=1 | Flags=
   S: 4535354e8fb477d0be4a16f44719d94650ed4607eabe206848ba24322406c1d5 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 297 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -1980,6 +2144,7 @@ TC 297 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 298 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 333231373038313738 (len=9 bytes)
@@ -1991,6 +2156,7 @@ TC 298 | result=valid | valid_bit=1 | Flags=
   S: eb8dd006680530f27326f1c9c54e5c4300f1bca21bdb17245c485d7b296a2372 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 299 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2004,6 +2170,7 @@ TC 299 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 300 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31313034373435303432 (len=10 bytes)
@@ -2015,6 +2182,7 @@ TC 300 | result=valid | valid_bit=1 | Flags=
   S: 56ae20cd659370712e06bd6d5936bcaa06169737a062438c7e599bfff0099fb1 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 301 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2028,6 +2196,7 @@ TC 301 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 302 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 32323631333835303439 (len=10 bytes)
@@ -2039,6 +2208,7 @@ TC 302 | result=valid | valid_bit=1 | Flags=
   S: a413070c1e974643e5d5fdc56209e1421a254f47fda3312ceda244064efe69ce (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 303 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2052,6 +2222,7 @@ TC 303 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 304 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33343939333634313832 (len=10 bytes)
@@ -2063,6 +2234,7 @@ TC 304 | result=valid | valid_bit=1 | Flags=
   S: e9c53670e94337535dda10a599de0a6da240ea813e8081f9caa6bae59cbd310a (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 305 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2076,6 +2248,7 @@ TC 305 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 306 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 343933383339353635 (len=9 bytes)
@@ -2087,6 +2260,7 @@ TC 306 | result=valid | valid_bit=1 | Flags=
   S: 73c0f75156531aad36d2d14169c2b66797e8dd31d6f66b8ddb83f7522fba2176 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 307 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2100,6 +2274,7 @@ TC 307 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 308 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 383334383031353938 (len=9 bytes)
@@ -2111,6 +2286,7 @@ TC 308 | result=valid | valid_bit=1 | Flags=
   S: 18a8157a0976bb0e349a02134fad0d0286c40a5e43a47b49b5a03653e3ae9e19 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 309 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2124,6 +2300,7 @@ TC 309 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 310 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 373836343638363335 (len=9 bytes)
@@ -2135,6 +2312,7 @@ TC 310 | result=valid | valid_bit=1 | Flags=
   S: a866f620640511357b7dd3bc0eddcddcc5a59e9162204c1d85f223ec485cdee2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 311 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2148,6 +2326,7 @@ TC 311 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 312 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31393237303137373338 (len=10 bytes)
@@ -2159,6 +2338,7 @@ TC 312 | result=valid | valid_bit=1 | Flags=
   S: 5c0a46804e7de7c741e5be55a7ebba092dc10a4d1691e6a04ac1690b54acf950 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 313 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2172,6 +2352,7 @@ TC 313 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 314 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 34303139383636363832 (len=10 bytes)
@@ -2183,6 +2364,7 @@ TC 314 | result=valid | valid_bit=1 | Flags=
   S: 17144740db21874aa58c0de6a4cadb16c5d9230d4f4607980aabd161d21045ae (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 315 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2196,6 +2378,7 @@ TC 315 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 316 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 333236393538353830 (len=9 bytes)
@@ -2207,6 +2390,7 @@ TC 316 | result=valid | valid_bit=1 | Flags=
   S: 09149c000d1af12d800225c1ba3587a53e5aabd8a8fe78230b1b4c12ba7df008 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 317 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2220,6 +2404,7 @@ TC 317 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 318 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 37373134363833343830 (len=10 bytes)
@@ -2231,6 +2416,7 @@ TC 318 | result=valid | valid_bit=1 | Flags=
   S: 785adced4f3d400b286ad7eb7bdf0b7c0f46d9e7268db5a34e740166caafd14a (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 319 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2244,6 +2430,7 @@ TC 319 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 320 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 34383830363235353636 (len=10 bytes)
@@ -2255,6 +2442,7 @@ TC 320 | result=valid | valid_bit=1 | Flags=
   S: 4c686aaafb4f3615247ff06b97bd76d49b93f65b5f66c93fc2a8a22246536c24 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 321 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2268,6 +2456,7 @@ TC 321 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 322 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 34373038363839373836 (len=10 bytes)
@@ -2279,6 +2468,7 @@ TC 322 | result=valid | valid_bit=1 | Flags=
   S: 5559936f9c94c6e4a97c9febbcb2c1a418fbf9f2933dd64def686b3771dc3fa8 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 323 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2292,6 +2482,7 @@ TC 323 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 324 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33303137313930333835 (len=10 bytes)
@@ -2303,6 +2494,7 @@ TC 324 | result=valid | valid_bit=1 | Flags=
   S: 88fb12318d60b66b68fe80834172813989c24901e3adbcd4c73860fa9500bc75 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 325 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2316,6 +2508,7 @@ TC 325 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 326 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 35333030373634333530 (len=10 bytes)
@@ -2327,6 +2520,7 @@ TC 326 | result=valid | valid_bit=1 | Flags=
   S: d9328ca00ce32934b4ed340a6e15236cb16e5364cc91ef5cd6f675e048985bac (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 327 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2340,6 +2534,7 @@ TC 327 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 328 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3335353435303535393632 (len=11 bytes)
@@ -2351,6 +2546,7 @@ TC 328 | result=valid | valid_bit=1 | Flags=
   S: 48dd0269cb216e2792f3b410a781c9b10e59abdc553aae2a00d4038f44a2849e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 329 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2364,6 +2560,7 @@ TC 329 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 330 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 35363137363931363932 (len=10 bytes)
@@ -2375,6 +2572,7 @@ TC 330 | result=valid | valid_bit=1 | Flags=
   S: afa24a4cd163042da5f767e7088e6fa03efe039a477fc13f6c23270cda91519f (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 331 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2388,6 +2586,7 @@ TC 331 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 332 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3135373136363738373434 (len=11 bytes)
@@ -2399,6 +2598,7 @@ TC 332 | result=valid | valid_bit=1 | Flags=
   S: 1e0e1f75489a451fc7cc4bca61a0a7330a5b4dc4283df68e21798996d8c69bd4 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 333 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2412,6 +2612,7 @@ TC 333 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 334 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 373430343735303832 (len=9 bytes)
@@ -2423,6 +2624,7 @@ TC 334 | result=valid | valid_bit=1 | Flags=
   S: c619ab2ba23b20f90bc815d2fd4c345d0381476b164590cd932b40b2263e4054 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 335 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2436,6 +2638,7 @@ TC 335 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 336 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31323335363538383839 (len=10 bytes)
@@ -2447,6 +2650,7 @@ TC 336 | result=valid | valid_bit=1 | Flags=
   S: 1e73b8299579684b80801d2fd70d5c6f9a904ab0735b26d27ff44021002c6107 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 337 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2460,6 +2664,7 @@ TC 337 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 338 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3531383033303235343636 (len=11 bytes)
@@ -2471,6 +2676,7 @@ TC 338 | result=valid | valid_bit=1 | Flags=
   S: 8bc24546613e4811facecf605d6b1f79b442c3d8fe458c1c69334cbee31ef532 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 339 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2484,6 +2690,7 @@ TC 339 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 340 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 39303630303335323132 (len=10 bytes)
@@ -2495,6 +2702,7 @@ TC 340 | result=valid | valid_bit=1 | Flags=
   S: 3a7ea099d7c2909ff4a5c3c286d9f7739f38b7e44605ea3f515fde117a4519ec (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 341 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2508,6 +2716,7 @@ TC 341 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 342 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 34393830383630303338 (len=10 bytes)
@@ -2519,6 +2728,7 @@ TC 342 | result=valid | valid_bit=1 | Flags=
   S: 55abb27fad179d132830f7e5dff0d26a63f0141fe2288b9ff7943c3a482ac124 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 343 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2532,6 +2742,7 @@ TC 343 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 344 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 36363433333334373231 (len=10 bytes)
@@ -2543,6 +2754,7 @@ TC 344 | result=valid | valid_bit=1 | Flags=
   S: 3d9e4fac784be61e2decb75a1f6768af21873eb49881849b936036b19187a734 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 345 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2556,6 +2768,7 @@ TC 345 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 346 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3230313834343032 (len=8 bytes)
@@ -2567,6 +2780,7 @@ TC 346 | result=valid | valid_bit=1 | Flags=
   S: bcbc6fa18d8ca570b4a9a5f2a8f6ff9db3e3370ffd3e5a7e19880990f6f8e614 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 347 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2580,6 +2794,7 @@ TC 347 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 348 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31313833383631383131 (len=10 bytes)
@@ -2591,6 +2806,7 @@ TC 348 | result=valid | valid_bit=1 | Flags=
   S: 11d8c48ba6c400f7950f9dfd9ea65617b3765db0e79778bb079fbd7db67b68f8 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 349 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2604,6 +2820,7 @@ TC 349 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 350 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 393735313433323037 (len=9 bytes)
@@ -2615,6 +2832,7 @@ TC 350 | result=valid | valid_bit=1 | Flags=
   S: 7b3fee66768794c0b362f2d40ad64fdf03e0fb0e8a47f2034167aae2ca383c0e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 351 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2628,6 +2846,7 @@ TC 351 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 352 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 333236333136383132 (len=9 bytes)
@@ -2639,6 +2858,7 @@ TC 352 | result=valid | valid_bit=1 | Flags=
   S: 21a71528f9e8fe6067ca74cc0d8b4b48270aad9ade9db44a98c98182a5e8f208 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 353 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2652,6 +2872,7 @@ TC 353 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 354 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 36333230383831313931 (len=10 bytes)
@@ -2663,6 +2884,7 @@ TC 354 | result=valid | valid_bit=1 | Flags=
   S: 44c32fb9d2b5e6f9c38226538776538a55eb1bdfbac44e3e1229337415645db6 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 355 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2676,6 +2898,7 @@ TC 355 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 356 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31333439333933363934 (len=10 bytes)
@@ -2687,6 +2910,7 @@ TC 356 | result=valid | valid_bit=1 | Flags=
   S: 4ffbcc50a7a69dfce92a47410f8574f7b0abfc8b4c7f74ac0dc1c1183d393482 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 357 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
@@ -2700,6 +2924,7 @@ TC 357 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 358 | result=invalid | valid_bit=0 | Flags=
   Comment: Signature generated without truncating the hash
   Msg: 313233343030 (len=6 bytes)
@@ -2711,6 +2936,7 @@ TC 358 | result=invalid | valid_bit=0 | Flags=
   S: f181213b28b921af292ea2fbcb8af4a0e14e2c5aa603c45dab7a46f05bbd5d85 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 359 | result=valid | valid_bit=1 | Flags=
   Comment: k*G has a large x-coordinate
@@ -2724,6 +2950,7 @@ TC 359 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 360 | result=invalid | valid_bit=0 | Flags=
   Comment: r too large
   Msg: 313233343030 (len=6 bytes)
@@ -2735,6 +2962,7 @@ TC 360 | result=invalid | valid_bit=0 | Flags=
   S: ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc63254e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 361 | result=valid | valid_bit=1 | Flags=
   Comment: r,s are large
@@ -2748,6 +2976,7 @@ TC 361 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 362 | result=valid | valid_bit=1 | Flags=
   Comment: r and s^-1 have a large Hamming weight
   Msg: 313233343030 (len=6 bytes)
@@ -2759,6 +2988,7 @@ TC 362 | result=valid | valid_bit=1 | Flags=
   S: 909135bdb6799286170f5ead2de4f6511453fe50914f3df2de54a36383df8dd4 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 363 | result=valid | valid_bit=1 | Flags=
   Comment: r and s^-1 have a large Hamming weight
@@ -2772,6 +3002,7 @@ TC 363 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 364 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s
   Msg: 313233343030 (len=6 bytes)
@@ -2783,6 +3014,7 @@ TC 364 | result=valid | valid_bit=1 | Flags=
   S: 01 (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 365 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s
@@ -2796,6 +3028,7 @@ TC 365 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 366 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s
   Msg: 313233343030 (len=6 bytes)
@@ -2807,6 +3040,7 @@ TC 366 | result=valid | valid_bit=1 | Flags=
   S: 05 (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 367 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s
@@ -2820,6 +3054,7 @@ TC 367 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 368 | result=invalid | valid_bit=0 | Flags=
   Comment: r is larger than n
   Msg: 313233343030 (len=6 bytes)
@@ -2831,6 +3066,7 @@ TC 368 | result=invalid | valid_bit=0 | Flags=
   S: 06 (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 369 | result=invalid | valid_bit=0 | Flags=
   Comment: s is larger than n
@@ -2844,6 +3080,7 @@ TC 369 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 370 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s^-1
   Msg: 313233343030 (len=6 bytes)
@@ -2855,6 +3092,7 @@ TC 370 | result=valid | valid_bit=1 | Flags=
   S: 8f1e3c7862c58b16bb76eddbb76eddbb516af4f63f2d74d76e0d28c9bb75ea88 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 371 | result=valid | valid_bit=1 | Flags=
   Comment: smallish r and s^-1
@@ -2868,6 +3106,7 @@ TC 371 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 372 | result=valid | valid_bit=1 | Flags=
   Comment: 100-bit r and small s^-1
   Msg: 313233343030 (len=6 bytes)
@@ -2879,6 +3118,7 @@ TC 372 | result=valid | valid_bit=1 | Flags=
   S: 8b748b74000000008b748b748b748b7466e769ad4a16d3dcd87129b8e91d1b4d (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 373 | result=valid | valid_bit=1 | Flags=
   Comment: small r and 100 bit s^-1
@@ -2892,6 +3132,7 @@ TC 373 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 374 | result=valid | valid_bit=1 | Flags=
   Comment: 100-bit r and s^-1
   Msg: 313233343030 (len=6 bytes)
@@ -2903,6 +3144,7 @@ TC 374 | result=valid | valid_bit=1 | Flags=
   S: ef9f6ba4d97c09d03178fa20b4aaad83be3cf9cb824a879fec3270fc4b81ef5b (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 375 | result=valid | valid_bit=1 | Flags=
   Comment: r and s^-1 are close to n
@@ -2916,6 +3158,7 @@ TC 375 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 376 | result=valid | valid_bit=1 | Flags=
   Comment: s == 1
   Msg: 313233343030 (len=6 bytes)
@@ -2927,6 +3170,7 @@ TC 376 | result=valid | valid_bit=1 | Flags=
   S: 01 (len=1 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 377 | result=invalid | valid_bit=0 | Flags=
   Comment: s == 0
@@ -2940,6 +3184,7 @@ TC 377 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: ZERO
 
+
 TC 378 | result=invalid | valid_bit=0 | Flags=
   Comment: point at infinity during verify
   Msg: 313233343030 (len=6 bytes)
@@ -2951,6 +3196,7 @@ TC 378 | result=invalid | valid_bit=0 | Flags=
   S: 555555550000000055555555555555553ef7a8e48d07df81a693439654210c70 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 379 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for signature malleability
@@ -2964,6 +3210,7 @@ TC 379 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 380 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for signature malleability
   Msg: 313233343030 (len=6 bytes)
@@ -2975,6 +3222,7 @@ TC 380 | result=valid | valid_bit=1 | Flags=
   S: 7fffffff800000007fffffffffffffffde737d56d38bcf4279dce5617e3192a9 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 381 | result=valid | valid_bit=1 | Flags=
   Comment: u1 == 1
@@ -2988,6 +3236,7 @@ TC 381 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 382 | result=valid | valid_bit=1 | Flags=
   Comment: u1 == n - 1
   Msg: 313233343030 (len=6 bytes)
@@ -2999,6 +3248,7 @@ TC 382 | result=valid | valid_bit=1 | Flags=
   S: cbd25189e59c5c367e7630cbd4c4cb1512c194cadf353d6331f9f57fa81b338e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 383 | result=valid | valid_bit=1 | Flags=
   Comment: u2 == 1
@@ -3012,6 +3262,7 @@ TC 383 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 384 | result=valid | valid_bit=1 | Flags=
   Comment: u2 == n - 1
   Msg: 313233343030 (len=6 bytes)
@@ -3023,6 +3274,7 @@ TC 384 | result=valid | valid_bit=1 | Flags=
   S: aaaaaaaa00000000aaaaaaaaaaaaaaaa7def51c91a0fbf034d26872ca84218e1 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 385 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
@@ -3036,6 +3288,7 @@ TC 385 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 386 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
@@ -3047,6 +3300,7 @@ TC 386 | result=valid | valid_bit=1 | Flags=
   S: 2a06d743967a1330ca91cc46c9394512cc85b4f1b9355eb7f4bbe53a32b76cf4 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 387 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
@@ -3060,6 +3314,7 @@ TC 387 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 388 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
@@ -3071,6 +3326,7 @@ TC 388 | result=valid | valid_bit=1 | Flags=
   S: cbfaf812124638c0b98c18cac3dd8d0848ff921f26aec42a708df7b6a97571c7 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 389 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
@@ -3084,6 +3340,7 @@ TC 389 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 390 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
@@ -3095,6 +3352,7 @@ TC 390 | result=valid | valid_bit=1 | Flags=
   S: 5f025bc7c717fdb28319587bb1a10fcead32935ea552ae4fb0fe33cdca6473d1 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 391 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
@@ -3108,6 +3366,7 @@ TC 391 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 392 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
@@ -3119,6 +3378,7 @@ TC 392 | result=valid | valid_bit=1 | Flags=
   S: ec618e7b1af40be0d052f5a020388fc6cafb822933c1bffab137885f52e89d3e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 393 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
@@ -3132,6 +3392,7 @@ TC 393 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 394 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
@@ -3143,6 +3404,7 @@ TC 394 | result=valid | valid_bit=1 | Flags=
   S: e9fcbcad906698e02d9aba57b3c4e9eefeaf3cec7a980c422fe7f6303fc4a3ab (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 395 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
@@ -3156,6 +3418,7 @@ TC 395 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 396 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
@@ -3167,6 +3430,7 @@ TC 396 | result=valid | valid_bit=1 | Flags=
   S: 43f0c5d8a1dec9677f7cbaee9c419907064086ee4a67147665fdfc7fe2b3bbda (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 397 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
@@ -3180,6 +3444,7 @@ TC 397 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 398 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
@@ -3191,6 +3456,7 @@ TC 398 | result=valid | valid_bit=1 | Flags=
   S: c522b80b59486b775aa2af0b3dcca27b1d565aa199ca0fc6d008598e33ff7779 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 399 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
@@ -3204,6 +3470,7 @@ TC 399 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 400 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
@@ -3215,6 +3482,7 @@ TC 400 | result=valid | valid_bit=1 | Flags=
   S: b62f26b5f2a2b26f6de86d42ad8a13da3ab3cccd0459b201de009e526adf21f2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 401 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
@@ -3228,6 +3496,7 @@ TC 401 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 402 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
@@ -3239,6 +3508,7 @@ TC 402 | result=valid | valid_bit=1 | Flags=
   S: 66755a00638cdaec1c732513ca0234ece52545dac11f816e818f725b4f60aaf2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 403 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
@@ -3252,6 +3522,7 @@ TC 403 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 404 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
@@ -3263,6 +3534,7 @@ TC 404 | result=valid | valid_bit=1 | Flags=
   S: ab40193f9b5d76c064a27940469d9fffd31d7c925fbe05c919491d3057d66cd2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 405 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
@@ -3276,6 +3548,7 @@ TC 405 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 406 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
@@ -3287,6 +3560,7 @@ TC 406 | result=valid | valid_bit=1 | Flags=
   S: bfffffff3ea3677e082b9310572620ae19933a9e65b285598711c77298815ad3 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 407 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
@@ -3300,6 +3574,7 @@ TC 407 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 408 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
@@ -3311,6 +3586,7 @@ TC 408 | result=valid | valid_bit=1 | Flags=
   S: bfffffff36db6db7a492492492492492146c573f4c6dfc8d08a443e258970b09 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 409 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
@@ -3324,6 +3600,7 @@ TC 409 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 410 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
@@ -3335,6 +3612,7 @@ TC 410 | result=valid | valid_bit=1 | Flags=
   S: 7fffffff55555555ffffffffffffffffd344a71e6f651458a27bdc81fd976e37 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 411 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
@@ -3348,6 +3626,7 @@ TC 411 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 412 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
@@ -3359,6 +3638,7 @@ TC 412 | result=valid | valid_bit=1 | Flags=
   S: 5d8ecd64a4eeba466815ddf3a4de9a8e6abd9c5db0a01eb80343553da648428f (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 413 | result=valid | valid_bit=1 | Flags=PointDuplication
   Comment: point duplication during verification
@@ -3372,6 +3652,7 @@ TC 413 | result=valid | valid_bit=1 | Flags=PointDuplication
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 414 | result=invalid | valid_bit=0 | Flags=PointDuplication
   Comment: duplication bug
   Msg: 313233343030 (len=6 bytes)
@@ -3383,6 +3664,7 @@ TC 414 | result=invalid | valid_bit=0 | Flags=PointDuplication
   S: ae36701f241f6073608b5f77d9039a9aec44aa5a12a99227fd2911b001915de2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 415 | result=invalid | valid_bit=0 | Flags=
   Comment: point with x-coordinate 0
@@ -3396,6 +3678,7 @@ TC 415 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 416 | result=invalid | valid_bit=0 | Flags=
   Comment: point with x-coordinate 0
   Msg: 313233343030 (len=6 bytes)
@@ -3407,6 +3690,7 @@ TC 416 | result=invalid | valid_bit=0 | Flags=
   S: 3333333300000000333333333333333325c7cbbc549e52e763f1f55a327a3aa9 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OUT_OF_RANGE
+
 
 TC 417 | result=invalid | valid_bit=0 | Flags=
   Comment: comparison with point at infinity 
@@ -3420,6 +3704,7 @@ TC 417 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 418 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and edgecase s
   Msg: 313233343030 (len=6 bytes)
@@ -3431,6 +3716,7 @@ TC 418 | result=valid | valid_bit=1 | Flags=
   S: 555555550000000055555555555555553ef7a8e48d07df81a693439654210c70 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 419 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
@@ -3444,6 +3730,7 @@ TC 419 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 420 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
   Msg: 313233343030 (len=6 bytes)
@@ -3455,6 +3742,7 @@ TC 420 | result=valid | valid_bit=1 | Flags=
   S: cccccccc00000000cccccccccccccccc971f2ef152794b9d8fc7d568c9e8eaa7 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 421 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
@@ -3468,6 +3756,7 @@ TC 421 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 422 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
   Msg: 313233343030 (len=6 bytes)
@@ -3479,6 +3768,7 @@ TC 422 | result=valid | valid_bit=1 | Flags=
   S: 49249248db6db6dbb6db6db6db6db6db5a8b230d0b2b51dcd7ebf0c9fef7c185 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 423 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k
@@ -3492,6 +3782,7 @@ TC 423 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 424 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and edgecase s
   Msg: 313233343030 (len=6 bytes)
@@ -3503,6 +3794,7 @@ TC 424 | result=valid | valid_bit=1 | Flags=
   S: 555555550000000055555555555555553ef7a8e48d07df81a693439654210c70 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 425 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
@@ -3516,6 +3808,7 @@ TC 425 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 426 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
   Msg: 313233343030 (len=6 bytes)
@@ -3527,6 +3820,7 @@ TC 426 | result=valid | valid_bit=1 | Flags=
   S: cccccccc00000000cccccccccccccccc971f2ef152794b9d8fc7d568c9e8eaa7 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 427 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
@@ -3540,6 +3834,7 @@ TC 427 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 428 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
   Msg: 313233343030 (len=6 bytes)
@@ -3551,6 +3846,7 @@ TC 428 | result=valid | valid_bit=1 | Flags=
   S: 49249248db6db6dbb6db6db6db6db6db5a8b230d0b2b51dcd7ebf0c9fef7c185 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 429 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k
@@ -3564,6 +3860,7 @@ TC 429 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 430 | result=invalid | valid_bit=0 | Flags=
   Comment: testing point duplication
   Msg: 313233343030 (len=6 bytes)
@@ -3575,6 +3872,7 @@ TC 430 | result=invalid | valid_bit=0 | Flags=
   S: 249249246db6db6ddb6db6db6db6db6dad4591868595a8ee6bf5f864ff7be0c2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 431 | result=invalid | valid_bit=0 | Flags=
   Comment: testing point duplication
@@ -3588,6 +3886,7 @@ TC 431 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 432 | result=invalid | valid_bit=0 | Flags=
   Comment: testing point duplication
   Msg: 313233343030 (len=6 bytes)
@@ -3599,6 +3898,7 @@ TC 432 | result=invalid | valid_bit=0 | Flags=
   S: 249249246db6db6ddb6db6db6db6db6dad4591868595a8ee6bf5f864ff7be0c2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 433 | result=invalid | valid_bit=0 | Flags=
   Comment: testing point duplication
@@ -3612,6 +3912,7 @@ TC 433 | result=invalid | valid_bit=0 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 434 | result=valid | valid_bit=1 | Flags=
   Comment: pseudorandom signature
   Msg:  (len=0 bytes)
@@ -3623,6 +3924,7 @@ TC 434 | result=valid | valid_bit=1 | Flags=
   S: a2bcd9f6228a0aa0a4f066aa674b9b08da252b02a77fd1b2f7a2d85929e8b491 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 435 | result=valid | valid_bit=1 | Flags=
   Comment: pseudorandom signature
@@ -3636,6 +3938,7 @@ TC 435 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 436 | result=valid | valid_bit=1 | Flags=
   Comment: pseudorandom signature
   Msg: 313233343030 (len=6 bytes)
@@ -3647,6 +3950,7 @@ TC 436 | result=valid | valid_bit=1 | Flags=
   S: a66755b078262b6b0d90c74aee64522104aa58b5f82fc5ba98bcef5bdb9d43a8 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 437 | result=valid | valid_bit=1 | Flags=
   Comment: pseudorandom signature
@@ -3660,6 +3964,7 @@ TC 437 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 438 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key has many trailing 0's
   Msg: 4d657373616765 (len=7 bytes)
@@ -3671,6 +3976,7 @@ TC 438 | result=valid | valid_bit=1 | Flags=
   S: cf135d42f5e379f6ef94b6a493db01c740f441ff5b2475638b6b081f445b17e2 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 439 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key has many trailing 0's
@@ -3684,6 +3990,7 @@ TC 439 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 440 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key has many trailing 0's
   Msg: 4d657373616765 (len=7 bytes)
@@ -3695,6 +4002,7 @@ TC 440 | result=valid | valid_bit=1 | Flags=
   S: f5d2c396e45d9af9fe1b06b27f0db4d9ee66e1855f4846dae5db6b3d8afbc4f8 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 441 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key has many trailing 0's
@@ -3708,6 +4016,7 @@ TC 441 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 442 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key has many trailing 0's
   Msg: 4d657373616765 (len=7 bytes)
@@ -3719,6 +4028,7 @@ TC 442 | result=valid | valid_bit=1 | Flags=
   S: 7aaa75e5a7948be66f06ce52fc3e4916fc93514b08c51f84b73839d2c05acf58 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 443 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key has many trailing 0's
@@ -3732,6 +4042,7 @@ TC 443 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 444 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key has many trailing 1's
   Msg: 4d657373616765 (len=7 bytes)
@@ -3743,6 +4054,7 @@ TC 444 | result=valid | valid_bit=1 | Flags=
   S: fbb3508d6692b8e0854c1a1749ea065262bae7c8b831ece895a1eeda01cebe7d (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 445 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key has many trailing 1's
@@ -3756,6 +4068,7 @@ TC 445 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 446 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key has many trailing 1's
   Msg: 4d657373616765 (len=7 bytes)
@@ -3767,6 +4080,7 @@ TC 446 | result=valid | valid_bit=1 | Flags=
   S: 4b3a19f1be945cd649f34d965e7eecac0a05ac8030b7cd2d6bed84086fda567e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 447 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key has many trailing 1's
@@ -3780,6 +4094,7 @@ TC 447 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 448 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key has many trailing 1's
   Msg: 4d657373616765 (len=7 bytes)
@@ -3791,6 +4106,7 @@ TC 448 | result=valid | valid_bit=1 | Flags=
   S: b4005a89aef027e5063a89709fbc66a05eb12d8d34af84f35ea7ac93f7bbd40e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 449 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key has many trailing 1's
@@ -3804,6 +4120,7 @@ TC 449 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 450 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key is large
   Msg: 4d657373616765 (len=7 bytes)
@@ -3815,6 +4132,7 @@ TC 450 | result=valid | valid_bit=1 | Flags=
   S: b99d63e3cc81458801d5fd5926405d33b894e0f96a85c3c4a929a45c828d76d0 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 451 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key is large
@@ -3828,6 +4146,7 @@ TC 451 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 452 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key is large
   Msg: 4d657373616765 (len=7 bytes)
@@ -3839,6 +4158,7 @@ TC 452 | result=valid | valid_bit=1 | Flags=
   S: fd8597585fa0270c8cdf855a7a69a843eb28124ecf90ac53a58a847c7b43c7a6 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 453 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key is small
@@ -3852,6 +4172,7 @@ TC 453 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 454 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key is small
   Msg: 4d657373616765 (len=7 bytes)
@@ -3863,6 +4184,7 @@ TC 454 | result=valid | valid_bit=1 | Flags=
   S: cc1735efd4b43e8bdba8c1b44f9ec3e62577e5f4f6543051467bacd9eaaa4d4a (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 455 | result=valid | valid_bit=1 | Flags=
   Comment: x-coordinate of the public key is small
@@ -3876,6 +4198,7 @@ TC 455 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 456 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is small
   Msg: 4d657373616765 (len=7 bytes)
@@ -3887,6 +4210,7 @@ TC 456 | result=valid | valid_bit=1 | Flags=
   S: 3b52a42606d0daa135092d89ab74b3c4e72b4ed213137406d4b50fa84c4ea049 (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 457 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is small
@@ -3900,6 +4224,7 @@ TC 457 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 458 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is small
   Msg: 4d657373616765 (len=7 bytes)
@@ -3911,6 +4236,7 @@ TC 458 | result=valid | valid_bit=1 | Flags=
   S: 9928afe57df6b8c90b7af7c3da981b71db6ae3a5a21a4c5a48b71628e5811a9e (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 
 TC 459 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is large
@@ -3924,6 +4250,7 @@ TC 459 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 460 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is large
   Msg: 4d657373616765 (len=7 bytes)
@@ -3936,6 +4263,7 @@ TC 460 | result=valid | valid_bit=1 | Flags=
   Encoding: STRICT_OK
   Range: OK
 
+
 TC 461 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is large
   Msg: 4d657373616765 (len=7 bytes)
@@ -3947,4 +4275,5 @@ TC 461 | result=valid | valid_bit=1 | Flags=
   S: aaa45d54eba6bb3ce00ce8e63de24dc7ee19069062e8d340663adcac07f097cd (len=32 bytes)
   Encoding: STRICT_OK
   Range: OK
+
 

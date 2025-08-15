@@ -9,9 +9,9 @@ import hashlib
 # =============================
 # Config
 # =============================
-DER_ONLY = True               # 只吃 DER
-ALLOW_EMPTY_INTEGER = True    # 允許 INTEGER 長度為 0（本案例外）
-ZERO_HEX_FOR_EMPTY = True     # 人檔遇到空值輸出 "00" 以利 regex
+DER_ONLY = True               # 只吃嚴格 DER（最短長度編碼、無 trailing）
+ALLOW_EMPTY_INTEGER = True    # 允許 INTEGER 長度為 0（特例：為了保留測項）
+ZERO_HEX_FOR_EMPTY = True     # 人檔遇到空值輸出 "00"（但 len=0），利於 regex
 
 # =============================
 # Hash & Curve size utilities
@@ -61,7 +61,7 @@ def to_sv_hex(byte_data, bit_width):
 # =============================
 
 def _read_len_strict(buf, i):
-    """DER length: short-form for <128, long-form only when >=128, minimal encoding。"""
+    """DER length: short-form for <128, long-form only when >=128，且必須最短編碼。"""
     if i >= len(buf):
         return None, i, False
     b = buf[i]; i += 1
@@ -71,7 +71,7 @@ def _read_len_strict(buf, i):
     if n == 0 or i + n > len(buf):
         return None, i, False
     L = int.from_bytes(buf[i:i+n], "big"); i += n
-    # DER 要求最短編碼：小於 128 不能用 long form
+    # DER: minimal encoding required
     if L < 128:
         return L, i, False
     return L, i, True
@@ -79,7 +79,7 @@ def _read_len_strict(buf, i):
 def der_decode_sig_strict(der_bytes):
     """
     嚴格 DER 解析 ECDSA 簽章：SEQUENCE { INTEGER r, INTEGER s }
-    - 長度最短編碼
+    - 最短長度編碼
     - 不允許 trailing bytes
     - 例外：若 ALLOW_EMPTY_INTEGER=True，允許 r_len==0 或 s_len==0
     回傳 (r_raw, s_raw, enc_ok)。r_raw/s_raw 為原始二補數位元組（可能為空）。
@@ -93,8 +93,8 @@ def der_decode_sig_strict(der_bytes):
         if seq_len is None:
             return None, None, False
         seq_end = i + seq_len
-        if seq_end != len(der_bytes):
-            return None, None, False  # DER 禁止 trailing
+        if seq_end != len(der_bytes):  # no trailing
+            return None, None, False
 
         # INTEGER r
         if i >= seq_end or der_bytes[i] != 0x02:
@@ -150,26 +150,16 @@ def _pick_key_obj(group):
 # Skip rules (by comment/flags)
 # =============================
 
-# 完全跳過（人/機都不寫）的「編碼測項」關鍵字（以 comment 為準）
+# 你要完全跳過（人/機都不寫）的關鍵字（用 comment 判斷）
 COMMON_SKIP_KEYWORDS = [
-    # "length of sequence",
-    # "appending 0's to sequence",
-    # "appending unused 0's to sequence",
-    # "appending null value to sequence",
-    # "append empty sequence",
-    # "append garbage with high tag number",
-    # "repeating element in sequence",
-    # "modify first byte of integer",
-    # "modify last byte of integer",
-    # "leading ff in integer",
-    # "long form encoding of length of integer",
-    # "indefinite length",  # 含 without termination
-    # 注意：不要把 "dropping value of integer" 放這裡，因為你要保留它
+    # 留空代表目前不根據 comment 跳；需要時再加關鍵字進來
 ]
+
+# flag 觸發就跳（大小寫不敏感）
 FLAG_SKIP_KEYWORDS = [
-    "InvalidEncoding",
-    "ber",
-    "berencoded",
+    "invalidencoding",  # Wycheproof 有這個 flag 名
+    "ber",              # 也有直接 "BER"
+    "berencoded",       # 也可能是 "BerEncodedSignature"
 ]
 
 # =============================
@@ -182,6 +172,8 @@ def main():
     if not json_files:
         print("⚠️  找不到任何 JSON：請把 Wycheproof 檔放到 ./wycherproof_vectors/")
         return
+
+    generated_sv_files = []  # 收集產生的 *_vectors.sv，用來寫 package
 
     for file in json_files:
         with open(file, "r") as f:
@@ -240,8 +232,8 @@ def main():
                 flags_lc = [f.lower() for f in flags]
                 flags_str = ",".join(flags)
 
-                # ---- BER / BerEncodedSignature，或 comment 命中 encoding 關鍵字 ----
-                is_ber_flag = any(k.lower() in flags_lc for k in FLAG_SKIP_KEYWORDS)
+                # ---- 按 flag/comment 跳過整筆 ----
+                is_ber_flag = any(k in flags_lc for k in FLAG_SKIP_KEYWORDS)
                 is_encoding_comment = any(k in comment.lower() for k in COMMON_SKIP_KEYWORDS)
                 if is_ber_flag or is_encoding_comment:
                     skip_count += 1
@@ -276,7 +268,6 @@ def main():
                     continue
 
                 # ---- Range / Zero 檢查 ----
-                # 將原始值去除前導 0 以作長度與 zero 判定（r_raw 可能為空）
                 r_nozero = (r_raw or b"").lstrip(b"\x00")
                 s_nozero = (s_raw or b"").lstrip(b"\x00")
                 r_len = len(r_nozero)
@@ -286,20 +277,15 @@ def main():
                 zero_any  = is_zero_r or is_zero_s
                 oversized = (r_len > size_bytes0) or (s_len > size_bytes0)
 
-                # ---- Human：原始值（不截斷）。空值用 "00" 輔助 regex，並標 len=0 bytes ----
+                # ---- Human：原始值（不截斷）----
                 if ZERO_HEX_FOR_EMPTY and is_zero_r:
-                    r_hex_full = "00"
-                    r_disp_len = 0
+                    r_hex_full = "00"; r_disp_len = 0
                 else:
-                    r_hex_full = hexlify(r_nozero).decode()
-                    r_disp_len = r_len
-
+                    r_hex_full = hexlify(r_nozero).decode(); r_disp_len = r_len
                 if ZERO_HEX_FOR_EMPTY and is_zero_s:
-                    s_hex_full = "00"
-                    s_disp_len = 0
+                    s_hex_full = "00"; s_disp_len = 0
                 else:
-                    s_hex_full = hexlify(s_nozero).decode()
-                    s_disp_len = s_len
+                    s_hex_full = hexlify(s_nozero).decode(); s_disp_len = s_len
 
                 r_line = f"  R: {r_hex_full} (len={r_disp_len} bytes)"
                 s_line = f"  S: {s_hex_full} (len={s_disp_len} bytes)"
@@ -320,10 +306,10 @@ def main():
                     f"{r_line}\n"
                     f"{s_line}\n"
                     f"{enc_line}"
-                    f"{range_line}\n"
+                    f"{range_line}\n\n"
                 )
 
-                # ---- SV：收；zero 或 oversized 都設 valid=0（預期 HW fail）----
+                # ---- SV：zero 或 oversized 都設 valid=0（預期 HW fail）----
                 r_fixed = (r_nozero[-size_bytes0:] if r_len > 0 else b"").rjust(size_bytes0, b"\x00")
                 s_fixed = (s_nozero[-size_bytes0:] if s_len > 0 else b"").rjust(size_bytes0, b"\x00")
                 vbit = 0 if (zero_any or oversized) else valid_bit
@@ -368,21 +354,39 @@ def main():
             for i, v in enumerate(vectors):
                 comma = "," if i < len(vectors) - 1 else ""
                 vbit = "1'b1" if v['valid'] else "1'b0"
-                comment = ""
                 tags = []
                 if v.get("r_zero"): tags.append("r=0")
                 if v.get("s_zero"): tags.append("s=0")
                 if v.get("oversized"): tags.append(f"OUT_OF_RANGE r_len={v['r_len']} s_len={v['s_len']}")
-                if tags:
-                    comment = "  // " + ", ".join(tags)
+                comment_tag = ("  // " + ", ".join(tags)) if tags else ""
                 out.write(
-                    f"  '{{{v['tc_id']}, {vbit}, {v['hash']}, {v['x']}, {v['y']}, {v['r']}, {v['s']}}}{comma}{comment}\n"
+                    f"  '{{{v['tc_id']}, {vbit}, {v['hash']}, {v['x']}, {v['y']}, {v['r']}, {v['s']}}}{comma}{comment_tag}\n"
                 )
             out.write("};\n")
+            # <<< 修正：用「陣列變數名」取 size，不是 typedef 名 >>>
+            out.write(f"localparam int {array_name}_NUM = $size({array_name});\n")
 
+        generated_sv_files.append(sv_out.name)
         print(f"✅ Generated {sv_out} ({appended} vectors)")
         print(f"📝 Human review: {human_out}")
         print(f"🔕 Skipped (non-DER / encoding) {skip_count} test(s) entirely. [{file.name}]")
+
+    # ===== 產生總 package：wycherproof_package.sv =====
+    if generated_sv_files:
+        pkg_path = folder / "wycherproof_package.sv"
+        with open(pkg_path, "w") as pf:
+            pf.write("`ifndef WYCHERPROOF_PACKAGE_SV\n")
+            pf.write("`define WYCHERPROOF_PACKAGE_SV\n")
+            pf.write("package wycherproof_pkg;\n\n")
+            for fn in generated_sv_files:
+                pf.write(f"  `include \"{fn}\"\n")
+            pf.write("\nendpackage : wycherproof_pkg\n")
+            pf.write("`endif // WYCHERPROOF_PACKAGE_SV\n")
+        print(f"📦 Package generated: {pkg_path}")
+        print("   -> import wycherproof_pkg::*;  // 在任何使用端")
+        print("   -> 例：localparam int N = test_vectors_secp384r1_sha384_NUM;")
+    else:
+        print("⚠️ 沒有任何 vectors 檔被產生，略過 package。")
 
 if __name__ == "__main__":
     main()
