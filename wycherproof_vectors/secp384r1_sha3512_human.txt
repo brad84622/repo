@@ -1,3 +1,4 @@
+vector_number=318
 --- Curve: secp384r1, SHA: SHA3-512 ---
 
 TC 1 | result=valid | valid_bit=1 | Flags=

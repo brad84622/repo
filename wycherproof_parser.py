@@ -332,6 +332,7 @@ def main():
 
         # ---- 寫 human ----
         with open(human_out, "w") as hf:
+            hf.write (f"vector_number={appended}\n")
             hf.write(f"--- Curve: {curve0}, SHA: {sha_norm0.upper()} ---\n\n")
             hf.writelines(human_lines)
 
