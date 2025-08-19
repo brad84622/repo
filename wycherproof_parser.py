@@ -203,8 +203,8 @@ def main():
 
         CURVE_BITS = size_bytes0 * 8
         HASH_BITS  = hash_bits_map[sha_norm0]
-        sv_out    = folder / f"{curve0}_{sha_norm0.replace('-', '_')}_vectors.sv"
-        human_out = folder / f"{curve0}_{sha_norm0.replace('-', '')}_human.txt"
+        sv_out    = folder / f"{curve0}_{sha_norm0.replace('-', '_')}_vectors.sv".lower()
+        human_out = folder / f"{curve0}_{sha_norm0.replace('-', '')}_human.txt".lower()
 
         vectors = []
         human_lines = []
