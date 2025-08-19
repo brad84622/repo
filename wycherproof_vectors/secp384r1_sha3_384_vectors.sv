@@ -1,3 +1,5 @@
+`ifdef WYCHERPROOF_SECP384R1_SHA3384_SV
+`define WYCHERPROOF_SECP384R1_SHA3384_SV
 typedef struct packed {
   int           tc_id;
   logic         valid;  // 1: expected pass; 0: expected fail (zero/oversized)
@@ -297,3 +299,4 @@ ecdsa_vector_secp384r1_sha3384 test_vectors_secp384r1_sha3384 [] = '{
   '{418, 1'b1, 384'hcfc55cb4b6f445aca0641b0ed200bbdedef9351f80ee5090d8d1a90f45cf2696786caa2d4fafab455b15678bc517f0d4, 384'hfb01baad5f0b8f79b9cd104d12aab9310146add7d6b4c022d87ae6711178b94d618ca7b3af13854b1c588879e877b336, 384'hffffffffdf74c0a52c4c6c8533629f933a131354b58fe08a12bd6a815b287a71cc0a3d92951df5633325a96798ff294b, 384'h024deac92bccdf77a3fe019fb5d35063c9ad9374bf1e7508218b25776815eb95f51c8c253f88991c3073c67ca8bbd577, 384'h8da6b6f9fde42f24536413f8c2d3506171c742b6a0883de116b314d559388b41630aa24c485e090fee5f340c79486164}
 };
 localparam int test_vectors_secp384r1_sha3384_NUM = $size(test_vectors_secp384r1_sha3384);
+`endif // WYCHERPROOF_SECP384R1_SHA3384_SV

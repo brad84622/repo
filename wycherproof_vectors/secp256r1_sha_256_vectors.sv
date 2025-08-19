@@ -1,3 +1,5 @@
+`ifdef WYCHERPROOF_SECP256R1_SHA256_SV
+`define WYCHERPROOF_SECP256R1_SHA256_SV
 typedef struct packed {
   int           tc_id;
   logic         valid;  // 1: expected pass; 0: expected fail (zero/oversized)
@@ -266,3 +268,4 @@ ecdsa_vector_secp256r1_sha256 test_vectors_secp256r1_sha256 [] = '{
   '{387, 1'b1, 256'h2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91, 256'hbcbb2914c79f045eaa6ecbbc612816b3be5d2d6796707d8125e9f851c18af015, 256'hfffffffeecad44b6f05d15b33146549c2297b522a5eed8430cff596758e6c43d, 256'h70bebe684cdcb5ca72a42f0d873879359bd1781a591809947628d313a3814f67, 256'haec03aca8f5587a4d535fa31027bbe9cc0e464b1c3577f4c2dcde6b2094798a9}
 };
 localparam int test_vectors_secp256r1_sha256_NUM = $size(test_vectors_secp256r1_sha256);
+`endif // WYCHERPROOF_SECP256R1_SHA256_SV

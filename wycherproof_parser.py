@@ -340,7 +340,10 @@ def main():
         struct_name = f"ecdsa_vector_{curve0}_{sha_norm0.replace('-', '')}"
         array_name  = f"test_vectors_{curve0}_{sha_norm0.replace('-', '')}"
 
+        defname = f"WYCHERPROOF_{curve0}_{sha_norm0.replace('-', '')}_SV".upper()
         with open(sv_out, "w") as out:
+            out.write(f"`ifdef {defname}\n")
+            out.write(f"`define {defname}\n")
             out.write("typedef struct packed {\n")
             out.write("  int           tc_id;\n")
             out.write("  logic         valid;  // 1: expected pass; 0: expected fail (zero/oversized)\n")
@@ -366,6 +369,8 @@ def main():
             out.write("};\n")
             # <<< 修正：用「陣列變數名」取 size，不是 typedef 名 >>>
             out.write(f"localparam int {array_name}_NUM = $size({array_name});\n")
+
+            out.write(f"`endif // {defname}\n")
 
         generated_sv_files.append(sv_out.name)
         print(f"✅ Generated {sv_out} ({appended} vectors)")
