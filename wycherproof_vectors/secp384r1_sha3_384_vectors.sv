@@ -1,4 +1,4 @@
-`ifdef WYCHERPROOF_SECP384R1_SHA3384_SV
+`ifndef WYCHERPROOF_SECP384R1_SHA3384_SV
 `define WYCHERPROOF_SECP384R1_SHA3384_SV
 typedef struct packed {
   int           tc_id;

@@ -342,7 +342,7 @@ def main():
 
         defname = f"WYCHERPROOF_{curve0}_{sha_norm0.replace('-', '')}_SV".upper()
         with open(sv_out, "w") as out:
-            out.write(f"`ifdef {defname}\n")
+            out.write(f"`ifndef {defname}\n")
             out.write(f"`define {defname}\n")
             out.write("typedef struct packed {\n")
             out.write("  int           tc_id;\n")
