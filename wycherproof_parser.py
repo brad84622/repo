@@ -353,6 +353,7 @@ def main():
             out.write(f"  logic [{CURVE_BITS-1}:0] r;\n")
             out.write(f"  logic [{CURVE_BITS-1}:0] s;\n")
             out.write(f"}} {struct_name};\n\n")
+            out.write(f"localparam int {array_name.upper()}_NUM = {appended};\n\n")
 
             out.write(f"{struct_name} {array_name} [] = '{{\n")
             for i, v in enumerate(vectors):
@@ -366,9 +367,7 @@ def main():
                 out.write(
                     f"  '{{{v['tc_id']}, {vbit}, {v['hash']}, {v['x']}, {v['y']}, {v['r']}, {v['s']}}}{comma}{comment_tag}\n"
                 )
-            out.write("};\n")
-            # <<< 修正：用「陣列變數名」取 size，不是 typedef 名 >>>
-            out.write(f"localparam int {array_name}_NUM = $size({array_name});\n")
+            out.write("};\n")            
 
             out.write(f"`endif // {defname}\n")
 
