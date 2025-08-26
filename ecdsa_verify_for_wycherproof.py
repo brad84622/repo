@@ -291,5 +291,104 @@ def main():
         for rec in grand_failures:
             print("  ", rec)
 
+def debug_verify_manual(
+    r: str = "",
+    s: str = "",
+    msg: str = "",
+    qx: str = "",
+    qy: str = "",
+    curve_name: str = "secp384r1",
+    hash_name: str = "SHA-384",
+    verbose: bool = True,
+):
+    """
+    Manual ECDSA verify using r,s + pubkey (qx,qy) + message (hex).
+    You provide hex strings; this function handles hashing and verification.
+    Returns a dict with details.
+    """
+    import re
+    from binascii import unhexlify, hexlify
+    from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
+    from cryptography.hazmat.primitives.asymmetric import ec
+
+    def _clean_hex(s: str) -> str:
+        s = (s or "").strip()
+        s = s[2:] if s.lower().startswith("0x") else s
+        s = re.sub(r"[^0-9a-fA-F]", "", s)
+        if len(s) % 2:  # ensure even-length hex
+            s = "0" + s
+        return s.lower()
+
+    # Basic presence checks
+    missing = [k for k, v in dict(r=r, s=s, msg=msg, qx=qx, qy=qy).items() if not v]
+    if missing:
+        raise ValueError(f"Missing hex fields: {', '.join(missing)}")
+
+    # Normalize hex
+    r_h  = _clean_hex(r)
+    s_h  = _clean_hex(s)
+    qx_h = _clean_hex(qx)
+    qy_h = _clean_hex(qy)
+    msg_h= _clean_hex(msg)
+
+    # Build primitives
+    curve_obj = curve_by_name(curve_name)
+    hash_obj, py_hash = hash_by_name(hash_name)
+    pub = pub_from_xy(qx_h, qy_h, curve_obj)
+
+    # Compute digest (library will also hash internally; we show digest just for visibility)
+    msg_bytes = unhexlify(msg_h)
+    digest = py_hash(msg_bytes).digest()
+
+    # r/s → integers (no DER required from caller)
+    r_int = int(r_h or "0", 16)
+    s_int = int(s_h or "0", 16)
+    in_range = rs_in_range(r_int, s_int, curve_name)
+
+    # Library verify expects DER: we assemble DER here as an internal detail.
+    sig_der = encode_dss_signature(r_int, s_int)
+
+    # Verify
+    try:
+        pub.verify(sig_der, msg_bytes, ec.ECDSA(hash_obj))
+        verified = True
+    except Exception:
+        verified = False
+
+    info = {
+        "curve": curve_name,
+        "hash": hash_name,
+        "qx": qx_h,
+        "qy": qy_h,
+        "msg_hex": msg_h,
+        "digest_hex": hexlify(digest).decode(),
+        "r": f"{r_int:x}",
+        "s": f"{s_int:x}",
+        "rs_in_range": in_range,
+        "verified": verified,
+    }
+
+    if verbose:
+        print("=== ECDSA DEBUG VERIFY ===")
+        print(f"Curve      : {info['curve']} (key_size={curve_obj.key_size} bits)")
+        print(f"Hash       : {info['hash']}")
+        print(f"Pub.X      : {info['qx']}")
+        print(f"Pub.Y      : {info['qy']}")
+        print(f"Msg (hex)  : {info['msg_hex']}")
+        print(f"Digest(hex): {info['digest_hex']}")
+        print(f"r          : {info['r']}")
+        print(f"s          : {info['s']}")
+        print(f"r/s in (1..n-1)? {info['rs_in_range']}")
+        print(f"VERIFY     : {'PASS' if info['verified'] else 'FAIL'}")
+
+    return info
+
 if __name__ == "__main__":
-    main()
+    # main()
+    r   = "12b30abef6b5476fe6b612ae557c0425661e26b44b1bfe19daf2ca28e3113083ba8e4ae4cc45a0320abd3394f1c548d7"
+    # s   = "1840da9fc1d2f8f8900cf485d5413b8c2574ee3a8d4ca03995ca30240e09513805bf6209b58ac7aa9cff54eecd82b9f1"
+    s   = "e7bf25603e2d07076ff30b7a2abec473da8b11c572b35fc631991d5de62ddca7525aaba89325dfd04fecc47bff426f82"
+    msg = "313233343030"
+    qx  = "2da57dda1089276a543f9ffdac0bff0d976cad71eb7280e7d9bfd9fee4bdb2f20f47ff888274389772d98cc5752138aa"
+    qy  = "4b6d054d69dcf3e25ec49df870715e34883b1836197d76f8ad962e78f6571bbc7407b0d6091f9e4d88f014274406174f"
+    debug_verify_manual(r,s,msg,qx,qy)

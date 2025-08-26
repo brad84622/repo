@@ -9,29 +9,23 @@ import hashlib
 # =============================
 # Config
 # =============================
-DER_ONLY = True               # 只吃嚴格 DER（最短長度編碼、無 trailing）
-ALLOW_EMPTY_INTEGER = True    # 允許 INTEGER 長度為 0（特例：為了保留測項）
-ZERO_HEX_FOR_EMPTY = True     # 人檔遇到空值輸出 "00"（但 len=0），利於 regex
+DER_ONLY = True               # 只接受嚴格 DER（最短長度、無 trailing）
+ALLOW_EMPTY_INTEGER = True    # 允許 INTEGER 長度為 0（保留測項）
+ZERO_HEX_FOR_EMPTY = True     # human 檔空值顯示 "00"（但 len=0）
+
+# 遇到下列 flags/comment 就整筆跳過（避免 BER / 非 DER）
+FLAG_SKIP_KEYWORDS = [
+    "invalidencoding",
+    "ber",
+    "berencoded",
+]
+COMMON_SKIP_KEYWORDS = [
+    # 目前不根據 comment 跳；需要時再加關鍵字
+]
 
 # =============================
-# Hash & Curve size utilities
+# Helpers
 # =============================
-
-curve_size_map = {
-    "secp256r1": 32,
-    "secp384r1": 48,
-    "secp521r1": 66,  # 521 bits -> ceil(521/8)=66 bytes
-}
-
-hash_bits_map = {
-    "sha-256": 256, "sha256": 256,
-    "sha-384": 384, "sha384": 384,
-    "sha-512": 512, "sha512": 512,
-    "sha3-256": 256,
-    "sha3-384": 384,
-    "sha3-512": 512,
-}
-
 def compute_hash(msg_bytes, sha_name):
     if not sha_name:
         return b""
@@ -50,50 +44,54 @@ def compute_hash(msg_bytes, sha_name):
         return hashlib.sha3_512(msg_bytes).digest()
     return b""
 
-def to_sv_hex(byte_data, bit_width):
+def to_sv_sized(byte_data: bytes) -> str:
+    """
+    回傳依 bytes 真實長度的 SV 位寬 literal。
+    例：48 bytes -> 384'hxxxx；49 bytes -> 392'hxxxx；len==0 -> "0"
+    """
+    if not byte_data or len(byte_data) == 0:
+        return "0"  # SV 會自動擴成全 0
     hex_str = hexlify(byte_data).decode()
-    total_nibbles = bit_width // 4
-    hex_str = hex_str[-total_nibbles:].rjust(total_nibbles, '0')
+    bit_width = len(byte_data) * 8
     return f"{bit_width}'h{hex_str}"
 
 # =============================
-# ASN.1 DER helpers (STRICT)
+# ASN.1 DER（STRICT）
 # =============================
-
-def _read_len_strict(buf, i):
-    """DER length: short-form for <128, long-form only when >=128，且必須最短編碼。"""
+def _read_len_strict(buf: bytes, i: int):
+    """DER length：short-form <128；>=128 用 long-form，且必須最短編碼。"""
     if i >= len(buf):
         return None, i, False
     b = buf[i]; i += 1
     if b < 0x80:
-        return b, i, True   # short form
+        return b, i, True
     n = b & 0x7F
     if n == 0 or i + n > len(buf):
         return None, i, False
     L = int.from_bytes(buf[i:i+n], "big"); i += n
-    # DER: minimal encoding required
+    # DER 要求最短編碼
     if L < 128:
         return L, i, False
     return L, i, True
 
-def der_decode_sig_strict(der_bytes):
+def der_decode_sig_strict(der_bytes: bytes):
     """
     嚴格 DER 解析 ECDSA 簽章：SEQUENCE { INTEGER r, INTEGER s }
     - 最短長度編碼
     - 不允許 trailing bytes
-    - 例外：若 ALLOW_EMPTY_INTEGER=True，允許 r_len==0 或 s_len==0
-    回傳 (r_raw, s_raw, enc_ok)。r_raw/s_raw 為原始二補數位元組（可能為空）。
+    - 可選：允許 r/s 長度為 0（為了留測項）
+    回傳 (r_raw, s_raw, enc_ok)，r_raw/s_raw 是 DER INTEGER 的原始 bytes（不 strip）。
     """
     try:
         i = 0
-        if i >= len(der_bytes) or der_bytes[i] != 0x30:
+        if i >= len(der_bytes) or der_bytes[i] != 0x30:  # SEQUENCE
             return None, None, False
         i += 1
         seq_len, i, ok1 = _read_len_strict(der_bytes, i)
         if seq_len is None:
             return None, None, False
         seq_end = i + seq_len
-        if seq_end != len(der_bytes):  # no trailing
+        if seq_end != len(der_bytes):  # 不允許 trailing
             return None, None, False
 
         # INTEGER r
@@ -134,7 +132,6 @@ def der_decode_sig_strict(der_bytes):
 # =============================
 # JSON helpers
 # =============================
-
 def _pick_key_obj(group):
     k = group.get("key") or group.get("publicKey")
     if not k:
@@ -147,25 +144,8 @@ def _pick_key_obj(group):
     return curve, x, y
 
 # =============================
-# Skip rules (by comment/flags)
-# =============================
-
-# 你要完全跳過（人/機都不寫）的關鍵字（用 comment 判斷）
-COMMON_SKIP_KEYWORDS = [
-    # 留空代表目前不根據 comment 跳；需要時再加關鍵字進來
-]
-
-# flag 觸發就跳（大小寫不敏感）
-FLAG_SKIP_KEYWORDS = [
-    "invalidencoding",  # Wycheproof 有這個 flag 名
-    "ber",              # 也有直接 "BER"
-    "berencoded",       # 也可能是 "BerEncodedSignature"
-]
-
-# =============================
 # Main
 # =============================
-
 def main():
     folder = Path("./wycherproof_vectors")
     json_files = sorted(folder.glob("*.json"))
@@ -173,7 +153,7 @@ def main():
         print("⚠️  找不到任何 JSON：請把 Wycheproof 檔放到 ./wycherproof_vectors/")
         return
 
-    generated_sv_files = []  # 收集產生的 *_vectors.sv，用來寫 package
+    generated_sv_files = []
 
     for file in json_files:
         with open(file, "r") as f:
@@ -190,19 +170,9 @@ def main():
         except Exception as e:
             print(f"❌ {file.name}: cannot read key/publicKey ({e})")
             continue
-
         sha_raw0 = groups[0].get("sha") or data.get("sha") or ""
-        sha_norm0 = sha_raw0.lower()
-        size_bytes0 = curve_size_map.get(curve0)
-        if not size_bytes0:
-            print(f"❌ 跳過不支援的曲線: {curve0} in {file.name}")
-            continue
-        if sha_norm0 not in hash_bits_map:
-            print(f"❌ 跳過不支援的雜湊: {sha_raw0} in {file.name}")
-            continue
+        sha_norm0 = (sha_raw0 or "").lower()
 
-        CURVE_BITS = size_bytes0 * 8
-        HASH_BITS  = hash_bits_map[sha_norm0]
         sv_out    = folder / f"{curve0}_{sha_norm0.replace('-', '_')}_vectors.sv".lower()
         human_out = folder / f"{curve0}_{sha_norm0.replace('-', '')}_human.txt".lower()
 
@@ -213,16 +183,11 @@ def main():
 
         for group in groups:
             g_sha = (group.get("sha") or sha_norm0).lower()
-            g_hash_bits = hash_bits_map.get(g_sha)
             try:
                 g_curve, x_hex, y_hex = _pick_key_obj(group)
             except Exception:
-                x_hex = y_hex = "?"
                 g_curve = None
-
-            # 只處理與第一組主題一致的 group
-            if g_curve != curve0 or g_hash_bits != HASH_BITS:
-                continue
+                x_hex = y_hex = "?"
 
             for test in group.get("tests", []):
                 tc_id   = test.get("tcId", -1)
@@ -232,19 +197,18 @@ def main():
                 flags_lc = [f.lower() for f in flags]
                 flags_str = ",".join(flags)
 
-                # ---- 按 flag/comment 跳過整筆 ----
-                is_ber_flag = any(k in flags_lc for k in FLAG_SKIP_KEYWORDS)
-                is_encoding_comment = any(k in comment.lower() for k in COMMON_SKIP_KEYWORDS)
-                if is_ber_flag or is_encoding_comment:
+                # 依 flags/comment 跳過整筆
+                if any(k in flags_lc for k in FLAG_SKIP_KEYWORDS) or \
+                   any(k in comment.lower() for k in COMMON_SKIP_KEYWORDS):
                     skip_count += 1
-                    continue  # human / SV 都不寫
+                    continue
 
-                # ---- valid_bit ----
+                # valid_bit：valid/acceptable -> 1；其餘 0；missingzero 例外
                 valid_bit = 1 if result in ("valid", "acceptable") else 0
                 if "missingzero" in flags_lc:
-                    valid_bit = 1  # 你的政策：HW 會過
+                    valid_bit = 1
 
-                # ---- Digest ----
+                # 計算雜湊（依 group 的 sha）
                 msg_hex = test.get("msg", "")
                 sig_hex = test.get("sig", "")
                 try:
@@ -254,46 +218,26 @@ def main():
                 digest = compute_hash(msg_bytes, g_sha)
                 digest_hex = hexlify(digest).decode() if digest else ""
 
-                # ---- 嚴格 DER 解碼（允許空 INTEGER 作為例外）----
+                # 解析 DER r/s（保留原始長度）
                 try:
                     r_raw, s_raw, enc_ok = der_decode_sig_strict(unhexlify(sig_hex))
-                    parse_ok = (r_raw is not None and s_raw is not None)
                 except Exception:
                     r_raw = s_raw = None
-                    parse_ok = enc_ok = False
+                    enc_ok = False
 
-                # ---- DER-only：非 DER 直接跳過 ----
                 if DER_ONLY and not enc_ok:
                     skip_count += 1
                     continue
 
-                # ---- Range / Zero 檢查 ----
-                r_nozero = (r_raw or b"").lstrip(b"\x00")
-                s_nozero = (s_raw or b"").lstrip(b"\x00")
-                r_len = len(r_nozero)
-                s_len = len(s_nozero)
-                is_zero_r = (r_raw is not None) and (len(r_raw) == 0 or r_len == 0)
-                is_zero_s = (s_raw is not None) and (len(s_raw) == 0 or s_len == 0)
-                zero_any  = is_zero_r or is_zero_s
-                oversized = (r_len > size_bytes0) or (s_len > size_bytes0)
-
-                # ---- Human：原始值（不截斷）----
-                if ZERO_HEX_FOR_EMPTY and is_zero_r:
-                    r_hex_full = "00"; r_disp_len = 0
+                # ===== Human：原始 r/s，不 strip =====
+                if ZERO_HEX_FOR_EMPTY and r_raw is not None and len(r_raw) == 0:
+                    r_hex_full = "00"; r_len = 0
                 else:
-                    r_hex_full = hexlify(r_nozero).decode(); r_disp_len = r_len
-                if ZERO_HEX_FOR_EMPTY and is_zero_s:
-                    s_hex_full = "00"; s_disp_len = 0
+                    r_hex_full = hexlify(r_raw or b"").decode(); r_len = len(r_raw or b"")
+                if ZERO_HEX_FOR_EMPTY and s_raw is not None and len(s_raw) == 0:
+                    s_hex_full = "00"; s_len = 0
                 else:
-                    s_hex_full = hexlify(s_nozero).decode(); s_disp_len = s_len
-
-                r_line = f"  R: {r_hex_full} (len={r_disp_len} bytes)"
-                s_line = f"  S: {s_hex_full} (len={s_disp_len} bytes)"
-                enc_line   = "  Encoding: STRICT_OK\n"
-                if zero_any:
-                    range_line = "  Range: ZERO\n"
-                else:
-                    range_line = "  Range: OK\n" if not oversized else "  Range: OUT_OF_RANGE\n"
+                    s_hex_full = hexlify(s_raw or b"").decode(); s_len = len(s_raw or b"")
 
                 human_lines.append(
                     f"TC {tc_id} | result={result} | valid_bit={valid_bit} | Flags={flags_str}\n"
@@ -303,55 +247,53 @@ def main():
                     f"  X: {x_hex}\n"
                     f"  Y: {y_hex}\n"
                     f"  Sig: {sig_hex}\n"
-                    f"{r_line}\n"
-                    f"{s_line}\n"
-                    f"{enc_line}"
-                    f"{range_line}\n\n"
+                    f"  R: {r_hex_full} (len={r_len} bytes)\n"
+                    f"  S: {s_hex_full} (len={s_len} bytes)\n"
+                    f"  Encoding: STRICT_OK\n\n"
                 )
 
-                # ---- SV：zero 或 oversized 都設 valid=0（預期 HW fail）----
-                r_fixed = (r_nozero[-size_bytes0:] if r_len > 0 else b"").rjust(size_bytes0, b"\x00")
-                s_fixed = (s_nozero[-size_bytes0:] if s_len > 0 else b"").rjust(size_bytes0, b"\x00")
-                vbit = 0 if (zero_any or oversized) else valid_bit
+                # ===== SV：右值依實長 =====
+                x_bytes = unhexlify(x_hex) if x_hex and x_hex != "?" else b""
+                y_bytes = unhexlify(y_hex) if y_hex and y_hex != "?" else b""
 
                 vectors.append({
                     "tc_id": tc_id,
-                    "valid": vbit,
-                    "hash": to_sv_hex(digest, HASH_BITS),
-                    "x": to_sv_hex(unhexlify(x_hex), CURVE_BITS),
-                    "y": to_sv_hex(unhexlify(y_hex), CURVE_BITS),
-                    "r": to_sv_hex(r_fixed, CURVE_BITS),
-                    "s": to_sv_hex(s_fixed, CURVE_BITS),
-                    "oversized": oversized,
-                    "r_zero": is_zero_r,
-                    "s_zero": is_zero_s,
-                    "r_len": r_len,
-                    "s_len": s_len,
+                    "valid": valid_bit,
+                    "hash_sv": to_sv_sized(digest or b""),
+                    "x_sv": to_sv_sized(x_bytes),
+                    "y_sv": to_sv_sized(y_bytes),
+                    "r_sv": to_sv_sized(r_raw or b""),
+                    "s_sv": to_sv_sized(s_raw or b""),
+                    "hash_bits": len(digest or b"")*8,
+                    "x_bits": len(x_bytes)*8,
+                    "y_bits": len(y_bytes)*8,
+                    "r_bits": (len(r_raw or b"")*8),
+                    "s_bits": (len(s_raw or b"")*8),
                 })
                 appended += 1
 
         # ---- 寫 human ----
         with open(human_out, "w") as hf:
-            hf.write (f"vector_number={appended}\n")
+            hf.write(f"vector_number={appended}\n")
             hf.write(f"--- Curve: {curve0}, SHA: {sha_norm0.upper()} ---\n\n")
             hf.writelines(human_lines)
 
         # ---- 寫 SV ----
         struct_name = f"ecdsa_vector_{curve0}_{sha_norm0.replace('-', '')}"
         array_name  = f"test_vectors_{curve0}_{sha_norm0.replace('-', '')}"
+        defname     = f"WYCHERPROOF_{curve0}_{sha_norm0.replace('-', '')}_SV".upper()
 
-        defname = f"WYCHERPROOF_{curve0}_{sha_norm0.replace('-', '')}_SV".upper()
         with open(sv_out, "w") as out:
             out.write(f"`ifndef {defname}\n")
             out.write(f"`define {defname}\n")
             out.write("typedef struct packed {\n")
-            out.write("  int           tc_id;\n")
-            out.write("  logic         valid;  // 1: expected pass; 0: expected fail (zero/oversized)\n")
-            out.write(f"  logic [{HASH_BITS-1}:0]  hash;\n")
-            out.write(f"  logic [{CURVE_BITS-1}:0] x;\n")
-            out.write(f"  logic [{CURVE_BITS-1}:0] y;\n")
-            out.write(f"  logic [{CURVE_BITS-1}:0] r;\n")
-            out.write(f"  logic [{CURVE_BITS-1}:0] s;\n")
+            out.write("  int            tc_id;\n")
+            out.write("  bit            valid;   // Wycheproof: valid/acceptable=1, else=0\n")
+            out.write("  logic [511:0]  hash;    // 固定宣告 512 bits\n")
+            out.write("  logic [527:0]  x;       // 固定宣告 528 bits\n")
+            out.write("  logic [527:0]  y;       // 固定宣告 528 bits\n")
+            out.write("  logic [527:0]  r;       // 固定宣告 528 bits\n")
+            out.write("  logic [527:0]  s;       // 固定宣告 528 bits\n")
             out.write(f"}} {struct_name};\n\n")
             out.write(f"localparam int {array_name.upper()}_NUM = {appended};\n\n")
 
@@ -359,16 +301,15 @@ def main():
             for i, v in enumerate(vectors):
                 comma = "," if i < len(vectors) - 1 else ""
                 vbit = "1'b1" if v['valid'] else "1'b0"
-                tags = []
-                if v.get("r_zero"): tags.append("r=0")
-                if v.get("s_zero"): tags.append("s=0")
-                if v.get("oversized"): tags.append(f"OUT_OF_RANGE r_len={v['r_len']} s_len={v['s_len']}")
-                comment_tag = ("  // " + ", ".join(tags)) if tags else ""
                 out.write(
-                    f"  '{{{v['tc_id']}, {vbit}, {v['hash']}, {v['x']}, {v['y']}, {v['r']}, {v['s']}}}{comma}{comment_tag}\n"
+                    "  '{"
+                    f"{v['tc_id']}, {vbit}, "
+                    f"{v['hash_sv']}, {v['x_sv']}, {v['y_sv']}, {v['r_sv']}, {v['s_sv']}"
+                    f"}}{comma}  // lens: hash={v['hash_bits']}b({v['hash_bits']//8}B), "
+                    f"x={v['x_bits']}b({v['x_bits']//8}B), y={v['y_bits']}b({v['y_bits']//8}B), "
+                    f"r={v['r_bits']}b({v['r_bits']//8}B), s={v['s_bits']}b({v['s_bits']//8}B)\n"
                 )
-            out.write("};\n")            
-
+            out.write("};\n")
             out.write(f"`endif // {defname}\n")
 
         generated_sv_files.append(sv_out.name)
@@ -388,7 +329,7 @@ def main():
             pf.write("\nendpackage : wycherproof_pkg\n")
             pf.write("`endif // WYCHERPROOF_PACKAGE_SV\n")
         print(f"📦 Package generated: {pkg_path}")
-        print("   -> import wycherproof_pkg::*;  // 在任何使用端")
+        print("   -> import wycherproof_pkg::*;")
         print("   -> 例：localparam int N = test_vectors_secp384r1_sha384_NUM;")
     else:
         print("⚠️ 沒有任何 vectors 檔被產生，略過 package。")
