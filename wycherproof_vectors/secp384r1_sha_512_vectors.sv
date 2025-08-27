@@ -2,12 +2,12 @@
 `define WYCHERPROOF_SECP384R1_SHA512_SV
 typedef struct packed {
   int            tc_id;
-  bit            valid;   // Wycheproof: valid/acceptable=1, else=0
-  logic [511:0]  hash;    // 固定宣告 512 bits
-  logic [527:0]  x;       // 固定宣告 528 bits
-  logic [527:0]  y;       // 固定宣告 528 bits
-  logic [527:0]  r;       // 固定宣告 528 bits
-  logic [527:0]  s;       // 固定宣告 528 bits
+  bit            valid;
+  logic [511:0]  hash;
+  logic [527:0]  x;
+  logic [527:0]  y;
+  logic [527:0]  r;
+  logic [527:0]  s;
 } ecdsa_vector_secp384r1_sha512;
 
 localparam int TEST_VECTORS_SECP384R1_SHA512_NUM = 314;
@@ -328,4 +328,4 @@ ecdsa_vector_secp384r1_sha512 test_vectors_secp384r1_sha512 [] = '{
   '{445, 1'b1, 512'h4fb472dfc43def7a46ad442c58ac532f89e0c8a96f23b672f5fd637652eab158d4d589444ef7530a34e6626b40830b4e1ec5364611ae31c599bffa958e8b4c4e, 392'h00fb01baad5f0b8f79b9cd104d12aab9310146add7d6b4c022d87ae6711178b94d618ca7b3af13854b1c588879e877b336, 392'h00ffffffffdf74c0a52c4c6c8533629f933a131354b58fe08a12bd6a815b287a71cc0a3d92951df5633325a96798ff294b, 392'h00e2aa9468ccaaadad8b9f43a429c97f0c6a7eedcb4d4af72d639df0fe53f610b953408a8e24e8db138551770750680f7a, 392'h00d81020846d1c50ee9ae23601dd638cb71b38d37fb555268c2fa1ad8a761fa7b27afcab2fa69224d1f976699914e09de2},  // lens: hash=512b(64B), x=392b(49B), y=392b(49B), r=392b(49B), s=392b(49B)
   '{446, 1'b1, 512'h4fb472dfc43def7a46ad442c58ac532f89e0c8a96f23b672f5fd637652eab158d4d589444ef7530a34e6626b40830b4e1ec5364611ae31c599bffa958e8b4c4e, 392'h00fb01baad5f0b8f79b9cd104d12aab9310146add7d6b4c022d87ae6711178b94d618ca7b3af13854b1c588879e877b336, 392'h00ffffffffdf74c0a52c4c6c8533629f933a131354b58fe08a12bd6a815b287a71cc0a3d92951df5633325a96798ff294b, 384'h6bf6fa7a663802c3382cc5fd02004ec71e5a031e3d9bfc0858fa994e88497a7782308bc265b8237a6bbbdd38658b36fc, 384'h3a9d5941a013bf70d99cc3ff255ce85573688dac40344b5db7144b19bf57bb2701e6850a8f819796b67f7d0b6aea7e50}  // lens: hash=512b(64B), x=392b(49B), y=392b(49B), r=384b(48B), s=384b(48B)
 };
-`endif // WYCHERPROOF_SECP384R1_SHA512_SV
+`endif
