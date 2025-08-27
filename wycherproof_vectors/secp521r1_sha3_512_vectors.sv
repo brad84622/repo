@@ -2,12 +2,12 @@
 `define WYCHERPROOF_SECP521R1_SHA3512_SV
 typedef struct packed {
   int            tc_id;
-  bit            valid;
-  logic [511:0]  hash;
-  logic [527:0]  x;
-  logic [527:0]  y;
-  logic [527:0]  r;
-  logic [527:0]  s;
+  bit            valid;   // Wycheproof: valid/acceptable=1, else=0
+  logic [511:0]  hash;    // 固定宣告 512 bits
+  logic [527:0]  x;       // 固定宣告 528 bits
+  logic [527:0]  y;       // 固定宣告 528 bits
+  logic [527:0]  r;       // 固定宣告 528 bits
+  logic [527:0]  s;       // 固定宣告 528 bits
 } ecdsa_vector_secp521r1_sha3512;
 
 localparam int TEST_VECTORS_SECP521R1_SHA3512_NUM = 318;
@@ -332,4 +332,4 @@ ecdsa_vector_secp521r1_sha3512 test_vectors_secp521r1_sha3512 [] = '{
   '{448, 1'b1, 512'h740913294202f7597ef7c2ae48b64b02482e698abf5c4fbbc85c7c321e10bfb22050f90fba281c46f15a058697bb7e5112bdfcdbf656bc61bd7b3b2678b548a6, 528'h00c7c8817bf2f0652a4a4b5140c773e261080a0a111395856e8a3350f5eb5612bd63b367b965e92e9538ea3b7908aef1ade4b68e17f9f9148495c167d1c4dd491349, 520'h08bf0be2979abb8111fd0d768adcad774113a822c1bb60887053b5cf8c9563e76705a391ece154b5dfb114b20e351df4014bec19fa87720845801cf06b7fffffff, 520'h13c33ad4251e52d9e6b12322a1794f4351b135c722b093dda22a1dcc885eaf3473e09af4307fc294db2d3f02649ad325898223be200c65a076d6fec1c4d054b0c8, 528'h009d78be212bd11cb5d36374a9743c6772196fb7d029462cdae5517a8ac52b42caabc5452de0a4904f05d5db20279e5663ad7cfe8f04efe6485a632458dd4ae1cb7c},  // lens: hash=512b(64B), x=528b(66B), y=520b(65B), r=520b(65B), s=528b(66B)
   '{449, 1'b1, 512'h740913294202f7597ef7c2ae48b64b02482e698abf5c4fbbc85c7c321e10bfb22050f90fba281c46f15a058697bb7e5112bdfcdbf656bc61bd7b3b2678b548a6, 528'h00c7c8817bf2f0652a4a4b5140c773e261080a0a111395856e8a3350f5eb5612bd63b367b965e92e9538ea3b7908aef1ade4b68e17f9f9148495c167d1c4dd491349, 520'h08bf0be2979abb8111fd0d768adcad774113a822c1bb60887053b5cf8c9563e76705a391ece154b5dfb114b20e351df4014bec19fa87720845801cf06b7fffffff, 528'h019c5d65ec2257ece62f146d9c61661789151ccce3a045c60a03f2034eec2e84eb54414825529b9e1bc6c19581e3ab827166ff4e4722bc10447bbff9a5758839b826, 528'h0191e1bb04a72eac5dec7c021bae1fc37d9bc81e0acdd09ae63464009a01751394a8593084f634c191045a632073aae56eb65d88ac1ac6fb309dcbcf76f22ae652c9}  // lens: hash=512b(64B), x=528b(66B), y=520b(65B), r=528b(66B), s=528b(66B)
 };
-`endif
+`endif // WYCHERPROOF_SECP521R1_SHA3512_SV

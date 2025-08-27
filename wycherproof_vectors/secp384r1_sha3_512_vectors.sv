@@ -2,12 +2,12 @@
 `define WYCHERPROOF_SECP384R1_SHA3512_SV
 typedef struct packed {
   int            tc_id;
-  bit            valid;
-  logic [511:0]  hash;
-  logic [527:0]  x;
-  logic [527:0]  y;
-  logic [527:0]  r;
-  logic [527:0]  s;
+  bit            valid;   // Wycheproof: valid/acceptable=1, else=0
+  logic [511:0]  hash;    // 固定宣告 512 bits
+  logic [527:0]  x;       // 固定宣告 528 bits
+  logic [527:0]  y;       // 固定宣告 528 bits
+  logic [527:0]  r;       // 固定宣告 528 bits
+  logic [527:0]  s;       // 固定宣告 528 bits
 } ecdsa_vector_secp384r1_sha3512;
 
 localparam int TEST_VECTORS_SECP384R1_SHA3512_NUM = 318;
@@ -332,4 +332,4 @@ ecdsa_vector_secp384r1_sha3512 test_vectors_secp384r1_sha3512 [] = '{
   '{449, 1'b1, 512'h740913294202f7597ef7c2ae48b64b02482e698abf5c4fbbc85c7c321e10bfb22050f90fba281c46f15a058697bb7e5112bdfcdbf656bc61bd7b3b2678b548a6, 392'h00fb01baad5f0b8f79b9cd104d12aab9310146add7d6b4c022d87ae6711178b94d618ca7b3af13854b1c588879e877b336, 392'h00ffffffffdf74c0a52c4c6c8533629f933a131354b58fe08a12bd6a815b287a71cc0a3d92951df5633325a96798ff294b, 384'h33f8ce53cb494e377fb351edd3a90e6d8a82007a39686042c35137e5f6c6b50e92ea6426dc07257f4e2833669c98af50, 392'h009d3c8aea4d601702791480fcf0c9e28e757b0457bf64e9529cef0a29f2c4074d3e7b2d838ecd311334ca671e542c841a},  // lens: hash=512b(64B), x=392b(49B), y=392b(49B), r=384b(48B), s=392b(49B)
   '{450, 1'b1, 512'h740913294202f7597ef7c2ae48b64b02482e698abf5c4fbbc85c7c321e10bfb22050f90fba281c46f15a058697bb7e5112bdfcdbf656bc61bd7b3b2678b548a6, 392'h00fb01baad5f0b8f79b9cd104d12aab9310146add7d6b4c022d87ae6711178b94d618ca7b3af13854b1c588879e877b336, 392'h00ffffffffdf74c0a52c4c6c8533629f933a131354b58fe08a12bd6a815b287a71cc0a3d92951df5633325a96798ff294b, 384'h38897bbcf7f806e2c7d32d9376462b0ac097717b984b3acfdb66cba4d20f2ea36f728342c21e6e9aaa517416c2ded860, 384'h0790f3b0f4a0c567ac9f58fdb42d1fc77ec08fc347736661cd73dd37993baad45af89a26d4154a6fafd81b4bae060e92}  // lens: hash=512b(64B), x=392b(49B), y=392b(49B), r=384b(48B), s=384b(48B)
 };
-`endif
+`endif // WYCHERPROOF_SECP384R1_SHA3512_SV

@@ -2,12 +2,12 @@
 `define WYCHERPROOF_SECP256K1_SHA256_SV
 typedef struct packed {
   int            tc_id;
-  bit            valid;
-  logic [511:0]  hash;
-  logic [527:0]  x;
-  logic [527:0]  y;
-  logic [527:0]  r;
-  logic [527:0]  s;
+  bit            valid;   // Wycheproof: valid/acceptable=1, else=0
+  logic [511:0]  hash;    // 固定宣告 512 bits
+  logic [527:0]  x;       // 固定宣告 528 bits
+  logic [527:0]  y;       // 固定宣告 528 bits
+  logic [527:0]  r;       // 固定宣告 528 bits
+  logic [527:0]  s;       // 固定宣告 528 bits
 } ecdsa_vector_secp256k1_sha256;
 
 localparam int TEST_VECTORS_SECP256K1_SHA256_NUM = 248;
@@ -262,4 +262,4 @@ ecdsa_vector_secp256k1_sha256 test_vectors_secp256k1_sha256 [] = '{
   '{379, 1'b1, 256'h2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91, 256'h6d4a7f60d4774a4f0aa8bbdedb953c7eea7909407e3164755664bc2800000000, 264'h00e659d34e4df38d9e8c9eaadfba36612c769195be86c77aac3f36e78b538680fb, 256'h60be20c3dbc162dd34d26780621c104bbe5dace630171b2daef0d826409ee5c2, 264'h00bd8081b27762ab6e8f425956bf604e332fa066a99b59f87e27dc1198b26f5caa},  // lens: hash=256b(32B), x=256b(32B), y=264b(33B), r=256b(32B), s=264b(33B)
   '{380, 1'b1, 256'h2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91, 256'h6d4a7f60d4774a4f0aa8bbdedb953c7eea7909407e3164755664bc2800000000, 264'h00e659d34e4df38d9e8c9eaadfba36612c769195be86c77aac3f36e78b538680fb, 264'h00edf03cf63f658883289a1a593d1007895b9f236d27c9c1f1313089aaed6b16ae, 264'h00e5b22903f7eb23adc2e01057e39b0408d495f694c83f306f1216c9bf87506074}  // lens: hash=256b(32B), x=256b(32B), y=264b(33B), r=264b(33B), s=264b(33B)
 };
-`endif
+`endif // WYCHERPROOF_SECP256K1_SHA256_SV

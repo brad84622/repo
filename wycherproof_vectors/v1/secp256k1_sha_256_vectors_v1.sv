@@ -1,18 +1,18 @@
-`ifndef WYCHERPROOF_SECP256K1_SHA256_SV
-`define WYCHERPROOF_SECP256K1_SHA256_SV
+`ifndef WYCHERPROOF_SECP256K1_SHA256_V1_SV
+`define WYCHERPROOF_SECP256K1_SHA256_V1_SV
 typedef struct packed {
   int            tc_id;
-  bit            valid;
-  logic [511:0]  hash;
-  logic [527:0]  x;
-  logic [527:0]  y;
-  logic [527:0]  r;
-  logic [527:0]  s;
-} ecdsa_vector_secp256k1_sha256;
+  bit            valid;   // Wycheproof: valid/acceptable=1, else=0
+  logic [511:0]  hash;    // 固定宣告 512 bits
+  logic [527:0]  x;       // 固定宣告 528 bits
+  logic [527:0]  y;       // 固定宣告 528 bits
+  logic [527:0]  r;       // 固定宣告 528 bits
+  logic [527:0]  s;       // 固定宣告 528 bits
+} ecdsa_vector_secp256k1_sha256_v1;
 
-localparam int TEST_VECTORS_SECP256K1_SHA256_NUM = 273;
+localparam int TEST_VECTORS_SECP256K1_SHA256_V1_NUM = 273;
 
-ecdsa_vector_secp256k1_sha256 test_vectors_secp256k1_sha256 [] = '{
+ecdsa_vector_secp256k1_sha256_v1 test_vectors_secp256k1_sha256_v1 [] = '{
   '{1, 1'b0, 256'hbb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023, 264'h00b838ff44e5bc177bf21189d0766082fc9d843226887fc9760371100b7ee20a6f, 264'h00f0c9d75bfba7b31a6bca1974496eeb56de357071955d83c4b1badaa0b21832e9, 264'h00813ef79ccefa9a56f7ba805f0e478584fe5f0dd5f567bc09b5123ccbc9832365, 264'h00900e75ad233fcc908509dbff5922647db37c21f4afd3203ae8dc4ae7794b0f87},  // lens: hash=256b(32B), x=264b(33B), y=264b(33B), r=264b(33B), s=264b(33B)
   '{2, 1'b1, 256'hbb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023, 264'h00b838ff44e5bc177bf21189d0766082fc9d843226887fc9760371100b7ee20a6f, 264'h00f0c9d75bfba7b31a6bca1974496eeb56de357071955d83c4b1badaa0b21832e9, 264'h00813ef79ccefa9a56f7ba805f0e478584fe5f0dd5f567bc09b5123ccbc9832365, 256'h6ff18a52dcc0336f7af62400a6dd9b810732baf1ff758000d6f613a556eb31ba},  // lens: hash=256b(32B), x=264b(33B), y=264b(33B), r=264b(33B), s=256b(32B)
   '{78, 1'b0, 256'hbb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023, 264'h00b838ff44e5bc177bf21189d0766082fc9d843226887fc9760371100b7ee20a6f, 264'h00f0c9d75bfba7b31a6bca1974496eeb56de357071955d83c4b1badaa0b21832e9, 280'h00813ef79ccefa9a56f7ba805f0e478584fe5f0dd5f567bc09b5123ccbc98323650000, 256'h6ff18a52dcc0336f7af62400a6dd9b810732baf1ff758000d6f613a556eb31ba},  // lens: hash=256b(32B), x=264b(33B), y=264b(33B), r=280b(35B), s=256b(32B)
@@ -287,4 +287,4 @@ ecdsa_vector_secp256k1_sha256 test_vectors_secp256k1_sha256 [] = '{
   '{462, 1'b1, 256'h2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91, 256'h6d4a7f60d4774a4f0aa8bbdedb953c7eea7909407e3164755664bc2800000000, 264'h00e659d34e4df38d9e8c9eaadfba36612c769195be86c77aac3f36e78b538680fb, 256'h60be20c3dbc162dd34d26780621c104bbe5dace630171b2daef0d826409ee5c2, 256'h427f7e4d889d549170bda6a9409fb1cb8b0e763d13eea7bd97f64cf41dc6e497},  // lens: hash=256b(32B), x=256b(32B), y=264b(33B), r=256b(32B), s=256b(32B)
   '{463, 1'b1, 256'h2f77668a9dfbf8d5848b9eeb4a7145ca94c6ed9236e4a773f6dcafa5132b2f91, 256'h6d4a7f60d4774a4f0aa8bbdedb953c7eea7909407e3164755664bc2800000000, 264'h00e659d34e4df38d9e8c9eaadfba36612c769195be86c77aac3f36e78b538680fb, 264'h00edf03cf63f658883289a1a593d1007895b9f236d27c9c1f1313089aaed6b16ae, 256'h1a4dd6fc0814dc523d1fefa81c64fbf5e618e651e7096fccadbb94cd48e5e0cd}  // lens: hash=256b(32B), x=256b(32B), y=264b(33B), r=264b(33B), s=256b(32B)
 };
-`endif
+`endif // WYCHERPROOF_SECP256K1_SHA256_V1_SV

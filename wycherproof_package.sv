@@ -42,7 +42,7 @@ package wycherproof_pkg;
   `include "wycherproof_vectors/secp521r1_sha3_512_vectors.sv"
   `include "wycherproof_vectors/secp521r1_sha_512_vectors.sv"
   `include "wycherproof_vectors/secp521r1_sha_512_vectors.sv"
-  `include "wycherproof_vectors/v1/secp256k1_sha_256_vectors.sv"
+  `include "wycherproof_vectors/v1/secp256k1_sha_256_vectors_v1.sv"
 
 endpackage : wycherproof_pkg
-`endif
+`endif // WYCHERPROOF_PACKAGE_SV

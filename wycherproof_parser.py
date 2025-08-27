@@ -9,12 +9,19 @@ import hashlib
 # =============================
 # Config
 # =============================
-DER_ONLY = True
-ALLOW_EMPTY_INTEGER = True
-ZERO_HEX_FOR_EMPTY = True
+DER_ONLY = True               # 嚴格 DER（最短長度、無 trailing）
+ALLOW_EMPTY_INTEGER = True    # 允許 INTEGER 長度為 0（保留測項）
+ZERO_HEX_FOR_EMPTY = True     # human 檔空值顯示 "00"（但 len=0）
 
-FLAG_SKIP_KEYWORDS = ["invalidencoding", "ber", "berencoded"]
-COMMON_SKIP_KEYWORDS = []
+# 遇到下列 flags/comment 就整筆跳過（避免 BER / 非 DER）
+FLAG_SKIP_KEYWORDS = [
+    "invalidencoding",
+    "ber",
+    "berencoded",
+]
+COMMON_SKIP_KEYWORDS = [
+    # 目前不根據 comment 跳；需要時再加關鍵字
+]
 
 # =============================
 # Helpers
@@ -38,13 +45,21 @@ def compute_hash(msg_bytes, sha_name):
     return b""
 
 def to_sv_sized(byte_data: bytes) -> str:
+    """
+    依 bytes 真實長度產生 SV 位寬 literal。
+    例：48B -> 384'h...；49B -> 392'h...；len==0 -> "0"
+    """
     if not byte_data or len(byte_data) == 0:
-        return "0"
+        return "0"  # SV 會自動擴成 0
     hex_str = hexlify(byte_data).decode()
     bit_width = len(byte_data) * 8
     return f"{bit_width}'h{hex_str}"
 
+# =============================
+# ASN.1 DER（STRICT）
+# =============================
 def _read_len_strict(buf: bytes, i: int):
+    """DER length：short-form <128；>=128 用 long-form，且必須最短編碼。"""
     if i >= len(buf):
         return None, i, False
     b = buf[i]; i += 1
@@ -54,39 +69,59 @@ def _read_len_strict(buf: bytes, i: int):
     if n == 0 or i + n > len(buf):
         return None, i, False
     L = int.from_bytes(buf[i:i+n], "big"); i += n
+    # DER 要求最短編碼
     if L < 128:
         return L, i, False
     return L, i, True
 
 def der_decode_sig_strict(der_bytes: bytes):
+    """
+    嚴格 DER 解析 ECDSA 簽章：SEQUENCE { INTEGER r, INTEGER s }
+    - 最短長度編碼
+    - 不允許 trailing bytes
+    - 可選：允許 r/s 長度為 0（為了留測項）
+    回傳 (r_raw, s_raw, enc_ok)，r_raw/s_raw 是 DER INTEGER 的原始 bytes（不 strip）。
+    """
     try:
         i = 0
-        if i >= len(der_bytes) or der_bytes[i] != 0x30:
+        if i >= len(der_bytes) or der_bytes[i] != 0x30:  # SEQUENCE
             return None, None, False
         i += 1
         seq_len, i, ok1 = _read_len_strict(der_bytes, i)
         if seq_len is None:
             return None, None, False
         seq_end = i + seq_len
-        if seq_end != len(der_bytes):
+        if seq_end != len(der_bytes):  # 不允許 trailing
             return None, None, False
 
+        # INTEGER r
         if i >= seq_end or der_bytes[i] != 0x02:
             return None, None, False
         i += 1
         r_len, i, ok2 = _read_len_strict(der_bytes, i)
         if r_len is None or i + r_len > seq_end:
             return None, None, False
-        r_raw = der_bytes[i:i+r_len] if r_len > 0 else (b"" if ALLOW_EMPTY_INTEGER else None)
+        if r_len == 0:
+            if not ALLOW_EMPTY_INTEGER:
+                return None, None, False
+            r_raw = b""
+        else:
+            r_raw = der_bytes[i:i + r_len]
         i += r_len
 
+        # INTEGER s
         if i >= seq_end or der_bytes[i] != 0x02:
             return None, None, False
         i += 1
         s_len, i, ok3 = _read_len_strict(der_bytes, i)
         if s_len is None or i + s_len > seq_end:
             return None, None, False
-        s_raw = der_bytes[i:i+s_len] if s_len > 0 else (b"" if ALLOW_EMPTY_INTEGER else None)
+        if s_len == 0:
+            if not ALLOW_EMPTY_INTEGER:
+                return None, None, False
+            s_raw = b""
+        else:
+            s_raw = der_bytes[i:i + s_len]
         i += s_len
 
         enc_ok = ok1 and ok2 and ok3 and (i == seq_end)
@@ -94,6 +129,9 @@ def der_decode_sig_strict(der_bytes: bytes):
     except Exception:
         return None, None, False
 
+# =============================
+# JSON helpers
+# =============================
 def _pick_key_obj(group):
     k = group.get("key") or group.get("publicKey")
     if not k:
@@ -106,9 +144,10 @@ def _pick_key_obj(group):
     return curve, x, y
 
 # =============================
-# Processing function
+# Per-folder processing
 # =============================
 def process_folder(folder: Path, generated_sv_files: list):
+    is_v1 = (folder.name.lower() == "v1")
     json_files = sorted(folder.glob("*.json"))
     if not json_files:
         print(f"⚠️ 找不到 JSON 在 {folder}")
@@ -123,6 +162,7 @@ def process_folder(folder: Path, generated_sv_files: list):
             print(f"❌ {file.name}: no testGroups")
             continue
 
+        # 以第一組的 curve / sha 來命名輸出
         try:
             curve0, _, _ = _pick_key_obj(groups[0])
         except Exception as e:
@@ -131,10 +171,13 @@ def process_folder(folder: Path, generated_sv_files: list):
         sha_raw0 = groups[0].get("sha") or data.get("sha") or ""
         sha_norm0 = (sha_raw0 or "").lower()
 
-        sv_out    = folder / f"{curve0}_{sha_norm0.replace('-', '_')}_vectors.sv".lower()
-        human_out = folder / f"{curve0}_{sha_norm0.replace('-', '')}_human.txt".lower()
+        # === 檔名：v1 版本加後綴 _v1 ===
+        suffix = "_v1" if is_v1 else ""
+        sv_out    = folder / f"{curve0}_{sha_norm0.replace('-', '_')}_vectors{suffix}.sv".lower()
+        human_out = folder / f"{curve0}_{sha_norm0.replace('-', '')}_human{suffix}.txt".lower()
 
-        vectors, human_lines = [], []
+        vectors = []
+        human_lines = []
         skip_count = 0
         appended = 0
 
@@ -143,7 +186,8 @@ def process_folder(folder: Path, generated_sv_files: list):
             try:
                 g_curve, x_hex, y_hex = _pick_key_obj(group)
             except Exception:
-                g_curve = None; x_hex = y_hex = "?"
+                g_curve = None
+                x_hex = y_hex = "?"
 
             for test in group.get("tests", []):
                 tc_id   = test.get("tcId", -1)
@@ -153,15 +197,18 @@ def process_folder(folder: Path, generated_sv_files: list):
                 flags_lc = [f.lower() for f in flags]
                 flags_str = ",".join(flags)
 
+                # 依 flags/comment 跳過整筆
                 if any(k in flags_lc for k in FLAG_SKIP_KEYWORDS) or \
                    any(k in comment.lower() for k in COMMON_SKIP_KEYWORDS):
                     skip_count += 1
                     continue
 
+                # valid_bit：valid/acceptable -> 1；其餘 0；missingzero 例外
                 valid_bit = 1 if result in ("valid", "acceptable") else 0
                 if "missingzero" in flags_lc:
                     valid_bit = 1
 
+                # 計算雜湊
                 msg_hex = test.get("msg", "")
                 sig_hex = test.get("sig", "")
                 try:
@@ -171,18 +218,26 @@ def process_folder(folder: Path, generated_sv_files: list):
                 digest = compute_hash(msg_bytes, g_sha)
                 digest_hex = hexlify(digest).decode() if digest else ""
 
+                # 解析 DER r/s（保留原始長度）
                 try:
                     r_raw, s_raw, enc_ok = der_decode_sig_strict(unhexlify(sig_hex))
                 except Exception:
-                    r_raw = s_raw = None; enc_ok = False
+                    r_raw = s_raw = None
+                    enc_ok = False
+
                 if DER_ONLY and not enc_ok:
                     skip_count += 1
                     continue
 
-                r_hex_full = hexlify(r_raw or b"").decode() if (r_raw and len(r_raw)>0) else ("00" if ZERO_HEX_FOR_EMPTY else "")
-                r_len = len(r_raw or b"")
-                s_hex_full = hexlify(s_raw or b"").decode() if (s_raw and len(s_raw)>0) else ("00" if ZERO_HEX_FOR_EMPTY else "")
-                s_len = len(s_raw or b"")
+                # ===== Human =====
+                if ZERO_HEX_FOR_EMPTY and r_raw is not None and len(r_raw) == 0:
+                    r_hex_full = "00"; r_len = 0
+                else:
+                    r_hex_full = hexlify(r_raw or b"").decode(); r_len = len(r_raw or b"")
+                if ZERO_HEX_FOR_EMPTY and s_raw is not None and len(s_raw) == 0:
+                    s_hex_full = "00"; s_len = 0
+                else:
+                    s_hex_full = hexlify(s_raw or b"").decode(); s_len = len(s_raw or b"")
 
                 human_lines.append(
                     f"TC {tc_id} | result={result} | valid_bit={valid_bit} | Flags={flags_str}\n"
@@ -197,6 +252,7 @@ def process_folder(folder: Path, generated_sv_files: list):
                     f"  Encoding: STRICT_OK\n\n"
                 )
 
+                # ===== SV vectors：右值依實長 =====
                 x_bytes = unhexlify(x_hex) if x_hex and x_hex != "?" else b""
                 y_bytes = unhexlify(y_hex) if y_hex and y_hex != "?" else b""
 
@@ -211,30 +267,35 @@ def process_folder(folder: Path, generated_sv_files: list):
                     "hash_bits": len(digest or b"")*8,
                     "x_bits": len(x_bytes)*8,
                     "y_bits": len(y_bytes)*8,
-                    "r_bits": len(r_raw or b"")*8,
-                    "s_bits": len(s_raw or b"")*8,
+                    "r_bits": (len(r_raw or b"")*8),
+                    "s_bits": (len(s_raw or b"")*8),
                 })
                 appended += 1
 
+        # ---- 寫 human ----
         with open(human_out, "w") as hf:
             hf.write(f"vector_number={appended}\n")
-            hf.write(f"--- Curve: {curve0}, SHA: {sha_norm0.upper()} ---\n\n")
+            hf.write(f"--- Curve: {curve0}, SHA: {sha_norm0.upper()}{' [v1]' if is_v1 else ''} ---\n\n")
             hf.writelines(human_lines)
 
-        struct_name = f"ecdsa_vector_{curve0}_{sha_norm0.replace('-', '')}"
-        array_name  = f"test_vectors_{curve0}_{sha_norm0.replace('-', '')}"
-        defname     = f"WYCHERPROOF_{curve0}_{sha_norm0.replace('-', '')}_SV".upper()
+        # ---- 寫 SV ----
+        # 名稱：v1 後綴
+        base_name = f"{curve0}_{sha_norm0.replace('-', '')}".lower()
+        struct_name = f"ecdsa_vector_{base_name}{suffix}"
+        array_name  = f"test_vectors_{base_name}{suffix}"
+        defname     = f"WYCHERPROOF_{base_name}{suffix}_SV".upper()
 
         with open(sv_out, "w") as out:
-            out.write(f"`ifndef {defname}\n`define {defname}\n")
+            out.write(f"`ifndef {defname}\n")
+            out.write(f"`define {defname}\n")
             out.write("typedef struct packed {\n")
             out.write("  int            tc_id;\n")
-            out.write("  bit            valid;\n")
-            out.write("  logic [511:0]  hash;\n")
-            out.write("  logic [527:0]  x;\n")
-            out.write("  logic [527:0]  y;\n")
-            out.write("  logic [527:0]  r;\n")
-            out.write("  logic [527:0]  s;\n")
+            out.write("  bit            valid;   // Wycheproof: valid/acceptable=1, else=0\n")
+            out.write("  logic [511:0]  hash;    // 固定宣告 512 bits\n")
+            out.write("  logic [527:0]  x;       // 固定宣告 528 bits\n")
+            out.write("  logic [527:0]  y;       // 固定宣告 528 bits\n")
+            out.write("  logic [527:0]  r;       // 固定宣告 528 bits\n")
+            out.write("  logic [527:0]  s;       // 固定宣告 528 bits\n")
             out.write(f"}} {struct_name};\n\n")
             out.write(f"localparam int {array_name.upper()}_NUM = {appended};\n\n")
 
@@ -250,12 +311,13 @@ def process_folder(folder: Path, generated_sv_files: list):
                     f"x={v['x_bits']}b({v['x_bits']//8}B), y={v['y_bits']}b({v['y_bits']//8}B), "
                     f"r={v['r_bits']}b({v['r_bits']//8}B), s={v['s_bits']}b({v['s_bits']//8}B)\n"
                 )
-            out.write("};\n`endif\n")
+            out.write("};\n")
+            out.write(f"`endif // {defname}\n")
 
         generated_sv_files.append(str(sv_out))
         print(f"✅ Generated {sv_out} ({appended} vectors)")
         print(f"📝 Human review: {human_out}")
-        print(f"🔕 Skipped {skip_count} tests. [{file.name}]")
+        print(f"🔕 Skipped (non-DER / encoding) {skip_count} test(s). [{file.name}]")
 
 # =============================
 # Main
@@ -263,18 +325,23 @@ def process_folder(folder: Path, generated_sv_files: list):
 def main():
     generated_sv_files = []
     for folder in [Path("./wycherproof_vectors"), Path("./wycherproof_vectors/v1")]:
-        process_folder(folder, generated_sv_files)
+        if folder.exists():
+            process_folder(folder, generated_sv_files)
 
+    # 產生總 package：把兩個資料夾產出的檔案都 include 進來
     if generated_sv_files:
         pkg_path = Path("./wycherproof_package.sv")
         with open(pkg_path, "w") as pf:
-            pf.write("`ifndef WYCHERPROOF_PACKAGE_SV\n`define WYCHERPROOF_PACKAGE_SV\n")
+            pf.write("`ifndef WYCHERPROOF_PACKAGE_SV\n")
+            pf.write("`define WYCHERPROOF_PACKAGE_SV\n")
             pf.write("package wycherproof_pkg;\n\n")
             for fn in generated_sv_files:
                 rel_path = Path(fn).as_posix()
                 pf.write(f"  `include \"{rel_path}\"\n")
-            pf.write("\nendpackage : wycherproof_pkg\n`endif\n")
+            pf.write("\nendpackage : wycherproof_pkg\n")
+            pf.write("`endif // WYCHERPROOF_PACKAGE_SV\n")
         print(f"📦 Package generated: {pkg_path}")
+        print("   -> import wycherproof_pkg::*;")
     else:
         print("⚠️ No vectors generated.")
 

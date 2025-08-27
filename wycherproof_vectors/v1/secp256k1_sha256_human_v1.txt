@@ -1,5 +1,5 @@
 vector_number=273
---- Curve: secp256k1, SHA: SHA-256 ---
+--- Curve: secp256k1, SHA: SHA-256 [v1] ---
 
 TC 1 | result=invalid | valid_bit=0 | Flags=SignatureMalleabilityBitcoin
   Comment: Signature malleability
