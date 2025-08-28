@@ -1,0 +1,123 @@
+============================= page 1 What is PQC?
+PQC is Post Quantum Cryptography.
+It is defined by NIST , and  NIST is a U.S. government agency that publishes all cryptography standards.
+
+The PQC definition is cryptographic systems that are secure against both quantum and classical computers, and can interoperate 
+with existing communication protocols and networks.
+
+In August 2024, NIST published three main PQC algorithms:
+
+FIPS203 : ML-KEM,it is a lattice-based algorithm for key exchange, 
+The key exchange algorithm allows two parties to securely establish a shared secret key, designed to replace ECDH.
+
+FIPS204 / 205 : ML-DSA and SLH-DSA , both are digital signature algorithms but based on different mathematical problems.
+A digital signature is used to authenticate identity and ensure integrity , it is designed to replace today’s RSA and ECDSA.”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+============================== page 2 why do we need PQC?
+
+“Then , why do we need PQC?
+
+First, there is a algorithm develop by Peter Shor , It can speed up the discrete log and factoring problems , to reduce the time complexity from exponential time to polynomial time on a quantum computer.
+
+current use the publick key cryptography, such as RSA based on factoring problem, ECC based on discrete log problem.
+so it would be cracked in polynomial time too.
+
+
+second, U.S. policy has already set a clear direction. According to NSM-10, by 2035 all federal agencies must migrate to 
+quantum-resistant cryptography to reduce the national security risk.
+
+Finally,  our customers are also requesting PQC support across product lines, from entry-level devices to flagship platforms.
+
+So PQC is driven by three forces: the security threat, government policy, and customer demand.”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+============================== page 3 What the PQC different with current RSA/ECC。
+
+“Here we compare PQC with today’s RSA and ECC.
+
+First, PQC is quantum-resistant, while RSA and ECC are not. This is the key reason why PQC is needed.
+
+However, PQC comes with trade-offs. The key and signature sizes are much larger.
+
+For example, in ECC the private key is only around 32 to 66 bytes, but in PQC it can be over 2k bytes.
+
+Similarly, an ECC signature is about 64 to 132 bytes, while a PQC signature can be more than 4k bytes.
+
+In terms of performance, ECC is very fast, RSA is slower, and PQC is somewhere in between—it’s acceptable, but not as quick as ECC.
+For memory access, PQC is slower as well, because of the larger data sizes.
+
+So in summary: PQC gives us quantum security, but the trade-off is larger keys and slower speed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+============================== page 4 Landing project
+
+This slide shows the landing projects for PQC.
+
+We currently have several projects using the third-party Rambus PQC solution, including Lafleur, Cheval, Myojo, and Bison.
+
+In addition, we are planning our in-house PQC solutions for projects such as DX7, DX8, and Carneros.
+
+So, this slide summarizes what is PQC , why do we need pqc , what the pqc trade-off and current project landing status.
+that's all for my presentation. Thank you for your listening.
+
+
+
+
+
+
+
+Q: What are the benefits of using our in-house PQC version instead of the Rambus solution?
+A1 (Cost saving):
+“The first benefit is cost reduction, because we don’t need to pay for the Rambus PQC license.”
+A2 (HSI support):
+“The second benefit is flexibility. With the in-house version, the software can provide a wish list or requirements, and the hardware can be customized to meet them — just like with HSI.”
