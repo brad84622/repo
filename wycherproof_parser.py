@@ -23,6 +23,14 @@ COMMON_SKIP_KEYWORDS = [
     # 目前不根據 comment 跳；需要時再加關鍵字
 ]
 
+# 依曲線設定「允許的 r/s 長度（bytes）」
+CURVE_SIZE_BYTES = {
+    "secp256r1": 32, "p-256": 32, "prime256v1": 32,
+    "secp256k1": 32, "p-256k1": 32,   # 如有用到 k1
+    "secp384r1": 48, "p-384": 48,
+    "secp521r1": 66, "p-521": 66,     # 521 bits → ceil(521/8)=66
+}
+
 # =============================
 # Helpers
 # =============================
@@ -189,6 +197,10 @@ def process_folder(folder: Path, generated_sv_files: list):
                 g_curve = None
                 x_hex = y_hex = "?"
 
+            # 針對本 group 判斷允許的 r/s 長度
+            curve_key = (g_curve or curve0 or "").lower()
+            allow_len = CURVE_SIZE_BYTES.get(curve_key, None)   # 若 None → 不知曲線，後面就不做長度過濾
+
             for test in group.get("tests", []):
                 tc_id   = test.get("tcId", -1)
                 comment = (test.get("comment") or "")
@@ -229,15 +241,24 @@ def process_folder(folder: Path, generated_sv_files: list):
                     skip_count += 1
                     continue
 
+                # === 新增：過濾 r/s 超過曲線長度的案例（HW 不支援）
+                if allow_len is not None:
+                    r_len = 0 if (r_raw is None) else len(r_raw)
+                    s_len = 0 if (s_raw is None) else len(s_raw)
+                    if (r_len > allow_len) or (s_len > allow_len):
+                        # 直接整筆跳過，不寫 human / SV
+                        skip_count += 1
+                        continue
+
                 # ===== Human =====
                 if ZERO_HEX_FOR_EMPTY and r_raw is not None and len(r_raw) == 0:
-                    r_hex_full = "00"; r_len = 0
+                    r_hex_full = "00"; r_show_len = 0
                 else:
-                    r_hex_full = hexlify(r_raw or b"").decode(); r_len = len(r_raw or b"")
+                    r_hex_full = hexlify(r_raw or b"").decode(); r_show_len = len(r_raw or b"")
                 if ZERO_HEX_FOR_EMPTY and s_raw is not None and len(s_raw) == 0:
-                    s_hex_full = "00"; s_len = 0
+                    s_hex_full = "00"; s_show_len = 0
                 else:
-                    s_hex_full = hexlify(s_raw or b"").decode(); s_len = len(s_raw or b"")
+                    s_hex_full = hexlify(s_raw or b"").decode(); s_show_len = len(s_raw or b"")
 
                 human_lines.append(
                     f"TC {tc_id} | result={result} | valid_bit={valid_bit} | Flags={flags_str}\n"
@@ -247,8 +268,8 @@ def process_folder(folder: Path, generated_sv_files: list):
                     f"  X: {x_hex}\n"
                     f"  Y: {y_hex}\n"
                     f"  Sig: {sig_hex}\n"
-                    f"  R: {r_hex_full} (len={r_len} bytes)\n"
-                    f"  S: {s_hex_full} (len={s_len} bytes)\n"
+                    f"  R: {r_hex_full} (len={r_show_len} bytes)\n"
+                    f"  S: {s_hex_full} (len={s_show_len} bytes)\n"
                     f"  Encoding: STRICT_OK\n\n"
                 )
 
@@ -317,7 +338,7 @@ def process_folder(folder: Path, generated_sv_files: list):
         generated_sv_files.append(str(sv_out))
         print(f"✅ Generated {sv_out} ({appended} vectors)")
         print(f"📝 Human review: {human_out}")
-        print(f"🔕 Skipped (non-DER / encoding) {skip_count} test(s). [{file.name}]")
+        print(f"🔕 Skipped (non-DER / encoding or oversize r/s) {skip_count} test(s). [{file.name}]")
 
 # =============================
 # Main

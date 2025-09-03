@@ -30,9 +30,12 @@ RE_SIGDER= re.compile(r"^\s*Sig\s*[:=]\s*([0-9a-fA-F]+)", re.I)
 
 # ---------------- 曲線階 (n) 與輔助 ----------------
 ORDER_MAP = {
+    # NIST P-256
     "secp256r1": int("ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551", 16),
     "p-256":     int("ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551", 16),
     "prime256v1":int("ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551", 16),
+
+    # NIST P-384
     "secp384r1": int(
         "ffffffffffffffffffffffffffffffffffffffffffffffffc7634d81f4372ddf"
         "581a0db248b0a77aecec196accc52973", 16
@@ -41,6 +44,8 @@ ORDER_MAP = {
         "ffffffffffffffffffffffffffffffffffffffffffffffffc7634d81f4372ddf"
         "581a0db248b0a77aecec196accc52973", 16
     ),
+
+    # NIST P-521
     "secp521r1": int(
         "01ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
         "fa51868783bf2f966b7fcc0148f709a5d03bb5c9b8899c47aebb6fb71e91386409", 16
@@ -48,6 +53,15 @@ ORDER_MAP = {
     "p-521":     int(
         "01ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
         "fa51868783bf2f966b7fcc0148f709a5d03bb5c9b8899c47aebb6fb71e91386409", 16
+    ),
+
+    # SEC secp256k1（比特幣用的 Koblitz curve）
+    "secp256k1": int(
+        "fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", 16
+    ),
+    # 可選別名：如果你的輸入會這麼寫就打開
+    "p-256k1":   int(
+        "fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", 16
     ),
 }
 
@@ -61,6 +75,7 @@ def curve_by_name(name: str):
     if n in ("secp256r1","p-256","prime256v1"): return ec.SECP256R1()
     if n in ("secp384r1","p-384"):             return ec.SECP384R1()
     if n in ("secp521r1","p-521"):             return ec.SECP521R1()
+    if n in ("secp256k1","p-256k1"):           return ec.SECP256K1()  # 新增：k1 支援
     raise ValueError(f"Unsupported curve: {name}")
 
 def hash_by_name(name: str):
@@ -85,7 +100,7 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
 
     curve = sha = wx = wy = None
     tcid = comment = result = flags = None
-    invalid_bit = valid_bit = None  # 你的人工作檔可能有其中之一
+    invalid_bit = valid_bit = None
     msg_hex = r_hex = s_hex = sig_der_hex = None
 
     csv_f = None
@@ -102,12 +117,10 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
         msg_hex = r_hex = s_hex = sig_der_hex = None
 
     def expected_valid_from_bits():
-        # 優先用 invalid 位；沒有時用 valid_bit；再沒有才回退 result
         if invalid_bit is not None:
             return (invalid_bit == 0)
         if valid_bit is not None:
             return (valid_bit == 1)
-        # fallback（幾乎用不到）：result=valid → True，其他 False
         return (result or "").lower() == "valid"
 
     def finish_one():
@@ -119,7 +132,6 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
         if tcid is None:
             return
 
-        # 1) 先確保有 r/s；若沒有但有 Sig: 試 decode
         if (r_hex in (None,"?") or s_hex in (None,"?")) and sig_der_hex:
             try:
                 r_i, s_i = decode_dss_signature(unhexlify(sig_der_hex))
@@ -129,7 +141,6 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
             except Exception as e:
                 if verbose: print(f"[DER→r/s] TC {tcid} decode fail: {e}")
 
-        # 2) 缺 r/s → 依你要求：一律 FAIL（方便抓 parser 問題）
         if r_hex in (None,"?") or s_hex in (None,"?"):
             total += 1
             failures.append((tcid, "missing_r_s", result, curve, sha, None))
@@ -139,7 +150,6 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
             if verbose: print(f"[FAIL] {path.name} TC {tcid} missing r/s")
             reset_case(); return
 
-        # 3) 用 r,s 重編 DER（數學驗證；避免被 BER 影響）
         r_int = int(r_hex, 16); s_int = int(s_hex, 16)
         sig_bytes_fixed = encode_dss_signature(r_int, s_int)
 
@@ -161,12 +171,7 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
             if verbose: print(f"[FAIL] {path.name} TC {tcid} exception: {e}")
             reset_case(); return
 
-        # 4) 依照你的規則決定 PASS/FAIL
         exp_valid = expected_valid_from_bits()
-        # 規則：
-        # invalid=0 且 verify(pass) → pass
-        # invalid=1 且 verify(fail) → pass
-        # 其他 → fail
         is_pass = (exp_valid and verified_math) or ((not exp_valid) and (not verified_math))
 
         total += 1
@@ -180,7 +185,6 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
                 print(f"[FAIL] {path.name} TC {tcid} exp_valid={exp_valid} verified_math={verified_math} ({curve},{sha}) {comment}")
 
         if csv_f:
-            # digest 僅用於追蹤，這裡就不花力氣重算（需要可加回 hashlib）
             csv_f.write(f"{tcid},{curve},{sha},{wx},{wy},,,{r_hex},{s_hex},{1 if exp_valid else 0},{1 if verified_math else 0},{(flags or '').strip()}\n")
 
         reset_case()
@@ -205,7 +209,6 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
                 comment = (m.group(2) or "").strip()
                 result  = m.group(3)
                 matched_any = True
-                # 同行就順便抓 invalid/valid_bit/flags
                 if (mi := RE_INVALID.search(line)): invalid_bit = int(mi.group(1))
                 if (mv := RE_VALIDBT.search(line)): valid_bit   = int(mv.group(1))
                 if (mf := RE_FLAGS.search(line)):   flags       = mf.group(1).strip()
@@ -213,7 +216,6 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
                     print(f"[TC ] id={tcid} result={result} invalid={invalid_bit} valid_bit={valid_bit} flags={flags} comment='{comment}'")
                 continue
 
-            # 獨立行上的 invalid / valid_bit / flags
             if (mi := RE_INVALID.search(line)):
                 invalid_bit = int(mi.group(1)); matched_any = True; 
                 if verbose: print(f"[INV] invalid={invalid_bit}")
@@ -227,7 +229,6 @@ def verify_one_file(path: Path, on_missing_sig: str, hw_csv_dir: Path|None, verb
                 if verbose: print(f"[FLG] flags={flags}")
                 continue
 
-            # 一般欄位
             if m := RE_MSG.match(line):
                 msg_hex = m.group(1).lower(); matched_any = True; continue
             if m := RE_X.match(line):
@@ -271,9 +272,6 @@ def main():
     hw_csv_dir = Path(args.hw_csv_dir) if args.hw_csv_dir else None
 
     for f in files:
-        # if "sha384" not in f.name or "secp384r1" not in f.name:
-        #     print(f"⚠️ 跳過非 SHA-384 & secp384r1 的檔案: {f.name}")
-        #     continue
         t, o, s, fails = verify_one_file(
             f,
             on_missing_sig=args.on_missing_sig,
@@ -385,10 +383,10 @@ def debug_verify_manual(
 
 if __name__ == "__main__":
     # main()
-    r   = "12b30abef6b5476fe6b612ae557c0425661e26b44b1bfe19daf2ca28e3113083ba8e4ae4cc45a0320abd3394f1c548d7"
-    # s   = "1840da9fc1d2f8f8900cf485d5413b8c2574ee3a8d4ca03995ca30240e09513805bf6209b58ac7aa9cff54eecd82b9f1"
-    s   = "e7bf25603e2d07076ff30b7a2abec473da8b11c572b35fc631991d5de62ddca7525aaba89325dfd04fecc47bff426f82"
+    # 這裡就是 secp256k1 的測試；可直接跑。
+    r   = "7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0"
+    s   = "7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a1"
     msg = "313233343030"
-    qx  = "2da57dda1089276a543f9ffdac0bff0d976cad71eb7280e7d9bfd9fee4bdb2f20f47ff888274389772d98cc5752138aa"
-    qy  = "4b6d054d69dcf3e25ec49df870715e34883b1836197d76f8ad962e78f6571bbc7407b0d6091f9e4d88f014274406174f"
-    debug_verify_manual(r,s,msg,qx,qy)
+    qx  = "3b37df5fb347c69a0f17d85c0c7ca83736883a825e13143d0fcfc8101e851e80"
+    qy  = "0de3c090b6ca21ba543517330c04b12f948c6badf14a63abffdf4ef8c7537026"
+    debug_verify_manual(r,s,msg,qx,qy,curve_name="secp256k1",hash_name="SHA-256",verbose=True)
