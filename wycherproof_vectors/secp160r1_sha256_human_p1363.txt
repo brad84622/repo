@@ -1,0 +1,58 @@
+vector_number=5
+--- Curve: secp160r1, SHA: SHA-256 [p1363] ---
+
+TC 116 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 00b005b80cb0733576bd27520bf7ac44f28e733718
+  Y: 09738b9aeb21252938e9a5fa885a4bfa3705e084
+  Sig: 01f4c8f927aed44a75225501f4c8f927aed44a752254
+  R: 01f4c8f927aed44a752255 (len=11 bytes)
+  S: 01f4c8f927aed44a752254 (len=11 bytes)
+  Encoding: P1363_RAW
+
+TC 120 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 00b3e8857e27393fb609bb7e4d42bb612704d9eef2
+  Y: 668439313310a849e17faca660f5f5346e11c1a9
+  Sig: 0401
+  R: 04 (len=1 bytes)
+  S: 01 (len=1 bytes)
+  Encoding: P1363_RAW
+
+TC 122 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 1b66bc474c8220de08f3db0fdc984b008828ff5d
+  Y: 00f94509a6596f822f62580acc988bf962ef9e32b8
+  Sig: 0403
+  R: 04 (len=1 bytes)
+  S: 03 (len=1 bytes)
+  Encoding: P1363_RAW
+
+TC 124 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 008ac14539432e062ff2b1f6086926bfc87e342e98
+  Y: 00bdc182b2ec96ac855f1057cd99731a054067a153
+  Sig: 0404
+  R: 04 (len=1 bytes)
+  S: 04 (len=1 bytes)
+  Encoding: P1363_RAW
+
+TC 126 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 4a5c77d11ddaa568733d8a6cb79b497e6a644944
+  Y: 339c2514eda2e275ceffb9a7fc4c8d0470b37638
+  Sig: 0405
+  R: 04 (len=1 bytes)
+  S: 05 (len=1 bytes)
+  Encoding: P1363_RAW
+

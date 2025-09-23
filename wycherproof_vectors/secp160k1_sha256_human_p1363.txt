@@ -1,0 +1,36 @@
+vector_number=3
+--- Curve: secp160k1, SHA: SHA-256 [p1363] ---
+
+TC 119 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 012a78f3ceb2c5606f824b90b4151a7cd788c3c8
+  Y: 6216521c8b038e7080bb5601ac8b49e96826368b
+  Sig: 0301
+  R: 03 (len=1 bytes)
+  S: 01 (len=1 bytes)
+  Encoding: P1363_RAW
+
+TC 121 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 00cee7f5abdb03bb603a30a7a781d2249708931e28
+  Y: 00f459dfe37fef1cc13d5832452381cc179e708728
+  Sig: 0303
+  R: 03 (len=1 bytes)
+  S: 03 (len=1 bytes)
+  Encoding: P1363_RAW
+
+TC 123 | result=acceptable | valid_bit=1 | Flags=SigSize
+  Comment: incorrect size of signature
+  Msg: 313233343030 (len=6 bytes)
+  Hash: bb5a52f42f9c9261ed4361f59422a1e30036e7c32b270c8807a419feca605023 (SHA-256)
+  X: 48c7400e22d2ef7354b820eb662105e1b6e44a60
+  Y: 00a329f8bd69afd5aa91d4e18d3cfa2428930dee68
+  Sig: 0304
+  R: 03 (len=1 bytes)
+  S: 04 (len=1 bytes)
+  Encoding: P1363_RAW
+

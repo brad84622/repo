@@ -1,373 +1,10 @@
-vector_number=252
+vector_number=60
 --- Curve: secp224r1, SHA: SHA3-224 ---
-
-TC 1 | result=valid | valid_bit=1 | Flags=
-  Comment: signature malleability
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021c56c80970d9a308a9f639ed199ac088f93ba9afd04c53f48e4fa88d3a
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 56c80970d9a308a9f639ed199ac088f93ba9afd04c53f48e4fa88d3a (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 2 | result=acceptable | valid_bit=1 | Flags=MissingZero
-  Comment: Legacy:ASN encoding of r misses leading 0
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021cbdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=28 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 3 | result=acceptable | valid_bit=1 | Flags=MissingZero
-  Comment: Legacy:ASN encoding of s misses leading 0
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021ca937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 4 | result=valid | valid_bit=1 | Flags=
-  Comment: valid
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 94 | result=invalid | valid_bit=0 | Flags=
-  Comment: appending 0's to integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3040021f00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453760000021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453760000 (len=31 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 95 | result=invalid | valid_bit=0 | Flags=
-  Comment: appending 0's to integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3040021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021f00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d030000
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d030000 (len=31 bytes)
-  Encoding: STRICT_OK
-
-TC 99 | result=invalid | valid_bit=0 | Flags=
-  Comment: appending null value to integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3040021f00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453760500021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453760500 (len=31 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 100 | result=invalid | valid_bit=0 | Flags=
-  Comment: appending null value to integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3040021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021f00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d030500
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d030500 (len=31 bytes)
-  Encoding: STRICT_OK
-
-TC 115 | result=invalid | valid_bit=0 | Flags=
-  Comment: dropping value of integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 30210200021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00 (len=0 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 116 | result=invalid | valid_bit=0 | Flags=
-  Comment: dropping value of integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3021021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453760200
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00 (len=0 bytes)
-  Encoding: STRICT_OK
-
-TC 119 | result=invalid | valid_bit=0 | Flags=
-  Comment: modify first byte of integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d02bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 02bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 120 | result=invalid | valid_bit=0 | Flags=
-  Comment: modify first byte of integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d02a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 02a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 121 | result=invalid | valid_bit=0 | Flags=
-  Comment: modify last byte of integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453f6021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453f6 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 122 | result=invalid | valid_bit=0 | Flags=
-  Comment: modify last byte of integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d83
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d83 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 123 | result=invalid | valid_bit=0 | Flags=
-  Comment: truncated integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac158453 (len=28 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 124 | result=invalid | valid_bit=0 | Flags=
-  Comment: truncated integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021c00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 125 | result=invalid | valid_bit=0 | Flags=
-  Comment: leading ff in integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303f021eff00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: ff00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=30 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 126 | result=invalid | valid_bit=0 | Flags=
-  Comment: leading ff in integer
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303f021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021eff00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: ff00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=30 bytes)
-  Encoding: STRICT_OK
-
-TC 129 | result=invalid | valid_bit=0 | Flags=
-  Comment: replacing integer with zero
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020100021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00 (len=1 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 130 | result=invalid | valid_bit=0 | Flags=
-  Comment: replacing integer with zero
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376020100
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 131 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d01bdeb8edbcb30885c65bcb58d6ea1eba154c61a02d5e2fff171e07db3021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 01bdeb8edbcb30885c65bcb58d6ea1eba154c61a02d5e2fff171e07db3 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 132 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021cbdeb8edbcb30885c65bcb58d6ea3be5b93543986ae28ad66b9282939021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: bdeb8edbcb30885c65bcb58d6ea3be5b93543986ae28ad66b9282939 (len=28 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 133 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021dff4214712434cf77a39a434a72915d2b018bf2d63b3dfa2953ea7bac8a021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: ff4214712434cf77a39a434a72915d2b018bf2d63b3dfa2953ea7bac8a (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 134 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c4214712434cf77a39a434a72915c41a46cabc67951d7529946d7d6c7021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 4214712434cf77a39a434a72915c41a46cabc67951d7529946d7d6c7 (len=28 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 135 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021dfe4214712434cf77a39a434a72915e145eab39e5fd2a1d000e8e1f824d021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: fe4214712434cf77a39a434a72915e145eab39e5fd2a1d000e8e1f824d (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 136 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d01bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 01bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 137 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c4214712434cf77a39a434a72915d2b018bf2d63b3dfa2953ea7bac8a021d00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 4214712434cf77a39a434a72915d2b018bf2d63b3dfa2953ea7bac8a (len=28 bytes)
-  S: 00a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 138 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d01a937f68f265cf75609c612e6653da44c85c830abdb665dfc690fc740
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 01a937f68f265cf75609c612e6653da44c85c830abdb665dfc690fc740 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 139 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021ca937f68f265cf75609c612e6653f7706c456502fb3ac0b71b05772c6
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: a937f68f265cf75609c612e6653f7706c456502fb3ac0b71b05772c6 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 140 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021dff56c80970d9a308a9f639ed199ac172565af0bf923876cb48f34c62fd
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: ff56c80970d9a308a9f639ed199ac172565af0bf923876cb48f34c62fd (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 141 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021dfe56c80970d9a308a9f639ed199ac25bb37a37cf542499a20396f038c0
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: fe56c80970d9a308a9f639ed199ac25bb37a37cf542499a20396f038c0 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 142 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021d01a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 01a937f68f265cf75609c612e6653e8da9a50f406dc78934b70cb39d03 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 143 | result=invalid | valid_bit=0 | Flags=
-  Comment: Modified r or s, e.g. by adding or subtracting the order of the group
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376021c56c80970d9a308a9f639ed199ac172565af0bf923876cb48f34c62fd
-  R: 00bdeb8edbcb30885c65bcb58d6ea2d4fe740d29c4c205d6ac15845376 (len=29 bytes)
-  S: 56c80970d9a308a9f639ed199ac172565af0bf923876cb48f34c62fd (len=28 bytes)
-  Encoding: STRICT_OK
 
 TC 144 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 3006020100020100
@@ -378,7 +15,7 @@ TC 144 | result=invalid | valid_bit=0 | Flags=EdgeCase
 TC 145 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 3006020100020101
@@ -389,7 +26,7 @@ TC 145 | result=invalid | valid_bit=0 | Flags=EdgeCase
 TC 146 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 30060201000201ff
@@ -397,65 +34,10 @@ TC 146 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
 
-TC 147 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020100021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: 00 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 148 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020100021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: 00 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 149 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020100021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: 00 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 150 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020100021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: 00 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 151 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020100021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: 00 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 154 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 3006020101020100
@@ -466,7 +48,7 @@ TC 154 | result=invalid | valid_bit=0 | Flags=EdgeCase
 TC 155 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 3006020101020101
@@ -477,7 +59,7 @@ TC 155 | result=invalid | valid_bit=0 | Flags=EdgeCase
 TC 156 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 30060201010201ff
@@ -485,65 +67,10 @@ TC 156 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
 
-TC 157 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020101021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: 01 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 158 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020101021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: 01 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 159 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020101021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: 01 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 160 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020101021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: 01 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 161 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022020101021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: 01 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 164 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 30060201ff020100
@@ -554,7 +81,7 @@ TC 164 | result=invalid | valid_bit=0 | Flags=EdgeCase
 TC 165 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 30060201ff020101
@@ -565,7 +92,7 @@ TC 165 | result=invalid | valid_bit=0 | Flags=EdgeCase
 TC 166 | result=invalid | valid_bit=0 | Flags=EdgeCase
   Comment: Signature with special case values for r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 30060201ff0201ff
@@ -573,538 +100,10 @@ TC 166 | result=invalid | valid_bit=0 | Flags=EdgeCase
   S: ff (len=1 bytes)
   Encoding: STRICT_OK
 
-TC 167 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 30220201ff021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: ff (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 168 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 30220201ff021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: ff (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 169 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 30220201ff021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: ff (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 170 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 30220201ff021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: ff (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 171 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 30220201ff021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: ff (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 174 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d020100
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: 00 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 175 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d020101
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: 01 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 176 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d0201ff
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: ff (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 177 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 178 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 179 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 180 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 181 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 184 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c020100
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 00 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 185 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c020101
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 01 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 186 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c0201ff
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: ff (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 187 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 188 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 189 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 190 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 191 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 194 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e020100
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: 00 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 195 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e020101
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: 01 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 196 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e0201ff
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: ff (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 197 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 198 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 199 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 200 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 201 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 204 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffffffff000000000000000000000001020100
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: 00 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 205 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffffffff000000000000000000000001020101
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: 01 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 206 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffffffff0000000000000000000000010201ff
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: ff (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 207 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000001021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 208 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000001021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 209 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000001021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 210 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000001021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 211 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000001021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 214 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffffffff000000000000000000000002020100
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: 00 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 215 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffffffff000000000000000000000002020101
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: 01 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 216 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 3022021d00ffffffffffffffffffffffffffffffff0000000000000000000000020201ff
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: ff (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 217 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000002021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3d (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 218 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000002021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 219 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000002021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 220 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000002021d00ffffffffffffffffffffffffffffffff000000000000000000000001
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000001 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 221 | result=invalid | valid_bit=0 | Flags=EdgeCase
-  Comment: Signature with special case values for r and s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00ffffffffffffffffffffffffffffffff000000000000000000000002021d00ffffffffffffffffffffffffffffffff000000000000000000000002
-  R: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffffffff000000000000000000000002 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 230 | result=valid | valid_bit=1 | Flags=
-  Comment: Edge case for Shamir multiplication
-  Msg: 34373731 (len=4 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c326bc06353f7f9c9f77b8f4b55464e8619944e7879402cca572e041a021d00bd6b1d7ab97ac1b607c22e042ffcc0062c744160c958ad0b1943a944
-  R: 326bc06353f7f9c9f77b8f4b55464e8619944e7879402cca572e041a (len=28 bytes)
-  S: 00bd6b1d7ab97ac1b607c22e042ffcc0062c744160c958ad0b1943a944 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 231 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 38363138363536383336 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c476bab7a32e1f66958492deb681033dc135276f62d9265c7c7fddff4021d00bcce78ad8017bb499490eb1bf00dd9f35b23b5e8bd03fe5bb09e3f5f
-  R: 476bab7a32e1f66958492deb681033dc135276f62d9265c7c7fddff4 (len=28 bytes)
-  S: 00bcce78ad8017bb499490eb1bf00dd9f35b23b5e8bd03fe5bb09e3f5f (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 232 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34323136353939373634 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d008355270aae4ef8dda33cdb3fad664dfb0124f6dcc0e79a9a7b6bb19f021d00ec8d3e43977e2692ec27c702a6f349d4536d00cc017b55f325227da7
-  R: 008355270aae4ef8dda33cdb3fad664dfb0124f6dcc0e79a9a7b6bb19f (len=29 bytes)
-  S: 00ec8d3e43977e2692ec27c702a6f349d4536d00cc017b55f325227da7 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 233 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33353035313435373534 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: b15b000000007c90bd7e479a53d6896b278efa828e9b33ef5404cf36 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c6222915ddf6e69eaefce3ebda56ac501428b3d69b7b94c0e9ccf0010021c5acbd1d130b50c08778175172a9d0d0e0e36b6a68c80af9aeae41b6f
@@ -1115,7 +114,7 @@ TC 233 | result=valid | valid_bit=1 | Flags=
 TC 234 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 34323833323334303630 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: c7e1590000000057642ff6b9373479cc4637154239c1863c1743792f (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c6b8e3edaf6aa9e6322e916ba1cd2bce6ce694ca8e8f9f999efe9cc07021c793b8d557b98e504bf05b2a57b1fd1eaffb38eda30db7c5e8a559c93
@@ -1123,21 +122,10 @@ TC 234 | result=valid | valid_bit=1 | Flags=
   S: 793b8d557b98e504bf05b2a57b1fd1eaffb38eda30db7c5e8a559c93 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 235 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 31343238353939333836 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00a8b78286f4b4ade20d7a8f7c1ce3c29d6616432eb99b34cf8a46d421021c66b05e86c8a7e41fecb51047a7b8d7c4a6baf806e9d360f0c6715c6a
-  R: 00a8b78286f4b4ade20d7a8f7c1ce3c29d6616432eb99b34cf8a46d421 (len=29 bytes)
-  S: 66b05e86c8a7e41fecb51047a7b8d7c4a6baf806e9d360f0c6715c6a (len=28 bytes)
-  Encoding: STRICT_OK
-
 TC 236 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31303532363634353530 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: a84aefc841000000003361df1f290d1692220b091782a92e8a363329 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c33529fcafcd107596f846563605f0d9c479f5ac9498e325e034fd001021c75e231e760bc10eb97901c2b8ccf908099ce7fc54472fcb419784d36
@@ -1145,43 +133,10 @@ TC 236 | result=valid | valid_bit=1 | Flags=
   S: 75e231e760bc10eb97901c2b8ccf908099ce7fc54472fcb419784d36 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 237 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 3534383039373837313931 (len=11 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00d4514aa4da10577bf2974ff7f6e410e82f9267877b73631e0b336ecb021d00936e3ddc7846ceebb4f9e8c262d014f8ec5ae90cebed2359b49aa559
-  R: 00d4514aa4da10577bf2974ff7f6e410e82f9267877b73631e0b336ecb (len=29 bytes)
-  S: 00936e3ddc7846ceebb4f9e8c262d014f8ec5ae90cebed2359b49aa559 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 238 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 36323339373639313139 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c65d35e97f9455bbc13c8ec28f8b8d13ab7327fe77c38b40f5b855c37021d00a21cad033d04659bd2539e7838e8377b5b11f14d0c016616775586f1
-  R: 65d35e97f9455bbc13c8ec28f8b8d13ab7327fe77c38b40f5b855c37 (len=28 bytes)
-  S: 00a21cad033d04659bd2539e7838e8377b5b11f14d0c016616775586f1 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 239 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 3835343839383334353535 (len=11 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00d444ef96649d01d2a47a9dd6210b45fffec0ed1a4cb7438e8cccf048021d00a828341bea5c28b55097e77332dd7e303df789a2a67946de23dd3473
-  R: 00d444ef96649d01d2a47a9dd6210b45fffec0ed1a4cb7438e8cccf048 (len=29 bytes)
-  S: 00a828341bea5c28b55097e77332dd7e303df789a2a67946de23dd3473 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 240 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 37333237333733363539 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: 00999f1686b81b000000008f0eddfef71b4a955f469f2d3f9c601cae (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c09463baa1c7630494a9ed5d64fa2fac19ac452b3142f8bf19f585574021c3897d58b8aff942a074a583604b174ddeaf230d7cead58e74835d89d
@@ -1192,7 +147,7 @@ TC 240 | result=valid | valid_bit=1 | Flags=
 TC 241 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 35333335313137303032 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: 229edc99f5336a9b00000000d30aa317135d789ab8d4bc7001cfbfd2 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c4c2ba44adbb44f6b0f57de21830870d5acfc68e03c8f35e1dda14cec021c6aff00cd6417ac43c1ea7e107fcfada404b88f4a79a0d12df96ab028
@@ -1200,43 +155,10 @@ TC 241 | result=valid | valid_bit=1 | Flags=
   S: 6aff00cd6417ac43c1ea7e107fcfada404b88f4a79a0d12df96ab028 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 242 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 31363630313837373733 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00dbbc41eea7c5c204388b7941cd19acc7a2eb38b8e848845bcdb4244d021c7c4e411b930f26ffaa494d2522381ac86f38b37591d697d1229253cd
-  R: 00dbbc41eea7c5c204388b7941cd19acc7a2eb38b8e848845bcdb4244d (len=29 bytes)
-  S: 7c4e411b930f26ffaa494d2522381ac86f38b37591d697d1229253cd (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 243 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 32373637393334333030 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c595b6900f6eb4494366219c35b40397ffdb3141bffb2d8d216f97973021d00f53261795ddfb36ed4a83f783710f15a8f606cf9fb3f9ca1981f2605
-  R: 595b6900f6eb4494366219c35b40397ffdb3141bffb2d8d216f97973 (len=28 bytes)
-  S: 00f53261795ddfb36ed4a83f783710f15a8f606cf9fb3f9ca1981f2605 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 244 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34363632343338363339 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c6a785a5bc1b857f7c10120d85f36d9d444a5bb6ed0991eac4a5a26a8021d00eefa7d6774ee5851dd7f1c45d204fff4387ee126acbd56452d342439
-  R: 6a785a5bc1b857f7c10120d85f36d9d444a5bb6ed0991eac4a5a26a8 (len=28 bytes)
-  S: 00eefa7d6774ee5851dd7f1c45d204fff4387ee126acbd56452d342439 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 245 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3131333132313436393936 (len=11 bytes)
-  Hash:  (SHA3-224)
+  Hash: dafee08df93849e39d8f36a00000000055074d4f2f50cc395cdfbe7d (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c4e0f67b081cd6b87e3f4d792f1ccdd66e780d8028eaeb5c40047b615021c14c42ea50c712c3fb7a0e18fe06b23822e9063f15bf2759dfc70383e
@@ -1244,32 +166,10 @@ TC 245 | result=valid | valid_bit=1 | Flags=
   S: 14c42ea50c712c3fb7a0e18fe06b23822e9063f15bf2759dfc70383e (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 246 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 39373533373339323833 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00b16e31a9a07bed7d2adab9bfbf9fb8a279f6387791d229e79ff435c7021c0cac45c70351a77cf2d0377601be4f7bbf5acddf0310f9e10b1c7022
-  R: 00b16e31a9a07bed7d2adab9bfbf9fb8a279f6387791d229e79ff435c7 (len=29 bytes)
-  S: 0cac45c70351a77cf2d0377601be4f7bbf5acddf0310f9e10b1c7022 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 247 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 32353031313933373134 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d008753a04e4ce34ab8997df5f36934cd16368cb0f3e849890d74242acc021d00d035d2d78feab9ced6c25735b3740a2309d96cb5d57fea729a9639d1
-  R: 008753a04e4ce34ab8997df5f36934cd16368cb0f3e849890d74242acc (len=29 bytes)
-  S: 00d035d2d78feab9ced6c25735b3740a2309d96cb5d57fea729a9639d1 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 248 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3136303339353338363330 (len=11 bytes)
-  Hash:  (SHA3-224)
+  Hash: 533901ad04964be8aa1f86740c274000000000c3445bf8cbae9dbe88 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c11974f58c95f8c44522f8359ae5e942577b8fb575a2ba18ff383df71021c6c141327f9e405729c300f16b301de140c8df92c05637db952216e4c
@@ -1277,65 +177,10 @@ TC 248 | result=valid | valid_bit=1 | Flags=
   S: 6c141327f9e405729c300f16b301de140c8df92c05637db952216e4c (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 249 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 35383739303634393638 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d009d5d514b884b4d892e92e373663e394901e483eca8c9bcd780910c82021c7da1cd12c575744ff70cfb3513c5eabc0e3632cf2ce50ecf0f55c822
-  R: 009d5d514b884b4d892e92e373663e394901e483eca8c9bcd780910c82 (len=29 bytes)
-  S: 7da1cd12c575744ff70cfb3513c5eabc0e3632cf2ce50ecf0f55c822 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 250 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 33303935393737323131 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00f68c1b642a35a1988f6c2fa77a5533a2f635abf02c6748f5a2b9d1de021c63ee52149fec97e52b2da4556fe28acf8f598636455f322cc9f47175
-  R: 00f68c1b642a35a1988f6c2fa77a5533a2f635abf02c6748f5a2b9d1de (len=29 bytes)
-  S: 63ee52149fec97e52b2da4556fe28acf8f598636455f322cc9f47175 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 251 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 37353735303634353636 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c48948b8dd7e62760af368fdc3c225afdbfb6b98a1125d8aeb62419df021d00bf889dd8eca1456c24d88abc16a5dc0217d3ac72b0e57935bb803550
-  R: 48948b8dd7e62760af368fdc3c225afdbfb6b98a1125d8aeb62419df (len=28 bytes)
-  S: 00bf889dd8eca1456c24d88abc16a5dc0217d3ac72b0e57935bb803550 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 252 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 333333333939363533 (len=9 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c0d002750cc80c0f5a6b2b1e6e08afafb4840cbdef6e32b726a4c1959021d00ee4095e31b594d159691777ff1f616989a65c4572b264215806f9268
-  R: 0d002750cc80c0f5a6b2b1e6e08afafb4840cbdef6e32b726a4c1959 (len=28 bytes)
-  S: 00ee4095e31b594d159691777ff1f616989a65c4572b264215806f9268 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 253 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 31353236353532363534 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c0977b6caba191d7cbe0b5319917f2748304e66577202335842e009cf021d00b0680b5d606ef9baa292f6bffdc84c11c59299854b4624539c2efc74
-  R: 0977b6caba191d7cbe0b5319917f2748304e66577202335842e009cf (len=28 bytes)
-  S: 00b0680b5d606ef9baa292f6bffdc84c11c59299854b4624539c2efc74 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 254 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 3938393131373931 (len=8 bytes)
-  Hash:  (SHA3-224)
+  Hash: 32206da1548d2c97eec2755f5fd49ea5e76a27d61c00000000086b63 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c023a1d2a8e49deac352acb3a6a758070b5c8a4e75fcbaffd9f32e862021c5d2d511ed37cf7d023a5335c48fc2f63cf0733a1a786c49ae929ce5b
@@ -1343,21 +188,10 @@ TC 254 | result=valid | valid_bit=1 | Flags=
   S: 5d2d511ed37cf7d023a5335c48fc2f63cf0733a1a786c49ae929ce5b (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 255 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34393338333931383530 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00c7cbad38e1c76603254dc2e9fd69332d0ef8f1a5879edb5be1bb578b021d00dddcf1aa863f291c0a287fa1d0159dabfa7d98e646596e8ac41f1b66
-  R: 00c7cbad38e1c76603254dc2e9fd69332d0ef8f1a5879edb5be1bb578b (len=29 bytes)
-  S: 00dddcf1aa863f291c0a287fa1d0159dabfa7d98e646596e8ac41f1b66 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 256 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 333333343935333833 (len=9 bytes)
-  Hash:  (SHA3-224)
+  Hash: b1590f4891953a511c5414d74383e2e54d811a36d25f1c0000000040 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c5c845a275521649bde9e3bfa07d6ca528f6e143d19e97b1e9e305e71021c60b4bd522c44b4c32e87b11b6b80b2061da98b4cf5c56dbf5f0651dc
@@ -1368,7 +202,7 @@ TC 256 | result=valid | valid_bit=1 | Flags=
 TC 257 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 31353435373932343633 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: 7f3932b8f1469bac9ad91834d5d7f1f792c68187adf1fc6000000000 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c260418182c819de5bdb8851c5ac937ab8d83ab70640010f7eeae13f4021c034c2f5ffaa2b4f1f111f4758e5adfbab5b7cfecfa48c8d88f5b6816
@@ -1379,7 +213,7 @@ TC 257 | result=valid | valid_bit=1 | Flags=
 TC 258 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 33313331343036343430 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: ffffffffd9f963c65ba7c514c1e5181bcdb839ad0cba69da5d60a561 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c0346d6521c74bfb34342c4b03c067d3cdfe35d3ea121580668301431021c571dc84cc071e25b98d47c87edd3f6db73f995e5a4fa038760c43cc3
@@ -1387,32 +221,10 @@ TC 258 | result=valid | valid_bit=1 | Flags=
   S: 571dc84cc071e25b98d47c87edd3f6db73f995e5a4fa038760c43cc3 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 259 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 36333034343731323831 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00f6d5049e2f0377f24fd3edd8ec14947251c9d687a4ec104f36b9238f021c713a07b0dd9aa2b08c30d9167b0373b852595579a7dfc48199056178
-  R: 00f6d5049e2f0377f24fd3edd8ec14947251c9d687a4ec104f36b9238f (len=29 bytes)
-  S: 713a07b0dd9aa2b08c30d9167b0373b852595579a7dfc48199056178 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 260 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 38393037303230373134 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00a7994553f1a793ebce2dfdcd357d3e4a01d0f7c1caaa9099fbb4b07a021d00d8f771084d362ef2a0dee50496e450b6e812e40c2e6d342495571508
-  R: 00a7994553f1a793ebce2dfdcd357d3e4a01d0f7c1caaa9099fbb4b07a (len=29 bytes)
-  S: 00d8f771084d362ef2a0dee50496e450b6e812e40c2e6d342495571508 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 261 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 36393536373534323535 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: 1c7effffffffe6d0757846274f00c3241e3dcb8e50cf2e0f30f36fc4 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c43236a22ba681bd71f99a8ee2b425b784ba6ff55cae154bf1b8ef454021c09cffb77306a5ea7675578bcfa2d2142c9dbd84401e09f78ec29fa74
@@ -1420,219 +232,10 @@ TC 261 | result=valid | valid_bit=1 | Flags=
   S: 09cffb77306a5ea7675578bcfa2d2142c9dbd84401e09f78ec29fa74 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 262 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34353533303132313836 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d008c63dae1f19d97135df18f8cf1a09e528b11ed2eac9f4b340621c73d021c3095be2232fe57d372796cc0c846445836ff35f25a38ce13585858b2
-  R: 008c63dae1f19d97135df18f8cf1a09e528b11ed2eac9f4b340621c73d (len=29 bytes)
-  S: 3095be2232fe57d372796cc0c846445836ff35f25a38ce13585858b2 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 263 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 39373837393632323939 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d008005bcb6b955f80b2a2b6e45d86154c561b543083ab065b50bffb499021d00e6515a9eb3fd8138ca117515d0f9a6549f226a72cccd49741adffec1
-  R: 008005bcb6b955f80b2a2b6e45d86154c561b543083ab065b50bffb499 (len=29 bytes)
-  S: 00e6515a9eb3fd8138ca117515d0f9a6549f226a72cccd49741adffec1 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 264 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34353433363234313238 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00be66cc8eb0d9e5dd7ef6c754018502e7371c0b0db97cce378b9aa355021c562b771c5104385878c3b918379b101ac888b1f15f0f52d15e0a92ba
-  R: 00be66cc8eb0d9e5dd7ef6c754018502e7371c0b0db97cce378b9aa355 (len=29 bytes)
-  S: 562b771c5104385878c3b918379b101ac888b1f15f0f52d15e0a92ba (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 265 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 3231313831373330313339 (len=11 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00f42940ed7287b281f00c795abd671feffded542fc63c4ecfc7336427021d009049e62c464723f50c265fdbcf7c6794b5294a58b3100e82ad9cd724
-  R: 00f42940ed7287b281f00c795abd671feffded542fc63c4ecfc7336427 (len=29 bytes)
-  S: 009049e62c464723f50c265fdbcf7c6794b5294a58b3100e82ad9cd724 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 266 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34303439363439373434 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00d0b092867808c7d3b34fec07c4ebe8324a1a4ff2bfc2e20aaffbd248021c4eb922b3de3bd244938adb20e21cdd560030d13cc0191c37ccd38e28
-  R: 00d0b092867808c7d3b34fec07c4ebe8324a1a4ff2bfc2e20aaffbd248 (len=29 bytes)
-  S: 4eb922b3de3bd244938adb20e21cdd560030d13cc0191c37ccd38e28 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 267 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 36323533333234353034 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00a73472e1f303bfe50128770c9134bd93af9b064f9b782a45dd85c33c021d00da4b8bd6e2ba5c635dcaf9a7d2bf774b10c2b09ba074cdc58d9c8da2
-  R: 00a73472e1f303bfe50128770c9134bd93af9b064f9b782a45dd85c33c (len=29 bytes)
-  S: 00da4b8bd6e2ba5c635dcaf9a7d2bf774b10c2b09ba074cdc58d9c8da2 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 268 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 33373935323533363938 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d009832ae82080ec02833e3eae913f7a98eb9e2d05133e5f2c7fa20479d021c0e90c676df7737adb84e54cda47af9f5d6ab2f34eaec837b628f646e
-  R: 009832ae82080ec02833e3eae913f7a98eb9e2d05133e5f2c7fa20479d (len=29 bytes)
-  S: 0e90c676df7737adb84e54cda47af9f5d6ab2f34eaec837b628f646e (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 269 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 3833343930343234303533 (len=11 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c3eac05a747f43988dab987f487fbca8003e5c7e9bb580634afef6e03021d00dd656679e1c1800f8a258781f45489e6630a6d934b3e2a05d41a0c4f
-  R: 3eac05a747f43988dab987f487fbca8003e5c7e9bb580634afef6e03 (len=28 bytes)
-  S: 00dd656679e1c1800f8a258781f45489e6630a6d934b3e2a05d41a0c4f (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 270 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 343736373036363938 (len=9 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c5f3a639c163daaf3e2c0d7d1a3ca82ebe42951491114b6e257e28f69021d00ea0e12e23d485a932f1aee974761b0e0c9c3d5ba1822ab646819886a
-  R: 5f3a639c163daaf3e2c0d7d1a3ca82ebe42951491114b6e257e28f69 (len=28 bytes)
-  S: 00ea0e12e23d485a932f1aee974761b0e0c9c3d5ba1822ab646819886a (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 271 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 393238353633373633 (len=9 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00c0ad06ec18c4ed4469c5f4f4be4bfb41b6fc024456b2eed1d8096a75021c45e08a93ae4e33bdf35379161843266ecd2f200ce292ac99894748ef
-  R: 00c0ad06ec18c4ed4469c5f4f4be4bfb41b6fc024456b2eed1d8096a75 (len=29 bytes)
-  S: 45e08a93ae4e33bdf35379161843266ecd2f200ce292ac99894748ef (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 272 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 31343936333331313539 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c0f5a1bb9c572a6ddfe5072de6a077b1490096a88cb2be9af8d976483021d0092e7258459df848ffbcc7fbfa99fdf4db16b734dc5b9701427034f80
-  R: 0f5a1bb9c572a6ddfe5072de6a077b1490096a88cb2be9af8d976483 (len=28 bytes)
-  S: 0092e7258459df848ffbcc7fbfa99fdf4db16b734dc5b9701427034f80 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 273 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 37323437303933303734 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00a097b8422452dcb2a93ae32ff8d6befc31d76051704b1023ac5c7645021d00f4faaf5f0dc78023885823c5547a59320bed2eb2eb3b948d07ce49a9
-  R: 00a097b8422452dcb2a93ae32ff8d6befc31d76051704b1023ac5c7645 (len=29 bytes)
-  S: 00f4faaf5f0dc78023885823c5547a59320bed2eb2eb3b948d07ce49a9 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 274 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 31373634353939333930 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c7b4d49838bffa979d0d9772f8af39340023a6b11a0e2173ce92d1b8e021d00f878af3f516288abf324b0c52dbc2d7106d2dc397871374bd144c272
-  R: 7b4d49838bffa979d0d9772f8af39340023a6b11a0e2173ce92d1b8e (len=28 bytes)
-  S: 00f878af3f516288abf324b0c52dbc2d7106d2dc397871374bd144c272 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 275 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 35393833373634333139 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00feda6c1c40c483f87f4586d23381a71a6b051ce28916f199295eaed3021c75be57d1b46ff0364308db2725b19bcc1ce820cf57e37f825d30e199
-  R: 00feda6c1c40c483f87f4586d23381a71a6b051ce28916f199295eaed3 (len=29 bytes)
-  S: 75be57d1b46ff0364308db2725b19bcc1ce820cf57e37f825d30e199 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 276 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 31393236363739363031 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d009969b8d03ed1313ecfd1739e4c9234c0e7287f15839ea1e6feed50b1021c45f6a820ac45d835ecdd52c836f157ab2b9279a560d2fe966ee23a4e
-  R: 009969b8d03ed1313ecfd1739e4c9234c0e7287f15839ea1e6feed50b1 (len=29 bytes)
-  S: 45f6a820ac45d835ecdd52c836f157ab2b9279a560d2fe966ee23a4e (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 277 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 3333353839393638 (len=8 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00a62e952192d3a9dbfc2ab20c57c719bf52eef859d994c860a9564f12021d00be1007b52e9308bde867f380f0bd3002554d8ac854f9db3d4a7d6898
-  R: 00a62e952192d3a9dbfc2ab20c57c719bf52eef859d994c860a9564f12 (len=29 bytes)
-  S: 00be1007b52e9308bde867f380f0bd3002554d8ac854f9db3d4a7d6898 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 278 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 33313731393734323238 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00f526b9288e25aaea8d657ec7a4ebde46d8adc4c6d909fcfd7e2dcdb0021c5d10087d1263db5259579e9987b410001b774f81c3e489df85b2715e
-  R: 00f526b9288e25aaea8d657ec7a4ebde46d8adc4c6d909fcfd7e2dcdb0 (len=29 bytes)
-  S: 5d10087d1263db5259579e9987b410001b774f81c3e489df85b2715e (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 279 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 32353736383731313033 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303e021d00c5ff7ab638b6702535ea719e7c2f7753c53c1611c5919868fb708b00021d00ab29aac043d35847280a3d77590ae93a4b26db18238a53c67cbd162b
-  R: 00c5ff7ab638b6702535ea719e7c2f7753c53c1611c5919868fb708b00 (len=29 bytes)
-  S: 00ab29aac043d35847280a3d77590ae93a4b26db18238a53c67cbd162b (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 280 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 36303432353831383130 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00e69b43a68f452d26516e1316d54cd51416a047d42945350cdc506518021c66d1abd5aa58eccf9ebe9391cce8cefab162a9130439235f051fc437
-  R: 00e69b43a68f452d26516e1316d54cd51416a047d42945350cdc506518 (len=29 bytes)
-  S: 66d1abd5aa58eccf9ebe9391cce8cefab162a9130439235f051fc437 (len=28 bytes)
-  Encoding: STRICT_OK
-
 TC 281 | result=valid | valid_bit=1 | Flags=
   Comment: special case hash
   Msg: 38363531303032303530 (len=10 bytes)
-  Hash:  (SHA3-224)
+  Hash: b6951fb6ca933c00668c1b58f396987a172ac34bf9ffffffffe58278 (SHA3-224)
   X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
   Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
   Sig: 303c021c0c6822e256d0190b4962c5b4bfdabce10d277cd347caf0850892288f021c3f59727e4d9e3b92f4b0ce710c5112caa18e4051cc71450f6989cb9a
@@ -1640,76 +243,10 @@ TC 281 | result=valid | valid_bit=1 | Flags=
   S: 3f59727e4d9e3b92f4b0ce710c5112caa18e4051cc71450f6989cb9a (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 282 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 343037313238303135 (len=9 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00850b43461e107174a77a4f9a3011e03854d6b5b4a0a6250e2fc472a2021c0e7da9a21a2373d0944031fd121dce0594aa8721da1269f846747f59
-  R: 00850b43461e107174a77a4f9a3011e03854d6b5b4a0a6250e2fc472a2 (len=29 bytes)
-  S: 0e7da9a21a2373d0944031fd121dce0594aa8721da1269f846747f59 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 283 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34383833313734353738 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021d00a6e142069366be8c48a7b651ec45b0e2dd9d79701108c35997ca1a4b021c20b576040b9f3e73ae7ff3af223e34df82dce8533bf1901486a8b3d2
-  R: 00a6e142069366be8c48a7b651ec45b0e2dd9d79701108c35997ca1a4b (len=29 bytes)
-  S: 20b576040b9f3e73ae7ff3af223e34df82dce8533bf1901486a8b3d2 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 284 | result=valid | valid_bit=1 | Flags=
-  Comment: special case hash
-  Msg: 34333631333834353035 (len=10 bytes)
-  Hash:  (SHA3-224)
-  X: 00eada93be10b2449e1e8bb58305d52008013c57107c1a20a317a6cba7
-  Y: 00eca672340c03d1d2e09663286691df55069fa25490c9dd9f9c0bb2b5
-  Sig: 303d021c58e4c5558f2d4d2baee361da0e907e068bbc697b3abdbae29474084e021d00951de902c7af71b5d7a3c6117d258242a04a8661bfdd4d047694f7fa
-  R: 58e4c5558f2d4d2baee361da0e907e068bbc697b3abdbae29474084e (len=28 bytes)
-  S: 00951de902c7af71b5d7a3c6117d258242a04a8661bfdd4d047694f7fa (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 285 | result=valid | valid_bit=1 | Flags=
-  Comment: k*G has a large x-coordinate
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00d37fb4abe8c504504f010539eb764c10c14250645e846eaf41b99953
-  Y: 00c4e2c1c277056982c5b81305ed3110a064ff6ae8e0545f0c35ff8871
-  Sig: 3030020f00e95c1f470fc1ec22d6baa3a3d5c1021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3a
-  R: 00e95c1f470fc1ec22d6baa3a3d5c1 (len=15 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3a (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 286 | result=invalid | valid_bit=0 | Flags=
-  Comment: r too large
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00d37fb4abe8c504504f010539eb764c10c14250645e846eaf41b99953
-  Y: 00c4e2c1c277056982c5b81305ed3110a064ff6ae8e0545f0c35ff8871
-  Sig: 303e021d00fffffffffffffffffffffffffffffffefffffffffffffffffffffffe021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3a
-  R: 00fffffffffffffffffffffffffffffffefffffffffffffffffffffffe (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3a (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 287 | result=valid | valid_bit=1 | Flags=
-  Comment: r,s are large
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00d9aac11d0277a4b23514c4d02a483e922dc40c92a774b8c62179690b
-  Y: 009cfe0c9b060b1a49598318631668083e4cf34e4bab29d14d81c2b049
-  Sig: 303e021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3b
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3c (len=29 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a3b (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 288 | result=valid | valid_bit=1 | Flags=
   Comment: r and s^-1 have a large Hamming weight
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00c359b31b3ee10cc0bab7d21f0cc5cecb632186e8ca608a74f921986f
   Y: 27787cc204c5ed561897c14961f7827b5f97395996de6cff87862771
   Sig: 303c021c7fffffffffffffffffffffffffffffffffffffffffffffffffffffff021c3d5052691b8dc89debad360466f2a39e82e8ae2aefb77c3c92ad7cd1
@@ -1717,21 +254,10 @@ TC 288 | result=valid | valid_bit=1 | Flags=
   S: 3d5052691b8dc89debad360466f2a39e82e8ae2aefb77c3c92ad7cd1 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 289 | result=valid | valid_bit=1 | Flags=
-  Comment: r and s^-1 have a large Hamming weight
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00b21fde4e399d8cbf8cbb8ea8ac770eb97ff85b018683433982ca2b35
-  Y: 3e7b4325b4319bbd71fe9c3e49c4daec895501afceaa554040129b71
-  Sig: 303d021c7fffffffffffffffffffffffffffffffffffffffffffffffffffffff021d00bf19ab4d3ebf5a1a49d765909308daa88c2b7be3969db552ea30562b
-  R: 7fffffffffffffffffffffffffffffffffffffffffffffffffffffff (len=28 bytes)
-  S: 00bf19ab4d3ebf5a1a49d765909308daa88c2b7be3969db552ea30562b (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 290 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00fc0341bdbbce3beee1be9f02e46148af9da53128e0e3c45af1abe4c7
   Y: 0092acfd718352e7107fe08ea6a35d8badcf54f57065dc4e8c9f2705d2
   Sig: 3006020103020101
@@ -1742,7 +268,7 @@ TC 290 | result=valid | valid_bit=1 | Flags=
 TC 291 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 50b14256f6ea50d9843bd9e2b4c2d9daf75f76ac4e4e757c712b3053
   Y: 594d68e1683ec977b2efcc8a7ba6c46a0e6a668a03f4f50a3e21e4ce
   Sig: 3006020103020103
@@ -1753,7 +279,7 @@ TC 291 | result=valid | valid_bit=1 | Flags=
 TC 292 | result=valid | valid_bit=1 | Flags=
   Comment: small r and s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 7801e48011fce2685a2f563faab34fff728ebb6e92eb029fef124eb5
   Y: 00a9be2c1b86e99e44ef60e6c02a04a16cbd968482ed2ec4c1463efeef
   Sig: 3006020103020104
@@ -1761,43 +287,10 @@ TC 292 | result=valid | valid_bit=1 | Flags=
   S: 04 (len=1 bytes)
   Encoding: STRICT_OK
 
-TC 293 | result=invalid | valid_bit=0 | Flags=
-  Comment: r is larger than n
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 7801e48011fce2685a2f563faab34fff728ebb6e92eb029fef124eb5
-  Y: 00a9be2c1b86e99e44ef60e6c02a04a16cbd968482ed2ec4c1463efeef
-  Sig: 3022021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a40020104
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c2a40 (len=29 bytes)
-  S: 04 (len=1 bytes)
-  Encoding: STRICT_OK
-
-TC 294 | result=invalid | valid_bit=0 | Flags=
-  Comment: s is larger than n
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 6cce004abbcdccdb3fda691e70a71a4d8a920219af2a20880f59c53d
-  Y: 0086023ea85caa2bebffcb9f360082e6264466ea065afb07820dfb1a9a
-  Sig: 3022020103021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c6f00c4
-  R: 03 (len=1 bytes)
-  S: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c6f00c4 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 295 | result=valid | valid_bit=1 | Flags=
-  Comment: small r and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 5d1b27dd47711d7fa90b2651e202c240cad281ed803e1a3236c789fa
-  Y: 0ea5420664e2a8bd9cea3740218e23735ee2715f8130beb437419539
-  Sig: 302302020100021d00c993264c993264c993264c99326411d2e55b3214a8d67528812a55ab
-  R: 0100 (len=2 bytes)
-  S: 00c993264c993264c993264c99326411d2e55b3214a8d67528812a55ab (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 296 | result=valid | valid_bit=1 | Flags=
   Comment: smallish r and s^-1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00ddf53cec8d9c6062904d2a04f790f4596c67696dd4f5422a3cb84c9c
   Y: 00af10f2d1eb0e0ff28fa8e40a91d8d4addb20c085d635158de1a67bdd
   Sig: 302702072d9b4d347952cc021c3e85d56474b5c55fbe86608442a84b2bf093b7d75f53a47250e1c70c
@@ -1808,7 +301,7 @@ TC 296 | result=valid | valid_bit=1 | Flags=
 TC 297 | result=valid | valid_bit=1 | Flags=
   Comment: 100-bit r and small s^-1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00f43b4a87dc12c65bf27f4b8610486402327adc0133c1db8adf4e3f9b
   Y: 00a61aadb4c58ac0b5518d1c2929068eaa0d6a5d5f84dacf66e5b276ff
   Sig: 302d020d1033e67e37b32b445580bf4efb021c02fd02fd02fd02fd02fd02fd02fd0043a4fd2da317247308c74dc6b8
@@ -1816,43 +309,10 @@ TC 297 | result=valid | valid_bit=1 | Flags=
   S: 02fd02fd02fd02fd02fd02fd02fd0043a4fd2da317247308c74dc6b8 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 298 | result=valid | valid_bit=1 | Flags=
-  Comment: small r and 100 bit s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 6bd0a5dc98a6761a24d4e5e6c31187af8c7ed874d42af841806583b6
-  Y: 022e6bf9480c23d1be341f59b043afdaa76bad8622204fa84e26dd3e
-  Sig: 302302020100021d00d05434abacd859ed74185e75b751c6d9f60c7921dacfbb8e19cdba8e
-  R: 0100 (len=2 bytes)
-  S: 00d05434abacd859ed74185e75b751c6d9f60c7921dacfbb8e19cdba8e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 299 | result=valid | valid_bit=1 | Flags=
-  Comment: 100-bit r and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 75b65cd61449faf0d4bb2d2300b134757b714fbc4efbd6631e664cbf
-  Y: 00b488633f42e50b11c301bf3736a461286eccad2447180835d508deb2
-  Sig: 302e020d062522bbd3ecbe7c39e93e7c24021d00d05434abacd859ed74185e75b751c6d9f60c7921dacfbb8e19cdba8e
-  R: 062522bbd3ecbe7c39e93e7c24 (len=13 bytes)
-  S: 00d05434abacd859ed74185e75b751c6d9f60c7921dacfbb8e19cdba8e (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 300 | result=valid | valid_bit=1 | Flags=
-  Comment: r and s^-1 are close to n
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00bd18c7797449c64e9fc1ad2ca9c49132fc34b4741831fdbc6cbd87cf
-  Y: 00f830c108fd501bf9b7b3b898072397b9a6e72216db784c877882c87b
-  Sig: 303d021d00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c29bd021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14
-  R: 00ffffffffffffffffffffffffffff16a2e0b8f03e13dd29455c5c29bd (len=29 bytes)
-  S: 5555555555555555555555555555078ba03da56a069f0dc1c9740e14 (len=28 bytes)
-  Encoding: STRICT_OK
-
 TC 301 | result=valid | valid_bit=1 | Flags=
   Comment: s == 1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00af736667b618cfa5526f073f7048d5e6b672a05569cd2912bce8914d
   Y: 6a030aa73fd79517ee8175800484f2dcebf02871825cc67c41b1a8fc
   Sig: 3021021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14020101
@@ -1863,7 +323,7 @@ TC 301 | result=valid | valid_bit=1 | Flags=
 TC 302 | result=invalid | valid_bit=0 | Flags=
   Comment: s == 0
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00af736667b618cfa5526f073f7048d5e6b672a05569cd2912bce8914d
   Y: 6a030aa73fd79517ee8175800484f2dcebf02871825cc67c41b1a8fc
   Sig: 3021021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14020100
@@ -1874,7 +334,7 @@ TC 302 | result=invalid | valid_bit=0 | Flags=
 TC 303 | result=invalid | valid_bit=0 | Flags=
   Comment: point at infinity during verify
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00aa2f981add5480e7f2a8ae50fc52258612ad6420a1a2cc2c252c1693
   Y: 32c1ff19c331d3e52a98add7e7f4f8ac122ca961b8cbe4260ed83e4c
   Sig: 303c021c7fffffffffffffffffffffffffff8b51705c781f09ee94a2ae2e151e021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14
@@ -1885,7 +345,7 @@ TC 303 | result=invalid | valid_bit=0 | Flags=
 TC 304 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for signature malleability
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 008feb4b153b7dfe4081069ec708fdb161716ec3ed17c81efb1bb3e396
   Y: 00bbc90cfae2c3957f2cec75239445239a1c0e9e0a032385d063f1d2ff
   Sig: 303c021c7fffffffffffffffffffffffffff8b51705c781f09ee94a2ae2e151f021c7fffffffffffffffffffffffffff8b51705c781f09ee94a2ae2e151e
@@ -1896,7 +356,7 @@ TC 304 | result=valid | valid_bit=1 | Flags=
 TC 305 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for signature malleability
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00af2a29d356133f4d726c64e8ff7d80851649cf3e35d2b9de2725bbab
   Y: 6d2199d9f3e0f0863e671deb987afdb25b6e6b7744bc53faa15cac53
   Sig: 303c021c7fffffffffffffffffffffffffff8b51705c781f09ee94a2ae2e151f021c7fffffffffffffffffffffffffff8b51705c781f09ee94a2ae2e151f
@@ -1907,7 +367,7 @@ TC 305 | result=valid | valid_bit=1 | Flags=
 TC 306 | result=valid | valid_bit=1 | Flags=
   Comment: u1 == 1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 7bb0bc9529b06a424e8efbaafdec5aa339de5599f82ec9e195f0cede
   Y: 381dc950caa8b0454fab70c57e06a15bc771b693ebb4013bc85b56ac
   Sig: 303c021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14021c0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7
@@ -1915,21 +375,10 @@ TC 306 | result=valid | valid_bit=1 | Flags=
   S: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 307 | result=valid | valid_bit=1 | Flags=
-  Comment: u1 == n - 1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 2da3ea3145a1e68772e139f1b5d9b85e201de7df4775d5c4f7782596
-  Y: 4d3a2380099d7f3cf3ad18c1fb13ab1e054c097633fd51e67c1a9ca0
-  Sig: 303d021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14021d00f18810142537c3fe231c073be9d0ee37a8010e002ba6f19e372a3f86
-  R: 5555555555555555555555555555078ba03da56a069f0dc1c9740e14 (len=28 bytes)
-  S: 00f18810142537c3fe231c073be9d0ee37a8010e002ba6f19e372a3f86 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 308 | result=valid | valid_bit=1 | Flags=
   Comment: u2 == 1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00ffd40a19c09ce0a21124f163c72558e1f15a11aecde9dde08c465bce
   Y: 00e3cc54426c7850ae17670e1cc19931e9d934610f42f456b8472a8047
   Sig: 303c021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14
@@ -1937,21 +386,10 @@ TC 308 | result=valid | valid_bit=1 | Flags=
   S: 5555555555555555555555555555078ba03da56a069f0dc1c9740e14 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 309 | result=valid | valid_bit=1 | Flags=
-  Comment: u2 == n - 1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 06081ee7d06ae8d4b84075e53264125b0efa082dc6e1d9190e9cd8f6
-  Y: 361012db570e279336fbc8f748d7d1c77967cc0ae188aedf8cb4d0f6
-  Sig: 303d021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14021d00aaaaaaaaaaaaaaaaaaaaaaaaaaaa0f17407b4ad40d3e1b8392e81c29
-  R: 5555555555555555555555555555078ba03da56a069f0dc1c9740e14 (len=28 bytes)
-  S: 00aaaaaaaaaaaaaaaaaaaaaaaaaaaa0f17407b4ad40d3e1b8392e81c29 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 310 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00f480a474e28f987e1e76e73c7a9c5c12307f5bdc99d97e515e71ae42
   Y: 0e310ab3403eb44f8f17e217914d136c8e2341f71177052d4f07dcb3
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c04d2a54e9e42beab49a152ec0764b823bd92a0bf4d6767e261bb4e3d
@@ -1959,32 +397,10 @@ TC 310 | result=valid | valid_bit=1 | Flags=
   S: 04d2a54e9e42beab49a152ec0764b823bd92a0bf4d6767e261bb4e3d (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 311 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 4655a8b7d46613d3d8ace597a9d381b7d2e30c57aad490e413481105
-  Y: 4aca5463f0377db9c9638d280129cf14f5e60c8ebcef4c8ebdc9b15d
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d00f9f9e7f101b4ea468eb78fd9ba89156454b414fc17d02840ca81ca78
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 00f9f9e7f101b4ea468eb78fd9ba89156454b414fc17d02840ca81ca78 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 312 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 6c3c1069fb76da43e5a9ae1a69fb679740171f2b457956b13f5829c0
-  Y: 4f0b1000d41a56d96eca18a626d0636f20cee184f3d2f5b87ab68c4a
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d00be7ed7384bc8b90113e58ca87a68a06fc2fe5efa96f0a956733dc65c
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 00be7ed7384bc8b90113e58ca87a68a06fc2fe5efa96f0a956733dc65c (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 313 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 009a24375b03b78c20230867b842c680bdb88604fa93f7c59317348310
   Y: 60090ff5dec7b6fb6df459befdfc5e9d440198e8610a267daa9548fa
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c79823515d525dc02f18810142537553a6da56048fb999d3fdff85f70
@@ -1995,7 +411,7 @@ TC 313 | result=valid | valid_bit=1 | Flags=
 TC 314 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 71f01e6070a5bd694092417f75b1f1b35457421e9997fa5086dfef4b
   Y: 2b8f67510ac820380907503b3bcdb89fdb5f2688434dba79d3a40a11
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c23515d525dc02f18810142537c3fc1ffd9a43852c262974a2a1640c8
@@ -2006,7 +422,7 @@ TC 314 | result=valid | valid_bit=1 | Flags=
 TC 315 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 453355214278474735b32b1d45c9a203421578c10acd426e9a569d5f
   Y: 6b5655138346d0bef9cde0ebb97b4938e3c28dc612b4eaaba862182d
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c46a2baa4bb805e31020284a6f87f83ffb34870a584c52e94542c8190
@@ -2014,21 +430,10 @@ TC 315 | result=valid | valid_bit=1 | Flags=
   S: 46a2baa4bb805e31020284a6f87f83ffb34870a584c52e94542c8190 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 316 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00fa86cdd0976acf06b0a7a3dcae70f287e62950d8874b32abcd59f755
-  Y: 00bd00817cea3c6b5e8d3266bef1f3df944fc4953e7a960902901ff380
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d00d525dc02f18810142537c3fe231b44eeebc76f3ab76829dc0fb7e7ff
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 00d525dc02f18810142537c3fe231b44eeebc76f3ab76829dc0fb7e7ff (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 317 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 6fc6ce348cb17cf57fe18e21ed13e8f33e5a724bf87f151ea7579633
   Y: 00bdd1fb53ba4ec9a477a6f3e5193003aaf462c857bc4a20bb62446552
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c7d96ad58b0dea0aa5b2f5689fc4d2f3f919327bf633ae0b17d506e00
@@ -2036,21 +441,10 @@ TC 317 | result=valid | valid_bit=1 | Flags=
   S: 7d96ad58b0dea0aa5b2f5689fc4d2f3f919327bf633ae0b17d506e00 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 318 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 0098f2f5da454958c7b04ef2220d45ed857a157d3874d033a25af6db87
-  Y: 0090c711d7574128fb7de7f316f7896b898670c97798d05a97f9eab7b0
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d00fb2d5ab161bd4154b65ead13f89a5e7f23264f7ec675c162faa0dc00
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 00fb2d5ab161bd4154b65ead13f89a5e7f23264f7ec675c162faa0dc00 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 319 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 3ccb08210d0b2283f3ccb779079bb160cee3cec9263d356565f770b3
   Y: 009fb0edb83cae0b730fddd5c0d63e10a99e527497a58c18b84dae8e8e
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c78c4080a129be1ff118e039df4e8771bd400870015d378cf1b951fc3
@@ -2061,7 +455,7 @@ TC 319 | result=valid | valid_bit=1 | Flags=
 TC 320 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 2dd3cd29db7616a6dc77bb1a66e849133b1408c540ee2ebb01e07bc4
   Y: 00d3e5786401c4533e15697c6bf86e14def5088590c19aec9d96f8538a
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c5f3f6b9c25e45c8089f2c6543d345037e17f2f7d4b7854ab399ee32e
@@ -2072,7 +466,7 @@ TC 320 | result=valid | valid_bit=1 | Flags=
 TC 321 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 53e89d29406622bbaa1bcf7c980d523209646cc20a4b3104aa344264
   Y: 7781d3de43413dfa061aa9b2d7c29eca9c8ed42b285fbcbbe016cc1e
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c7fffffffffffffffffffffffffffb2364ae85014b149b86c741eb8be
@@ -2080,21 +474,10 @@ TC 321 | result=valid | valid_bit=1 | Flags=
   S: 7fffffffffffffffffffffffffffb2364ae85014b149b86c741eb8be (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 322 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u2
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 049c4d998c0f368ebf1a69274fddf807dae245b4d3144d696d813ed9
-  Y: 00a5d3f586315ee7f5b263efe47a1b0a2e94847242710370d92ceb24a4
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d00855f5b2dc8e46ec428a593f73219cf65dae793e8346e30cc3701309c
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 00855f5b2dc8e46ec428a593f73219cf65dae793e8346e30cc3701309c (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 323 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 4b1b3c491443d1a45cbe5fb2f6ed36ac3ebde2a2456a7f9afe628dd7
   Y: 00d328db165ee1110765797569b30b041984790ea3aa65bd0ba3341818
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c2db5f61aea817276af2064e104c7a30e32034cb526dd0aacfa56566f
@@ -2102,21 +485,10 @@ TC 323 | result=valid | valid_bit=1 | Flags=
   S: 2db5f61aea817276af2064e104c7a30e32034cb526dd0aacfa56566f (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 324 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u2
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00b19e1369acb5fc913d1ac6e92ee3770590c5a45ce52fdf64a9f651be
-  Y: 2fac7a017a6b6cfc1c381c9254564c1b929b3c101f89195a6d27907e
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d0084a6c7513e5f48c07fffffffffff8713f3cba1293e4f3e95597fe6bd
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 0084a6c7513e5f48c07fffffffffff8713f3cba1293e4f3e95597fe6bd (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 325 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00d0c80d942da3dbe662467e1bcc69ceb322dc311152bf15557ed3f7af
   Y: 00f7b627b0ba59524170527cc1161abdfa4a4a25dfd09c59a98db7ea04
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c6c7513e5f48c07ffffffffffffff9d21fd1b31544cb13ca86a75b25e
@@ -2124,21 +496,10 @@ TC 325 | result=valid | valid_bit=1 | Flags=
   S: 6c7513e5f48c07ffffffffffffff9d21fd1b31544cb13ca86a75b25e (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 326 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u2
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00a781c88681c98aadf31e26541b9ab6efa52a49412cf7282944f13720
-  Y: 00b68ddeaf8a09af0b372b007e122d402e724fdcea1c619a80b32bfe5b
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d00d8ea27cbe9180fffffffffffffff3a43fa3662a899627950d4eb64bc
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 00d8ea27cbe9180fffffffffffffff3a43fa3662a899627950d4eb64bc (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 327 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00931606b9f180d16409efebc996bb1df442b84e19bcc9bed0e236cb64
   Y: 50edd2162625a979a25b231fba17878b756a77c167223886613afb03
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c3e5f48c07fffffffffffffffffffc724968c0ecf9ed783744a7337b3
@@ -2146,21 +507,10 @@ TC 327 | result=valid | valid_bit=1 | Flags=
   S: 3e5f48c07fffffffffffffffffffc724968c0ecf9ed783744a7337b3 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 328 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u2
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 1df7985b13decb2aa170b325ed2421d8d42474152b1040724ed7f28d
-  Y: 77ab5d47a2fb85754a3515682f20b3a47d13b26bd59b72f3bda83532
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d00bfffffffffffffffffffffffffff3d87bb44c833bb384d0f224ccdde
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 00bfffffffffffffffffffffffffff3d87bb44c833bb384d0f224ccdde (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 329 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 008a46670a9c9d3cf03a9e9d48525c75e572680a26278adc0888d5030f
   Y: 008c88e59829d5a802c0245aa8b5641779877c5647ad2b9b2a736535eb
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c7fffffffffffffffffffffffffff646c95d0a029629370d8e83d717f
@@ -2171,7 +521,7 @@ TC 329 | result=valid | valid_bit=1 | Flags=
 TC 330 | result=valid | valid_bit=1 | Flags=
   Comment: edge case for u2
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 16428097e6eb65688905678aae661f3d83b7e5ecc7787ed22fc029e8
   Y: 68d62cb89be54d10ca5b575aa86f9c8fb475c6d90f59d4477595c01c
   Sig: 303c021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021c3fffffffffffffffffffffffffff8b51705c781f09ee94a2ae2e1520
@@ -2179,43 +529,10 @@ TC 330 | result=valid | valid_bit=1 | Flags=
   S: 3fffffffffffffffffffffffffff8b51705c781f09ee94a2ae2e1520 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 331 | result=valid | valid_bit=1 | Flags=
-  Comment: edge case for u2
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 3fa563f806be913b57347adf8b1e862b7e0253bea701f6b201e57dca
-  Y: 0231cd68a2c24493deced00771e100bd001bc79902756d56d6ff87f1
-  Sig: 303d021c7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd021d0096dafb0d7540b93b5790327082635cd8895e1e799d5d19f92b594056
-  R: 7ffffffffffffffffffffffffffffffffffffffffffffffffffffffd (len=28 bytes)
-  S: 0096dafb0d7540b93b5790327082635cd8895e1e799d5d19f92b594056 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 332 | result=valid | valid_bit=1 | Flags=PointDuplication
-  Comment: point duplication during verification
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00feba9230660ac3fd64ae02f7306297aa4975436c0ad1105854e4066b
-  Y: 00ddcdba26679436b4e13f95d8f4f659142e7bf405c772e21788047b08
-  Sig: 303d021d00c44503dae85dd5210780f02928b3d927171c578f8603d16b240663c7021c141a6efb8f6e19016b61c76573c9759309a18c16e48c136dca552602
-  R: 00c44503dae85dd5210780f02928b3d927171c578f8603d16b240663c7 (len=29 bytes)
-  S: 141a6efb8f6e19016b61c76573c9759309a18c16e48c136dca552602 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 333 | result=invalid | valid_bit=0 | Flags=PointDuplication
-  Comment: duplication bug
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00feba9230660ac3fd64ae02f7306297aa4975436c0ad1105854e4066b
-  Y: 223245d9986bc94b1ec06a270b09a6ead1840bfa388d1de877fb84f9
-  Sig: 303d021d00c44503dae85dd5210780f02928b3d927171c578f8603d16b240663c7021c141a6efb8f6e19016b61c76573c9759309a18c16e48c136dca552602
-  R: 00c44503dae85dd5210780f02928b3d927171c578f8603d16b240663c7 (len=29 bytes)
-  S: 141a6efb8f6e19016b61c76573c9759309a18c16e48c136dca552602 (len=28 bytes)
-  Encoding: STRICT_OK
-
 TC 334 | result=invalid | valid_bit=0 | Flags=
   Comment: comparison with point at infinity 
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 25094ea9e4ce76d8c47356e4ae604eb6469669b0161fff805a765f
   Y: 6f807430f186ba63ffa0f315be721ec43baef24b8fba10b04f19189f
   Sig: 303c021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14021c33333333333333333333333333330486f9be9672d0c5d50ddf45a20c
@@ -2226,7 +543,7 @@ TC 334 | result=invalid | valid_bit=0 | Flags=
 TC 335 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and edgecase s
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 754267d9f090524d4c97bb1a5622e0c9f804dfd70cc68d9872f0a4f8
   Y: 708c24a49b81307db458c020fc7374770858faaea1d6ee37bf7beae3
   Sig: 303c021c706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14
@@ -2234,21 +551,10 @@ TC 335 | result=valid | valid_bit=1 | Flags=
   S: 5555555555555555555555555555078ba03da56a069f0dc1c9740e14 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 336 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 75a0d5291f48c17b4029baaea4d5796bda7c9d5802d534c0c265794a
-  Y: 00c93769dcaf7965f3c12864f50ccb22f10f193d5f0f7c33449131d2c4
-  Sig: 303d021c706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6021d00db6db6db6db6db6db6db6db6db6ceed4c09e84c77ebd9116e17391eb
-  R: 706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6 (len=28 bytes)
-  S: 00db6db6db6db6db6db6db6db6db6ceed4c09e84c77ebd9116e17391eb (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 337 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00d357674da166e0f4a058203df23b8f8ada82858034355d23aff5a812
   Y: 00edf6d5265ed40b6da2adbe9f8cb6050ebf61ebc0e56a10a1d6cf6e2e
   Sig: 303c021c706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6021c33333333333333333333333333330486f9be9672d0c5d50ddf45a20c
@@ -2256,21 +562,10 @@ TC 337 | result=valid | valid_bit=1 | Flags=
   S: 33333333333333333333333333330486f9be9672d0c5d50ddf45a20c (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 338 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 0085675f96009ddf740108f5bdb82523d59414d39b74e11570a6d0faa3
-  Y: 13cd5841a8e2a3e3ebd099b43205ca46664a6e6cf19481e8552fb4d8
-  Sig: 303d021c706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6021d00cccccccccccccccccccccccccccc121be6fa59cb431754377d168831
-  R: 706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6 (len=28 bytes)
-  S: 00cccccccccccccccccccccccccccc121be6fa59cb431754377d168831 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 339 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k and s^-1
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00c1678bddce5f00e4f41ebcab86f801b4dc050a1b2da8f9747b5abfc9
   Y: 00f1cf0d67d9c93456988a004dbcb8e95d17dde4070577e51d881d8859
   Sig: 303c021c706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6021c249249249249249249249249249227ce201a6b76951f982e7ae89852
@@ -2281,7 +576,7 @@ TC 339 | result=valid | valid_bit=1 | Flags=
 TC 340 | result=valid | valid_bit=1 | Flags=
   Comment: extreme value for k
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 09d2cfd575986bfe1a7420c7dabc0476e0dd13e54e01aa6f97b9e027
   Y: 464ba5b84c4d92ed9fddd0bbcb2382f0e9b9d5bb201b2ea8eb8d3a50
   Sig: 303c021c706a46dc76dcb76798e60e6d89474788d16dc18032d268fd1a704fa6021c0eb10e5ab95facded4061029d63a46f46f12947411f2ea561a592057
@@ -2289,98 +584,21 @@ TC 340 | result=valid | valid_bit=1 | Flags=
   S: 0eb10e5ab95facded4061029d63a46f46f12947411f2ea561a592057 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 341 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k and edgecase s
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 6fcc244352869febdc7425204f7b297ca85d5b0da8aa6ffe871980
-  Y: 62feef58d8c5a878d0255cd547af4f132906555017c330648d5b1ae4
-  Sig: 303d021d00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21021c5555555555555555555555555555078ba03da56a069f0dc1c9740e14
-  R: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21 (len=29 bytes)
-  S: 5555555555555555555555555555078ba03da56a069f0dc1c9740e14 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 342 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 0171e08f58fbf9812ae32570c2102e843968f5f35c596ff8591b03a6
-  Y: 6c07f75d9ecc5e39dda090ae92157e5d86fcf1a8c395490a446dc7ff
-  Sig: 303e021d00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21021d00db6db6db6db6db6db6db6db6db6ceed4c09e84c77ebd9116e17391eb
-  R: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21 (len=29 bytes)
-  S: 00db6db6db6db6db6db6db6db6db6ceed4c09e84c77ebd9116e17391eb (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 343 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 330586236257b3dabb8fa249fc6a65fe0f97e4d51c162028e535b74d
-  Y: 20101ba5cc9967511f794fa7c7f6114d40e14b7dc589148bdb1c275a
-  Sig: 303d021d00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21021c33333333333333333333333333330486f9be9672d0c5d50ddf45a20c
-  R: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21 (len=29 bytes)
-  S: 33333333333333333333333333330486f9be9672d0c5d50ddf45a20c (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 344 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 008044b73305e9f59021dbd0ce462d0d8a9b22e75887c56505c9c94c2e
-  Y: 6291a5c5364bad138d3ac3b538f77b266903bf71b6d4cc25ac0b6f12
-  Sig: 303e021d00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21021d00cccccccccccccccccccccccccccc121be6fa59cb431754377d168831
-  R: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21 (len=29 bytes)
-  S: 00cccccccccccccccccccccccccccc121be6fa59cb431754377d168831 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 345 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k and s^-1
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 6fdbd44d22532a8803568b512f27c107572a4f0e99c90ab15d6c1bc7
-  Y: 014e5943da516a92cf6cf1ffb4f859bc93e5a8dd9f9b1906d69acd92
-  Sig: 303d021d00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21021c249249249249249249249249249227ce201a6b76951f982e7ae89852
-  R: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21 (len=29 bytes)
-  S: 249249249249249249249249249227ce201a6b76951f982e7ae89852 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 346 | result=valid | valid_bit=1 | Flags=
-  Comment: extreme value for k
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 1b9a838b8899a5c7b9d982bcc080787521d8334fdbd2bb544ab10f46
-  Y: 76548c21fd012875c5364e1552a03a1ea237a2f1adafe6279419877d
-  Sig: 303d021d00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21021c0eb10e5ab95facded4061029d63a46f46f12947411f2ea561a592057
-  R: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21 (len=29 bytes)
-  S: 0eb10e5ab95facded4061029d63a46f46f12947411f2ea561a592057 (len=28 bytes)
-  Encoding: STRICT_OK
-
 TC 347 | result=invalid | valid_bit=0 | Flags=
   Comment: testing point duplication
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21
   Y: 00bd376388b5f723fb4c22dfe6cd4375a05a07476444d5819985007e34
   Sig: 303c021c0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7021c249249249249249249249249249227ce201a6b76951f982e7ae89851
   R: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (len=28 bytes)
-  S: 249249249249249249249249249227ce201a6b76951f982e7ae89851 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 348 | result=invalid | valid_bit=0 | Flags=
-  Comment: testing point duplication
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21
-  Y: 00bd376388b5f723fb4c22dfe6cd4375a05a07476444d5819985007e34
-  Sig: 303d021d00f18810142537c3fe231c073be9d0ee37a8010e002ba6f19e372a3f86021c249249249249249249249249249227ce201a6b76951f982e7ae89851
-  R: 00f18810142537c3fe231c073be9d0ee37a8010e002ba6f19e372a3f86 (len=29 bytes)
   S: 249249249249249249249249249227ce201a6b76951f982e7ae89851 (len=28 bytes)
   Encoding: STRICT_OK
 
 TC 349 | result=invalid | valid_bit=0 | Flags=
   Comment: testing point duplication
   Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
+  Hash: 0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7 (SHA3-224)
   X: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21
   Y: 42c89c774a08dc04b3dd201932bc8a5ea5f8b89bbb2a7e667aff81cd
   Sig: 303c021c0e77efebdac83c01dce3f8c4162e286b38b7e23de83637a72531eab7021c249249249249249249249249249227ce201a6b76951f982e7ae89851
@@ -2388,21 +606,10 @@ TC 349 | result=invalid | valid_bit=0 | Flags=
   S: 249249249249249249249249249227ce201a6b76951f982e7ae89851 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 350 | result=invalid | valid_bit=0 | Flags=
-  Comment: testing point duplication
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 00b70e0cbd6bb4bf7f321390b94a03c1d356c21122343280d6115c1d21
-  Y: 42c89c774a08dc04b3dd201932bc8a5ea5f8b89bbb2a7e667aff81cd
-  Sig: 303d021d00f18810142537c3fe231c073be9d0ee37a8010e002ba6f19e372a3f86021c249249249249249249249249249227ce201a6b76951f982e7ae89851
-  R: 00f18810142537c3fe231c073be9d0ee37a8010e002ba6f19e372a3f86 (len=29 bytes)
-  S: 249249249249249249249249249227ce201a6b76951f982e7ae89851 (len=28 bytes)
-  Encoding: STRICT_OK
-
 TC 351 | result=valid | valid_bit=1 | Flags=
   Comment: pseudorandom signature
   Msg:  (len=0 bytes)
-  Hash:  (SHA3-224)
+  Hash: 6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e3f5b5a6bc7 (SHA3-224)
   X: 4c246670658a1d41f5d77bce246cbe386ac22848e269b9d4cd67c466
   Y: 00ddd947153d39b2d42533a460def26880408caf2dd3dd48fe888cd176
   Sig: 303c021c474b086cf4754c270d20f88be569b7d7b6eb6e55de6ce21382160e81021c60692fdb35b4cb824a2729fb175f709d06bc9f4e8bbb4b1058c53788
@@ -2410,32 +617,10 @@ TC 351 | result=valid | valid_bit=1 | Flags=
   S: 60692fdb35b4cb824a2729fb175f709d06bc9f4e8bbb4b1058c53788 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 352 | result=valid | valid_bit=1 | Flags=
-  Comment: pseudorandom signature
-  Msg: 4d7367 (len=3 bytes)
-  Hash:  (SHA3-224)
-  X: 4c246670658a1d41f5d77bce246cbe386ac22848e269b9d4cd67c466
-  Y: 00ddd947153d39b2d42533a460def26880408caf2dd3dd48fe888cd176
-  Sig: 303e021d00dde359fe51a6d8ca9aec41e3376bd3e9fff8a41a3e44a64db81d6326021d00a1c29d577309f7135b688b1990433fb45c5dc17a021557272c1256fc
-  R: 00dde359fe51a6d8ca9aec41e3376bd3e9fff8a41a3e44a64db81d6326 (len=29 bytes)
-  S: 00a1c29d577309f7135b688b1990433fb45c5dc17a021557272c1256fc (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 353 | result=valid | valid_bit=1 | Flags=
-  Comment: pseudorandom signature
-  Msg: 313233343030 (len=6 bytes)
-  Hash:  (SHA3-224)
-  X: 4c246670658a1d41f5d77bce246cbe386ac22848e269b9d4cd67c466
-  Y: 00ddd947153d39b2d42533a460def26880408caf2dd3dd48fe888cd176
-  Sig: 303d021c0cdc4a54a091e61e0f764ddb12ffb243f457ad571a8ae7999caa0f06021d00d5cdd524f2092bcbe2fc7c328b0876d436d9190058700af370dab0b7
-  R: 0cdc4a54a091e61e0f764ddb12ffb243f457ad571a8ae7999caa0f06 (len=28 bytes)
-  S: 00d5cdd524f2092bcbe2fc7c328b0876d436d9190058700af370dab0b7 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 354 | result=valid | valid_bit=1 | Flags=
   Comment: pseudorandom signature
   Msg: 0000000000000000000000000000000000000000 (len=20 bytes)
-  Hash:  (SHA3-224)
+  Hash: 9629e241405210082c4e5e4b5925464253bec320eafa95b4bc5e40ff (SHA3-224)
   X: 4c246670658a1d41f5d77bce246cbe386ac22848e269b9d4cd67c466
   Y: 00ddd947153d39b2d42533a460def26880408caf2dd3dd48fe888cd176
   Sig: 303c021c6efa32457e09b8abe22168501bc4ae051d2294674114a9dca94c51ae021c3173b652c78324b877dc5bdfe80324aeb01b171fd2626124a44f0b36
@@ -2443,21 +628,10 @@ TC 354 | result=valid | valid_bit=1 | Flags=
   S: 3173b652c78324b877dc5bdfe80324aeb01b171fd2626124a44f0b36 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 355 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key has many trailing 0's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00aed6fcad2400c4d94e55dbb6b012ce3d4c2b46843fbe99d4289e6ecf
-  Y: 008a24a89e71343d7d151d258d2cb690349c2d56b366dd10a600000000
-  Sig: 303d021c41a3e0370cf8148bccbdd03a7e763d382695263da11b9470b0e103d6021d0087a612990d0a4a9f811e20ac520a3476d91848444cccc4c8138ad5d6
-  R: 41a3e0370cf8148bccbdd03a7e763d382695263da11b9470b0e103d6 (len=28 bytes)
-  S: 0087a612990d0a4a9f811e20ac520a3476d91848444cccc4c8138ad5d6 (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 356 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key has many trailing 0's
   Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
+  Hash: 5d7d45b46692e51f9e2bb3f3e9f02672c85dda1d6aad741de70b0255 (SHA3-224)
   X: 00aed6fcad2400c4d94e55dbb6b012ce3d4c2b46843fbe99d4289e6ecf
   Y: 008a24a89e71343d7d151d258d2cb690349c2d56b366dd10a600000000
   Sig: 303c021c6f138512bf05addbb536b976b9125e1228f43f32f766325d1c270e16021c556205464ff65c9a5d4d9475167059863835644b06862f1b49cca20c
@@ -2465,175 +639,10 @@ TC 356 | result=valid | valid_bit=1 | Flags=
   S: 556205464ff65c9a5d4d9475167059863835644b06862f1b49cca20c (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 357 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key has many trailing 0's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00aed6fcad2400c4d94e55dbb6b012ce3d4c2b46843fbe99d4289e6ecf
-  Y: 008a24a89e71343d7d151d258d2cb690349c2d56b366dd10a600000000
-  Sig: 303e021d00840dccce1760f476240b516d5cfbf9a10fbd44b25c68fd69a96f67a3021d00b79884b6495a1c65f07853fc5d56ac06b84366bddb3ddf56b0fc9328
-  R: 00840dccce1760f476240b516d5cfbf9a10fbd44b25c68fd69a96f67a3 (len=29 bytes)
-  S: 00b79884b6495a1c65f07853fc5d56ac06b84366bddb3ddf56b0fc9328 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 358 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key has many trailing 1's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00bf19ecfe43ffe289f699f479316145b9a7f7370b9ece5ab1212174f1
-  Y: 73d528949ae9142f818bade71a960407963be0b6482a6a60ffffffff
-  Sig: 303e021d00949e76e0e35be5a08fcb60d8f86ecb0c650fc9b37ecd61a059649315021d00cd870903fc1437d59e43eade139aa8eb717039d2e8d3282f27d484f0
-  R: 00949e76e0e35be5a08fcb60d8f86ecb0c650fc9b37ecd61a059649315 (len=29 bytes)
-  S: 00cd870903fc1437d59e43eade139aa8eb717039d2e8d3282f27d484f0 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 359 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key has many trailing 1's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00bf19ecfe43ffe289f699f479316145b9a7f7370b9ece5ab1212174f1
-  Y: 73d528949ae9142f818bade71a960407963be0b6482a6a60ffffffff
-  Sig: 303e021d00a6364e1e4dd41327b4f88a9998412bf168551acc561357d2bbfd2aaf021d00f5e48ced76655eb729f4371d20f5d4ec53a23844313423063bb85fba
-  R: 00a6364e1e4dd41327b4f88a9998412bf168551acc561357d2bbfd2aaf (len=29 bytes)
-  S: 00f5e48ced76655eb729f4371d20f5d4ec53a23844313423063bb85fba (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 360 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key has many trailing 1's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00bf19ecfe43ffe289f699f479316145b9a7f7370b9ece5ab1212174f1
-  Y: 73d528949ae9142f818bade71a960407963be0b6482a6a60ffffffff
-  Sig: 303e021d00f572bd069ffef726222db033664205220bf694f374282c795959945f021d00ca942ef4fd6becd3bc4c3280ca29b84c8d29555dda402a50af1d7665
-  R: 00f572bd069ffef726222db033664205220bf694f374282c795959945f (len=29 bytes)
-  S: 00ca942ef4fd6becd3bc4c3280ca29b84c8d29555dda402a50af1d7665 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 361 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key has many trailing 0's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 26e5abf135cb54eaaa16b69e4b0b292275344e88a09df6df80000000
-  Y: 00eab891de54e3f26ff50ab989f333dac551583d468ae623c596434af0
-  Sig: 303e021d00e8b29401b22688776f8b24951f239893e12d822868dbbe1f6bc860ee021d00bfefb3641875aa10c3e8468665071658d0ab312cdf8f9a669bd82a7a
-  R: 00e8b29401b22688776f8b24951f239893e12d822868dbbe1f6bc860ee (len=29 bytes)
-  S: 00bfefb3641875aa10c3e8468665071658d0ab312cdf8f9a669bd82a7a (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 362 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key has many trailing 0's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 26e5abf135cb54eaaa16b69e4b0b292275344e88a09df6df80000000
-  Y: 00eab891de54e3f26ff50ab989f333dac551583d468ae623c596434af0
-  Sig: 303d021c291d8cc81f715fd52a74168946ed2bf2d692dae0955249e4cdad3209021d00ef56a69ebd78125a4ca12bdacd193e2111a35158d5d78b5d30460a34
-  R: 291d8cc81f715fd52a74168946ed2bf2d692dae0955249e4cdad3209 (len=28 bytes)
-  S: 00ef56a69ebd78125a4ca12bdacd193e2111a35158d5d78b5d30460a34 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 363 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key has many trailing 0's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 26e5abf135cb54eaaa16b69e4b0b292275344e88a09df6df80000000
-  Y: 00eab891de54e3f26ff50ab989f333dac551583d468ae623c596434af0
-  Sig: 303d021d00f5123a9f9212f64b8c607cfd5b0418f3694ce5ef4d161186afac7d30021c44c4b5d7647dfc1ed10f1d8d9283d4bca6961a4ea78cf1cad632f95b
-  R: 00f5123a9f9212f64b8c607cfd5b0418f3694ce5ef4d161186afac7d30 (len=29 bytes)
-  S: 44c4b5d7647dfc1ed10f1d8d9283d4bca6961a4ea78cf1cad632f95b (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 364 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key has many trailing 1's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00ec627f345545d03f8c6dbd08e575527116567fe375f9ecaaffffffff
-  Y: 41bf705697d5f716bcf78718d5393b63a98691f4a1f24246375538fd
-  Sig: 303d021c6119c72d6d5fe72d181614d3d40b36eec756ca7d9e4f2ab3095d52a4021d00fbbaf5bb4a97b6096792f17f95b116a645fe1c62fa1d83e969c0e8d6
-  R: 6119c72d6d5fe72d181614d3d40b36eec756ca7d9e4f2ab3095d52a4 (len=28 bytes)
-  S: 00fbbaf5bb4a97b6096792f17f95b116a645fe1c62fa1d83e969c0e8d6 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 365 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key has many trailing 1's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00ec627f345545d03f8c6dbd08e575527116567fe375f9ecaaffffffff
-  Y: 41bf705697d5f716bcf78718d5393b63a98691f4a1f24246375538fd
-  Sig: 303d021d008c3d675a759d30b8afcbee3f37746c226eb992177f8d76f162d4093e021c643322d3f37ba532e7e5f0f0c14b691a3678075c03281203eb529745
-  R: 008c3d675a759d30b8afcbee3f37746c226eb992177f8d76f162d4093e (len=29 bytes)
-  S: 643322d3f37ba532e7e5f0f0c14b691a3678075c03281203eb529745 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 366 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key has many trailing 1's
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00ec627f345545d03f8c6dbd08e575527116567fe375f9ecaaffffffff
-  Y: 41bf705697d5f716bcf78718d5393b63a98691f4a1f24246375538fd
-  Sig: 303d021d00e1f7acc96fd3eafc29991165223b0b899c2b04cc239372eef4d060a5021c2a0b6f214fa197cfbe834a4f80a74de9748e62f2a894214fe92bdeeb
-  R: 00e1f7acc96fd3eafc29991165223b0b899c2b04cc239372eef4d060a5 (len=29 bytes)
-  S: 2a0b6f214fa197cfbe834a4f80a74de9748e62f2a894214fe92bdeeb (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 367 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 15016e52b36472d536477605fb805dd3903082a062d1ea30af9e555a
-  Y: 762d28f1fdc219184f81681fbff566d465b5f1f31e872df5
-  Sig: 303d021d00ab49a92649a5b95bee1a0e4dd897d5f5aae7581faa41673ad4d18eb6021c5df9e1a65ad72a88f58b0b711e162c6de169ade7106c01571486c7df
-  R: 00ab49a92649a5b95bee1a0e4dd897d5f5aae7581faa41673ad4d18eb6 (len=29 bytes)
-  S: 5df9e1a65ad72a88f58b0b711e162c6de169ade7106c01571486c7df (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 368 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 15016e52b36472d536477605fb805dd3903082a062d1ea30af9e555a
-  Y: 762d28f1fdc219184f81681fbff566d465b5f1f31e872df5
-  Sig: 303e021d00b3edcc316dd5cbe6cd0054e48bc1a77e55cc4cf3dddbf552ffc4e929021d00cf4de654980e88f7908109c5f637113cb03bdf8ba5443dda852e6313
-  R: 00b3edcc316dd5cbe6cd0054e48bc1a77e55cc4cf3dddbf552ffc4e929 (len=29 bytes)
-  S: 00cf4de654980e88f7908109c5f637113cb03bdf8ba5443dda852e6313 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 369 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 15016e52b36472d536477605fb805dd3903082a062d1ea30af9e555a
-  Y: 762d28f1fdc219184f81681fbff566d465b5f1f31e872df5
-  Sig: 303d021c32538b93b71e7ea2b3cef6027271e0037b84f3818a0727accaaea6d9021d00e6225061a7d76b93c6562de31d50608444a533bb5853b8ab94160fea
-  R: 32538b93b71e7ea2b3cef6027271e0037b84f3818a0727accaaea6d9 (len=28 bytes)
-  S: 00e6225061a7d76b93c6562de31d50608444a533bb5853b8ab94160fea (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 370 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 15016e52b36472d536477605fb805dd3903082a062d1ea30af9e555a
-  Y: 00ffffffff89d2d70e023de6e7b07e97df400a992b9a4a0e0ce178d20c
-  Sig: 303e021d00846e6b4ae059cf673ac2f424c07be6b64456554effd14d4a0a85d5d1021d00c67353e85fdfb421fb3abb014f1d3d21a8b744ba146e4709e722a5e6
-  R: 00846e6b4ae059cf673ac2f424c07be6b64456554effd14d4a0a85d5d1 (len=29 bytes)
-  S: 00c67353e85fdfb421fb3abb014f1d3d21a8b744ba146e4709e722a5e6 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 371 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 15016e52b36472d536477605fb805dd3903082a062d1ea30af9e555a
-  Y: 00ffffffff89d2d70e023de6e7b07e97df400a992b9a4a0e0ce178d20c
-  Sig: 303d021d0095073bb824196016092413631dd4208a571744d0030dd54352611921021c100ef7ac960937e740f868bf9b37c6845317ab1865ce13881ce5156b
-  R: 0095073bb824196016092413631dd4208a571744d0030dd54352611921 (len=29 bytes)
-  S: 100ef7ac960937e740f868bf9b37c6845317ab1865ce13881ce5156b (len=28 bytes)
-  Encoding: STRICT_OK
-
 TC 372 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is large
   Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
+  Hash: 5d7d45b46692e51f9e2bb3f3e9f02672c85dda1d6aad741de70b0255 (SHA3-224)
   X: 15016e52b36472d536477605fb805dd3903082a062d1ea30af9e555a
   Y: 00ffffffff89d2d70e023de6e7b07e97df400a992b9a4a0e0ce178d20c
   Sig: 303c021c3186a92aa760960996aea13f3137acf00b82b2b2036e607ec9c44b67021c1835944e96b6ca1f445cf3350f105a97a37252f85cf6d8e628c96a02
@@ -2641,135 +650,14 @@ TC 372 | result=valid | valid_bit=1 | Flags=
   S: 1835944e96b6ca1f445cf3350f105a97a37252f85cf6d8e628c96a02 (len=28 bytes)
   Encoding: STRICT_OK
 
-TC 373 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00f7e4713d085112112c37cdf4601ff688da796016b71a727a
-  Y: 00de5a9ec165054cc987f9dc87e9991b92e4fa649ca655eeae9f2a30e1
-  Sig: 303d021d00cdb43f063ed3ce20f94e453d40e9d7de39936906484114c307078e22021c26d2436f2f66a954010e580b95e21a174a4b667aa8249f2676fe1be7
-  R: 00cdb43f063ed3ce20f94e453d40e9d7de39936906484114c307078e22 (len=29 bytes)
-  S: 26d2436f2f66a954010e580b95e21a174a4b667aa8249f2676fe1be7 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 374 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00f7e4713d085112112c37cdf4601ff688da796016b71a727a
-  Y: 00de5a9ec165054cc987f9dc87e9991b92e4fa649ca655eeae9f2a30e1
-  Sig: 303d021d00b29a2bfe9fab394b34550483f3cc811d9b86345f6f8e35d6a6bb0b34021c26120ea06b1910c44bc370cd0479c6addc5bce896c4a606810194e2e
-  R: 00b29a2bfe9fab394b34550483f3cc811d9b86345f6f8e35d6a6bb0b34 (len=29 bytes)
-  S: 26120ea06b1910c44bc370cd0479c6addc5bce896c4a606810194e2e (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 375 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00f7e4713d085112112c37cdf4601ff688da796016b71a727a
-  Y: 00de5a9ec165054cc987f9dc87e9991b92e4fa649ca655eeae9f2a30e1
-  Sig: 303e021d00ac247dff26016109d28200505270cf2d2c2b06067bd5d330a1c2a41a021d00910a8d69da5d6a508c88aad4f091ed5b5286d029c1095fc57af2a106
-  R: 00ac247dff26016109d28200505270cf2d2c2b06067bd5d330a1c2a41a (len=29 bytes)
-  S: 00910a8d69da5d6a508c88aad4f091ed5b5286d029c1095fc57af2a106 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 376 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00ffffffffeadf7cee8d34d04cf22c8f7de35674fb2f501d242a76f725
-  Y: 0086c409309d398e60ce1e0a4c9e05a9d32627577e8ce2cc7f3afa2c3e
-  Sig: 303e021d00bfdbfcd3bee9803c5060dbc69d6749fb5e4dc40a1c00002e0d235354021d00a84a6ff4c2ef80c074c8a8a9305e79e0e75321b9afab9348c02a7e29
-  R: 00bfdbfcd3bee9803c5060dbc69d6749fb5e4dc40a1c00002e0d235354 (len=29 bytes)
-  S: 00a84a6ff4c2ef80c074c8a8a9305e79e0e75321b9afab9348c02a7e29 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 377 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00ffffffffeadf7cee8d34d04cf22c8f7de35674fb2f501d242a76f725
-  Y: 0086c409309d398e60ce1e0a4c9e05a9d32627577e8ce2cc7f3afa2c3e
-  Sig: 303d021c20fd72eb73edda9cb0aca2473c5c582c78318b0705a9a6d7180ac767021d00b07a3e773fa28f513202b69903b5cc65f2b4f7714b5b28c83b52bedd
-  R: 20fd72eb73edda9cb0aca2473c5c582c78318b0705a9a6d7180ac767 (len=28 bytes)
-  S: 00b07a3e773fa28f513202b69903b5cc65f2b4f7714b5b28c83b52bedd (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 378 | result=valid | valid_bit=1 | Flags=
-  Comment: x-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00ffffffffeadf7cee8d34d04cf22c8f7de35674fb2f501d242a76f725
-  Y: 0086c409309d398e60ce1e0a4c9e05a9d32627577e8ce2cc7f3afa2c3e
-  Sig: 303d021d0086aa1eba72a1aca7dd83cb2c2659241d12fd8ac17cbd798cc44afabb021c66e0a66a78c6c31ce99e45162a0b4757deff5ed80be8348283f1b7a5
-  R: 0086aa1eba72a1aca7dd83cb2c2659241d12fd8ac17cbd798cc44afabb (len=29 bytes)
-  S: 66e0a66a78c6c31ce99e45162a0b4757deff5ed80be8348283f1b7a5 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 379 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00b0013c6fbff6f09fecda1c263ef65399d4cf989ca5fc4f8fff0fe9e1
-  Y: 0e2ab0e8495e859eb2afb00769d6e7fe626a119167c0b6bc
-  Sig: 303d021c01cfaa7ccae0522b5363b48ab1fa5e0e102666f2ac5218c5b32523d3021d00a61491de2a4a05bda0bf2769453faa845451207c4dd3a95aab169b0c
-  R: 01cfaa7ccae0522b5363b48ab1fa5e0e102666f2ac5218c5b32523d3 (len=28 bytes)
-  S: 00a61491de2a4a05bda0bf2769453faa845451207c4dd3a95aab169b0c (len=29 bytes)
-  Encoding: STRICT_OK
-
 TC 380 | result=valid | valid_bit=1 | Flags=
   Comment: y-coordinate of the public key is small
   Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
+  Hash: 5d7d45b46692e51f9e2bb3f3e9f02672c85dda1d6aad741de70b0255 (SHA3-224)
   X: 00b0013c6fbff6f09fecda1c263ef65399d4cf989ca5fc4f8fff0fe9e1
   Y: 0e2ab0e8495e859eb2afb00769d6e7fe626a119167c0b6bc
   Sig: 303c021c500c9d08a0ab52d35fe5cf9d4eddea0eb8cc00e8e8db0a29a512de10021c482d0f78f2808e83f10bee9fad61f4bdba83ab9a4f7d71c9b7083e13
   R: 500c9d08a0ab52d35fe5cf9d4eddea0eb8cc00e8e8db0a29a512de10 (len=28 bytes)
   S: 482d0f78f2808e83f10bee9fad61f4bdba83ab9a4f7d71c9b7083e13 (len=28 bytes)
-  Encoding: STRICT_OK
-
-TC 381 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is small
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00b0013c6fbff6f09fecda1c263ef65399d4cf989ca5fc4f8fff0fe9e1
-  Y: 0e2ab0e8495e859eb2afb00769d6e7fe626a119167c0b6bc
-  Sig: 303d021c75bf80b060ff123c0e525c98ca74fa82d716a09c21d67accd34a60bc021d00eda7a9644563a349ff3a2483b6e7563f0aa4c4d319551ca0c3bd1fe4
-  R: 75bf80b060ff123c0e525c98ca74fa82d716a09c21d67accd34a60bc (len=28 bytes)
-  S: 00eda7a9644563a349ff3a2483b6e7563f0aa4c4d319551ca0c3bd1fe4 (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 382 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00b0013c6fbff6f09fecda1c263ef65399d4cf989ca5fc4f8fff0fe9e1
-  Y: 00fffffffff1d54f17b6a17a614d504ff7962918019d95ee6e983f4945
-  Sig: 303d021c3ef832679f6277b901b6a986833d03e4b574d23fd73edfd936689761021d00e82af05ebafe22ccd384336c9530738036d99f17b62ef3dfc4e0948b
-  R: 3ef832679f6277b901b6a986833d03e4b574d23fd73edfd936689761 (len=28 bytes)
-  S: 00e82af05ebafe22ccd384336c9530738036d99f17b62ef3dfc4e0948b (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 383 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00b0013c6fbff6f09fecda1c263ef65399d4cf989ca5fc4f8fff0fe9e1
-  Y: 00fffffffff1d54f17b6a17a614d504ff7962918019d95ee6e983f4945
-  Sig: 303e021d009504b624b116a2c28efa037e35581c71b2e7d01f30d8f68946c13e88021d008082639374a8d5e067a6df09d6df11a972967a081a5307a3b7f1785b
-  R: 009504b624b116a2c28efa037e35581c71b2e7d01f30d8f68946c13e88 (len=29 bytes)
-  S: 008082639374a8d5e067a6df09d6df11a972967a081a5307a3b7f1785b (len=29 bytes)
-  Encoding: STRICT_OK
-
-TC 384 | result=valid | valid_bit=1 | Flags=
-  Comment: y-coordinate of the public key is large
-  Msg: 4d657373616765 (len=7 bytes)
-  Hash:  (SHA3-224)
-  X: 00b0013c6fbff6f09fecda1c263ef65399d4cf989ca5fc4f8fff0fe9e1
-  Y: 00fffffffff1d54f17b6a17a614d504ff7962918019d95ee6e983f4945
-  Sig: 303d021c2eb5db8a9e1c82ed4ce643c953c9f11c3de264ef92d7607c91dbce76021d00b6a97c943aa7a62b5783786356f7b75b36b88356eb62d5a3d15a7029
-  R: 2eb5db8a9e1c82ed4ce643c953c9f11c3de264ef92d7607c91dbce76 (len=28 bytes)
-  S: 00b6a97c943aa7a62b5783786356f7b75b36b88356eb62d5a3d15a7029 (len=29 bytes)
   Encoding: STRICT_OK
 
