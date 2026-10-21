@@ -1,0 +1,13 @@
+What / How: How AI Agents Help Reduce Manual Effort
+
+The IPDV agent coordinates the verification workflow and evidence collection, working with specialized agents to reduce manual effort in repetitive operations, execution tracking, and result consolidation:
+- DSIM Owner: Handles regression setup, compilation, job tracking, and test-result classification.
+- SMA CRV/DSIM Debug: Analyzes logs and waveforms, identifies failure causes, and helps resolve test-side issues. RTL issues are referred to the design owner.
+- OpenTitan Coverage Closure: Analyzes coverage gaps, adds tests, and iteratively runs simulations to help achieve coverage closure.
+- Coverage Merge: Automatically merges VDB files, loads exclusion lists (EL), and consolidates coverage scores.
+- DVC CyberSecurity: Periodically collects cybersecurity metrics and uploads them to the DVP server.
+Resource / Quality: Targeting at Least a 20% Reduction in Manual Effort
+
+This automation frees up engineering time spent on regression operations, initial debugging, coverage merging, and report consolidation, allowing engineers to focus on new-feature verification, corner-case planning, and critical issue analysis.
+
+It also helps ensure that verification tasks are rerun after each revision, reducing the risk of missed runs and the reuse of outdated evidence.
